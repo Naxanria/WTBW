@@ -11,6 +11,6 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(WTBW.MODID)
 public class ModItems
 {
-  public static final Item MINI_COAL = Items.AIR;
-  public static final Item MINI_CHARCOAL = Items.AIR;
+  public static final Item TINY_COAL = Items.AIR;
+  public static final Item TINY_CHARCOAL = Items.AIR;
 }

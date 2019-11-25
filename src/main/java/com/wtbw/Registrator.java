@@ -1,5 +1,6 @@
 package com.wtbw;
 
+import com.wtbw.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -27,7 +28,7 @@ public class Registrator
   private static void registerAllBlocks()
   {
     // register blocks here
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
   }
   
   private static void registerAllItems()
@@ -39,7 +40,7 @@ public class Registrator
       {
         return 800;
       }
-    }, "mini_coal");
+    }, "tiny_coal");
   
     register(new Item(getItemProperties()){
       @Override
@@ -47,7 +48,15 @@ public class Registrator
       {
         return 800;
       }
-    }, "mini_charcoal");
+    }, "tiny_charcoal");
+    
+    register(new BlockItem(ModBlocks.CHARCOAL_BLOCK, getItemProperties()){
+      @Override
+      public int getBurnTime(ItemStack itemStack)
+      {
+        return 14400;
+      }
+    }, "charcoal_block");
   }
   
   private static Item.Properties getItemProperties()
@@ -90,6 +99,11 @@ public class Registrator
   private static <T extends Block> T register(T block, String registryName)
   {
     return register(block, registryName, true, null);
+  }
+  
+  private static <T extends Block> T register(T block, String registryName, boolean createBlockItem)
+  {
+    return register(block, registryName, createBlockItem, null);
   }
   
   private static <T extends Block> T register(T block, String registryName, boolean createBlockItem, Item.Properties blockItemProperties)
