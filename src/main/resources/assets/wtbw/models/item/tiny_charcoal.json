@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "wtbw:tiny_charcoal"
+    "layer0": "wtbw:item/tiny_charcoal"
   }
 }
