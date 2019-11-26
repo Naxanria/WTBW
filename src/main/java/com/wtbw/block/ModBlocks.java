@@ -12,4 +12,6 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModBlocks
 {
   public static final Block CHARCOAL_BLOCK = Blocks.AIR;
+  
+  public static final Block IRON_FURNACE = Blocks.AIR;
 }
