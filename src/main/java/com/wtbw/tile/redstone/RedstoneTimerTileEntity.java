@@ -1,46 +1,88 @@
 package com.wtbw.tile.redstone;
 
+import com.wtbw.WTBW;
 import com.wtbw.tile.ModTiles;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
+import com.wtbw.util.Cooldown;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-
-import javax.annotation.Nullable;
 
 /*
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class RedstoneTimerTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider
+public class RedstoneTimerTileEntity extends TileEntity implements ITickableTileEntity
 {
+  private Cooldown cooldown;
+  private Cooldown windDown;
+  private int sendPower = 0;
+  
   public RedstoneTimerTileEntity()
   {
     super(ModTiles.REDSTONE_TIMER);
+    
+    cooldown = new Cooldown(10).start();
+    windDown = new Cooldown(4).start();
   }
   
   @Override
   public void tick()
   {
-  
+    if (!world.isRemote)
+    {
+//      int power = world.getRedstonePowerFromNeighbors(pos);
+      boolean powered = world.isBlockPowered(pos);
+      
+      if (powered)
+      {
+        cooldown.setCount(0);
+        updatePower(0);
+        return;
+      }
+      
+//      if (power > 0)
+//      {
+//        sendPower = 0;
+//        cooldown.stop();
+//      }
+//      else
+//      {
+        cooldown.start();
+        cooldown.update();
+        if (cooldown.isFinished())
+        {
+          updatePower(15);
+          windDown.update();
+          if (windDown.isFinished())
+          {
+            windDown.restart();
+            cooldown.restart();
+          }
+        }
+        else if (cooldown.getCount() > 1)
+        {
+          updatePower(0);
+        }
+//      }
+    }
   }
   
-  @Override
-  public ITextComponent getDisplayName()
+  private void updatePower(int newPower)
   {
-    return new StringTextComponent(getType().getRegistryName().getPath());
+    if (newPower != sendPower)
+    {
+      sendPower = newPower;
+      world.notifyNeighbors(pos, world.getBlockState(pos).getBlock());
+    }
+    else
+    {
+      sendPower = newPower;
+    }
+    
+    
   }
   
-  @Nullable
-  @Override
-  public Container createMenu(int windowID, PlayerInventory inventory, PlayerEntity player)
+  public int getPower()
   {
-    return null;
+    return sendPower;
   }
-  
 }

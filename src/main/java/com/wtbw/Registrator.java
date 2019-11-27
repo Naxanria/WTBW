@@ -2,8 +2,10 @@ package com.wtbw;
 
 import com.wtbw.block.IronFurnaceBlock;
 import com.wtbw.block.ModBlocks;
+import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
+import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -37,7 +39,9 @@ public class Registrator
   {
     // register blocks here
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
+    
     register(new IronFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7)), "iron_furnace");
+    register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
   }
   
   private static void registerAllItems()
@@ -71,6 +75,7 @@ public class Registrator
   private static void registerAllTiles()
   {
     register(() -> new BaseFurnaceTileEntity(1.2f, IRecipeType.SMELTING), ModBlocks.IRON_FURNACE, "iron_furnace");
+    register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
   }
   
   private static Item.Properties getItemProperties()

@@ -55,6 +55,11 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
     return tileEntityProvider.get(world, state);
   }
   
+  protected TE getTileEntity(IBlockReader world, BlockPos pos)
+  {
+    return (TE) world.getTileEntity(pos);
+  }
+  
   @Override
   public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult hit)
   {
