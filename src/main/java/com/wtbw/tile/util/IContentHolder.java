@@ -1,4 +1,4 @@
-package com.wtbw.tile.tools;
+package com.wtbw.tile.util;
 
 /*
   @author: Naxanria

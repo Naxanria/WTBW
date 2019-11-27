@@ -4,8 +4,15 @@ import com.wtbw.block.BaseTileBlock;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -15,9 +22,13 @@ import net.minecraft.world.World;
 */
 public class RedstoneTimerBlock extends BaseTileBlock<RedstoneTimerTileEntity>
 {
+  public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+  
   public RedstoneTimerBlock(Properties properties)
   {
     super(properties, (world, state) -> new RedstoneTimerTileEntity());
+    
+    setDefaultState(stateContainer.getBaseState().with(ACTIVE, false));
   }
   
   public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
@@ -36,18 +47,11 @@ public class RedstoneTimerBlock extends BaseTileBlock<RedstoneTimerTileEntity>
     return 0;
   }
   
-//  @Override
-//  public void updateNeighbors(BlockState stateIn, IWorld worldIn, BlockPos pos, int flags)
-//  {
-//    super.updateNeighbors(stateIn, worldIn, pos, flags);
-//  }
-//
-//  @Override
-//  public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
-//  {
-//    super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
-//  }
-  
+  @Override
+  protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+  {
+    builder.add(ACTIVE);
+  }
   
   @Override
   public boolean canProvidePower(BlockState state)

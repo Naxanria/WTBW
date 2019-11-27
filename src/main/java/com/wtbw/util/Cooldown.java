@@ -26,7 +26,7 @@ public class Cooldown
       count++;
       if (count >= cooldown)
       {
-        if (callback != null)
+        if (active && callback != null)
         {
           callback.call();
         }

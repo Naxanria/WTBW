@@ -4,7 +4,7 @@ import com.wtbw.WTBW;
 import com.wtbw.block.BaseFurnaceBlock;
 import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.tile.ModTiles;
-import com.wtbw.tile.tools.IContentHolder;
+import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.Utilities;
 import net.minecraft.block.BlockState;
