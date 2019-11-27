@@ -4,12 +4,15 @@ import com.wtbw.WTBW;
 import com.wtbw.block.BaseFurnaceBlock;
 import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.tile.ModTiles;
+import com.wtbw.tile.tools.IContentHolder;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.Utilities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
@@ -36,7 +39,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
   @author: Naxanria
 */
 @SuppressWarnings("NullableProblems")
-public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider
+public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IContentHolder
 {
   protected int burnTime;
   protected int burnTimeTotal;
@@ -494,5 +497,13 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
   {
     this.cookTimeTotal = cookTimeTotal;
     return this;
+  }
+  
+  @Override
+  public void dropContents()
+  {
+    inputHandler.ifPresent(handler -> InventoryHelper.dropInventoryItems(world, pos, new Inventory(handler.getStackInSlot(0))));
+    outputHandler.ifPresent(handler -> InventoryHelper.dropInventoryItems(world, pos, new Inventory(handler.getStackInSlot(0))));
+    fuelHandler.ifPresent(handler -> InventoryHelper.dropInventoryItems(world, pos, new Inventory(handler.getStackInSlot(0))));
   }
 }
