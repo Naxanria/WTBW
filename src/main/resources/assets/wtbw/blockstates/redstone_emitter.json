@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "power=0": { "model": "wtbw:block/emitter/0" },
+    "power=1": { "model": "wtbw:block/emitter/1" },
+    "power=2": { "model": "wtbw:block/emitter/2" },
+    "power=3": { "model": "wtbw:block/emitter/3" },
+    "power=4": { "model": "wtbw:block/emitter/4" },
+    "power=5": { "model": "wtbw:block/emitter/5" },
+    "power=6": { "model": "wtbw:block/emitter/6" },
+    "power=7": { "model": "wtbw:block/emitter/7" },
+    "power=8": { "model": "wtbw:block/emitter/8" },
+    "power=9": { "model": "wtbw:block/emitter/9" },
+    "power=10": { "model": "wtbw:block/emitter/10" },
+    "power=11": { "model": "wtbw:block/emitter/11" },
+    "power=12": { "model": "wtbw:block/emitter/12" },
+    "power=13": { "model": "wtbw:block/emitter/13" },
+    "power=14": { "model": "wtbw:block/emitter/14" },
+    "power=15": { "model": "wtbw:block/emitter/15" }
+  }
+}

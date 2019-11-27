@@ -2,6 +2,7 @@ package com.wtbw;
 
 import com.wtbw.block.IronFurnaceBlock;
 import com.wtbw.block.ModBlocks;
+import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
@@ -42,6 +43,7 @@ public class Registrator
     
     register(new IronFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7)), "iron_furnace");
     register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
+    register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
   }
   
   private static void registerAllItems()

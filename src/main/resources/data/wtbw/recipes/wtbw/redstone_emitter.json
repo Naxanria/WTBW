@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "TRS",
+      "TCS",
+      "SRS"
+    ],
+    "key": {
+      "S": {
+        "tag": "forge:stone"
+      },
+      "R": {
+        "item": "minecraft:redstone"
+      },
+      "C": {
+        "item": "minecraft:comparator"
+      },
+      "T" : {
+        "item": "minecraft:redstone_torch"
+      }
+    },
+    "result": {
+      "item": "wtbw:redstone_emitter"
+    }
+}
