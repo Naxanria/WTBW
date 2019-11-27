@@ -4,5 +4,7 @@
   "item.wtbw.tiny_coal": "Tiny Coal",
   "item.wtbw.tiny_charcoal": "Tiny Charcoal",
 
-  "block.wtbw.charcoal_block": "Block of Charcoal"
+  "block.wtbw.charcoal_block": "Block of Charcoal",
+
+  "block.wtbw.iron_furnace": "Iron Furnace"
 }
