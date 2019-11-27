@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
   @author: Naxanria
 */
 @SuppressWarnings("NullableProblems")
-public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEntity, INamedContainerProvider
+public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider
 {
   protected int burnTime;
   protected int burnTimeTotal;
@@ -51,7 +51,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
   
   protected IInventory inventoryInput;
   
-  public TileEntityBaseFurnace(float speed, IRecipeType<? extends AbstractCookingRecipe> recipeType)
+  public BaseFurnaceTileEntity(float speed, IRecipeType<? extends AbstractCookingRecipe> recipeType)
   {
     super(ModTiles.IRON_FURNACE);
     this.speed = speed;
@@ -457,7 +457,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     return burnTime;
   }
   
-  public TileEntityBaseFurnace setBurnTime(int burnTime)
+  public BaseFurnaceTileEntity setBurnTime(int burnTime)
   {
     this.burnTime = burnTime;
     return this;
@@ -468,7 +468,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     return burnTimeTotal;
   }
   
-  public TileEntityBaseFurnace setBurnTimeTotal(int burnTimeTotal)
+  public BaseFurnaceTileEntity setBurnTimeTotal(int burnTimeTotal)
   {
     this.burnTimeTotal = burnTimeTotal;
     return this;
@@ -479,7 +479,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     return cookTime;
   }
   
-  public TileEntityBaseFurnace setCookTime(int cookTime)
+  public BaseFurnaceTileEntity setCookTime(int cookTime)
   {
     this.cookTime = cookTime;
     return this;
@@ -490,7 +490,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     return cookTimeTotal;
   }
   
-  public TileEntityBaseFurnace setCookTimeTotal(int cookTimeTotal)
+  public BaseFurnaceTileEntity setCookTimeTotal(int cookTimeTotal)
   {
     this.cookTimeTotal = cookTimeTotal;
     return this;

@@ -1,7 +1,7 @@
 package com.wtbw.gui.container;
 
 import com.wtbw.block.ModBlocks;
-import com.wtbw.tile.furnace.TileEntityBaseFurnace;
+import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import com.wtbw.util.Utilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
@@ -19,7 +18,7 @@ import javax.annotation.Nonnull;
 /*
   @author: Naxanria
 */
-public class IronFurnaceContainer extends BaseTileContainer<TileEntityBaseFurnace>
+public class IronFurnaceContainer extends BaseTileContainer<BaseFurnaceTileEntity>
 {
   public IronFurnaceContainer( int id, World world, BlockPos pos, PlayerInventory playerInventory)
   {

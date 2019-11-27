@@ -3,23 +3,18 @@ package com.wtbw;
 import com.wtbw.block.IronFurnaceBlock;
 import com.wtbw.block.ModBlocks;
 import com.wtbw.gui.container.IronFurnaceContainer;
-import com.wtbw.tile.furnace.TileEntityBaseFurnace;
+import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.data.RecipeProvider;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -75,7 +70,7 @@ public class Registrator
   
   private static void registerAllTiles()
   {
-    register(() -> new TileEntityBaseFurnace(1.2f, IRecipeType.SMELTING), ModBlocks.IRON_FURNACE, "iron_furnace");
+    register(() -> new BaseFurnaceTileEntity(1.2f, IRecipeType.SMELTING), ModBlocks.IRON_FURNACE, "iron_furnace");
   }
   
   private static Item.Properties getItemProperties()
