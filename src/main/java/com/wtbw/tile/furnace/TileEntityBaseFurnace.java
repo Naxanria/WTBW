@@ -173,21 +173,21 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
           }
         }
       }
-    }
-    
-    
-    BlockState state = world.getBlockState(pos);
-    boolean lit = state.get(BaseFurnaceBlock.LIT);
-    boolean currentBurn = isBurning();
-    if (lit != burning || burning != currentBurn || lit != currentBurn)
-    {
-      world.setBlockState(pos, state.with(BaseFurnaceBlock.LIT, isBurning()), 3);
-      dirty = true;
-    }
-    
-    if (dirty)
-    {
-      markDirty();
+  
+      BlockState state = world.getBlockState(pos);
+      boolean lit = state.get(BaseFurnaceBlock.LIT);
+      boolean currentBurn = isBurning();
+      if (lit != currentBurn)
+      {
+        world.setBlockState(pos, state.with(BaseFurnaceBlock.LIT, currentBurn), 3);
+        WTBW.LOGGER.info("Changed lit {} to {} burning: ", lit, currentBurn, burning);
+        dirty = true;
+      }
+  
+      if (dirty)
+      {
+        markDirty();
+      }
     }
   }
   
