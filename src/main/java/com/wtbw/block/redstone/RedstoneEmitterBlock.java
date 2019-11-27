@@ -42,13 +42,31 @@ public class RedstoneEmitterBlock extends Block
   @Override
   public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
   {
-    if (player.isAllowEdit())
+    if (player.isAllowEdit() && handIn != Hand.OFF_HAND)
     {
       if (!worldIn.isRemote)
       {
-        BlockState newState = state.cycle(POWER);
-        worldIn.setBlockState(pos, newState, 4);
-        worldIn.notifyNeighbors(pos, this);
+        if (player.getHeldItem(handIn).isEmpty())
+        {
+          BlockState newState;
+          if (player.isSneaking())
+          {
+            int next = state.get(POWER) - 1;
+            if (next < 0)
+            {
+              next = 15;
+            }
+            newState = state.with(POWER, next);
+          }
+          else
+          {
+            newState = state.cycle(POWER);
+          }
+          
+          worldIn.setBlockState(pos, newState, 4);
+          worldIn.notifyNeighbors(pos, this);
+          return true;
+        }
       }
       else
       {
