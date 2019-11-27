@@ -1,5 +1,7 @@
 package com.wtbw;
 
+import com.wtbw.block.ModBlocks;
+import com.wtbw.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -49,7 +51,7 @@ public class WTBW
     @Override
     public ItemStack createIcon()
     {
-      return new ItemStack(Items.KNOWLEDGE_BOOK);
+      return new ItemStack(ModBlocks.REDSTONE_TIMER);
     }
   };
 }
