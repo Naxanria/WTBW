@@ -1,10 +1,12 @@
 package com.wtbw.block;
 
+import com.wtbw.tile.tools.IContentHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -14,9 +16,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.List;
 import java.util.Random;
 
 /*
@@ -46,6 +50,27 @@ public class BaseFurnaceBlock<TE extends TileEntity> extends BaseTileBlock<TE>
   public BlockState mirror(BlockState state, Mirror mirrorIn)
   {
     return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+  }
+  
+  @Override
+  public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+  {
+    if (state.getBlock() != newState.getBlock())
+    {
+      TE tileEntity = getTileEntity(worldIn, pos);
+      if (tileEntity != null && tileEntity instanceof IContentHolder)
+      {
+        ((IContentHolder) tileEntity).dropContents();
+      }
+    }
+    
+    super.onReplaced(state, worldIn, pos, newState, isMoving);
+  }
+  
+  @Override
+  public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
+  {
+    return super.getDrops(state, builder);
   }
   
   protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
