@@ -1,5 +1,6 @@
 {
   "variants" : {
-    "" : { "model" : "wtbw:block/redstone_timer" }
+    "active=true" : { "model" : "wtbw:block/redstone_timer_active" },
+    "active=false" : { "model" : "wtbw:block/redstone_timer" }
   }
 }

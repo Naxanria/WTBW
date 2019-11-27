@@ -1,10 +1,9 @@
 package com.wtbw.block;
 
-import com.wtbw.tile.tools.IContentHolder;
+import com.wtbw.tile.util.IContentHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
@@ -34,6 +33,8 @@ public class BaseFurnaceBlock<TE extends TileEntity> extends BaseTileBlock<TE>
   public BaseFurnaceBlock(Properties properties, TileEntityProvider<TE> tileEntityProvider)
   {
     super(properties, tileEntityProvider);
+    
+    setDefaultState(stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
   }
   
   @Override
