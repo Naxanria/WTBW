@@ -2,6 +2,7 @@ package com.wtbw.tile.furnace;
 
 import com.wtbw.WTBW;
 import com.wtbw.block.BaseFurnaceBlock;
+import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.tile.ModTiles;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.Utilities;
@@ -12,6 +13,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
@@ -41,7 +43,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
   protected int cookTime;
   protected int cookTimeTotal;
   protected float speed = 1;
-  protected final IRecipeType<? extends AbstractCookingRecipe> recipeType;
+  public final IRecipeType<? extends AbstractCookingRecipe> recipeType;
   
   protected LazyOptional<ItemStackHandler> inputHandler;
   protected LazyOptional<ItemStackHandler> fuelHandler;
@@ -58,6 +60,8 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     inputHandler = LazyOptional.of(this::createInputHandler);
     fuelHandler = LazyOptional.of(this::createFuelHandler);
     outputHandler = LazyOptional.of(this::createOutputHandler);
+    
+    speed = 5;
     
     cookTimeTotal = (int) (200 / speed);
     
@@ -152,17 +156,12 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
         ItemStack target = recipe.getRecipeOutput();
         if (canOutput(target))
         {
-          if (!burning)
+          if (!burning || !isBurning())
           {
             startBurn();
             if (!isBurning())
             {
-              // stop smelting
-              if (cookTime > 0)
-              {
-                dirty = true;
-              }
-              
+              dirty = true;
               cookTime = 0;
             }
           }
@@ -238,9 +237,16 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
         {
           burnTimeTotal = fuelTime;
           burnTime = fuelTime;
-  
-          fuel.shrink(1);
-          handler.setStackInSlot(0, fuel);
+          
+          if (fuel.getItem() == Items.LAVA_BUCKET)
+          {
+            handler.setStackInSlot(0, new ItemStack(Items.BUCKET));
+          }
+          else
+          {
+            fuel.shrink(1);
+            handler.setStackInSlot(0, fuel);
+          }
         }
       }
     );
@@ -274,7 +280,7 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     return canOutput.get();
   }
   
-  private boolean isBurning()
+  public boolean isBurning()
   {
     return burnTime > 0;
   }
@@ -287,14 +293,14 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
   @Override
   public ITextComponent getDisplayName()
   {
-    return new StringTextComponent("");
+    return new StringTextComponent(getType().getRegistryName().getPath());
   }
   
   @Nullable
   @Override
   public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity player)
   {
-    return null;
+    return new IronFurnaceContainer(id, world, pos, playerInventory);
   }
   
   protected ItemStackHandler createInputHandler()
@@ -431,5 +437,64 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     outputHandler.ifPresent(handler -> compound.put("output" ,handler.serializeNBT()));
     
     return super.write(compound);
+  }
+  
+  public LazyOptional<ItemStackHandler> getInputHandler()
+  {
+    return inputHandler;
+  }
+  
+  public LazyOptional<ItemStackHandler> getFuelHandler()
+  {
+    return fuelHandler;
+  }
+  
+  public LazyOptional<ItemStackHandler> getOutputHandler()
+  {
+    return outputHandler;
+  }
+  
+  public int getBurnTime()
+  {
+    return burnTime;
+  }
+  
+  public TileEntityBaseFurnace setBurnTime(int burnTime)
+  {
+    this.burnTime = burnTime;
+    return this;
+  }
+  
+  public int getBurnTimeTotal()
+  {
+    return burnTimeTotal;
+  }
+  
+  public TileEntityBaseFurnace setBurnTimeTotal(int burnTimeTotal)
+  {
+    this.burnTimeTotal = burnTimeTotal;
+    return this;
+  }
+  
+  public int getCookTime()
+  {
+    return cookTime;
+  }
+  
+  public TileEntityBaseFurnace setCookTime(int cookTime)
+  {
+    this.cookTime = cookTime;
+    return this;
+  }
+  
+  public int getCookTimeTotal()
+  {
+    return cookTimeTotal;
+  }
+  
+  public TileEntityBaseFurnace setCookTimeTotal(int cookTimeTotal)
+  {
+    this.cookTimeTotal = cookTimeTotal;
+    return this;
   }
 }

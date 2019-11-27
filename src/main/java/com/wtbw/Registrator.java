@@ -2,10 +2,12 @@ package com.wtbw;
 
 import com.wtbw.block.IronFurnaceBlock;
 import com.wtbw.block.ModBlocks;
+import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.tile.furnace.TileEntityBaseFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
@@ -16,7 +18,9 @@ import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -112,7 +116,16 @@ public class Registrator
   }
   
   public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event)
-  { }
+  {
+    IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
+    
+    registry.register(IForgeContainerType.create((windowId, inv, data) ->
+      {
+        BlockPos pos = data.readBlockPos();
+        return new IronFurnaceContainer(windowId, Minecraft.getInstance().world, pos, inv);
+      }
+    ).setRegistryName(WTBW.MODID, "iron_furnace"));
+  }
   
   private static <T extends Block> T register(T block, String registryName)
   {
