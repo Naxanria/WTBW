@@ -21,7 +21,7 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
     super(ModTiles.REDSTONE_TIMER);
     
     cooldown = new Cooldown(10).start();
-    windDown = new Cooldown(4).start();
+    windDown = new Cooldown(6).start();
   }
   
   @Override
@@ -38,31 +38,23 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
         updatePower(0);
         return;
       }
-      
-//      if (power > 0)
-//      {
-//        sendPower = 0;
-//        cooldown.stop();
-//      }
-//      else
-//      {
-        cooldown.start();
-        cooldown.update();
-        if (cooldown.isFinished())
+
+      cooldown.start();
+      cooldown.update();
+      if (cooldown.isFinished())
+      {
+        updatePower(15);
+        windDown.update();
+        if (windDown.isFinished())
         {
-          updatePower(15);
-          windDown.update();
-          if (windDown.isFinished())
-          {
-            windDown.restart();
-            cooldown.restart();
-          }
+          windDown.restart();
+          cooldown.restart();
         }
-        else if (cooldown.getCount() > 1)
-        {
-          updatePower(0);
-        }
-//      }
+      }
+      else //if (cooldown.getCount() > 1)
+      {
+        updatePower(0);
+      }
     }
   }
   
@@ -77,8 +69,6 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
     {
       sendPower = newPower;
     }
-    
-    
   }
   
   public int getPower()

@@ -1,0 +1,5 @@
+{
+  "variants" : {
+    "" : { "model" : "wtbw:block/redstone_timer" }
+  }
+}
