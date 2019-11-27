@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"tag": "forge:crops/wheat"}
+  ],
+  "result": {
+    "item": "minecraft:wheat_seeds"
+  }
+}

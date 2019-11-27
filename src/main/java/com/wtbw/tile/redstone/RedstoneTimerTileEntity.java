@@ -32,7 +32,7 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
 //      int power = world.getRedstonePowerFromNeighbors(pos);
       boolean powered = world.isBlockPowered(pos);
       
-      if (powered)
+      if (powered && !cooldown.isFinished())
       {
         cooldown.setCount(0);
         updatePower(0);
