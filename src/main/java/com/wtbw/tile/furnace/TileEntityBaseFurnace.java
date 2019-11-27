@@ -61,8 +61,6 @@ public class TileEntityBaseFurnace extends TileEntity implements ITickableTileEn
     fuelHandler = LazyOptional.of(this::createFuelHandler);
     outputHandler = LazyOptional.of(this::createOutputHandler);
     
-    speed = 5;
-    
     cookTimeTotal = (int) (200 / speed);
     
     inventoryInput = new IInventory()
