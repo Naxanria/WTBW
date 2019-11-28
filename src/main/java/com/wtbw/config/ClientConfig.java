@@ -18,6 +18,7 @@ public class ClientConfig
   
   public ForgeConfigSpec.BooleanValue showFullDurabilityOfTools;
   public ForgeConfigSpec.BooleanValue showTags;
+  public ForgeConfigSpec.BooleanValue showTagsRequireShift;
   
   public ClientConfig(ForgeConfigSpec.Builder builder)
   {
@@ -42,6 +43,11 @@ public class ClientConfig
       .comment("Show the tags of an item")
       .translation(key("qol.show_tags"))
       .define(key("show_tags"), true);
+    
+    showTagsRequireShift = builder
+      .comment("Require shift to show tags")
+      .translation(key("qol.show_tags_shift"))
+      .define("show_tags_shift", true);
       
     builder.pop();
     builder.pop();

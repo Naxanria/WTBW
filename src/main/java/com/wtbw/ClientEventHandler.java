@@ -1,6 +1,7 @@
 package com.wtbw;
 
 import com.wtbw.config.ClientConfig;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
@@ -33,10 +34,13 @@ public class ClientEventHandler
       
       if (ClientConfig.get().showTags.get())
       {
-        Set<ResourceLocation> tags = stack.getItem().getTags();
-        for (ResourceLocation location : tags)
+        if (!ClientConfig.get().showTagsRequireShift.get() || Screen.hasShiftDown())
         {
-          event.getToolTip().add(new StringTextComponent("#" + location.toString()).setStyle(darkGrey));
+          Set<ResourceLocation> tags = stack.getItem().getTags();
+          for (ResourceLocation location : tags)
+          {
+            event.getToolTip().add(new StringTextComponent("#" + location.toString()).setStyle(darkGrey));
+          }
         }
       }
     }
