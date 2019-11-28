@@ -1,6 +1,8 @@
 package com.wtbw;
 
 import com.wtbw.block.ModBlocks;
+import com.wtbw.config.ClientConfig;
+import com.wtbw.config.CommonConfig;
 import com.wtbw.config.WTBWConfig;
 import com.wtbw.item.ModItems;
 import net.minecraft.block.Block;
@@ -11,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -31,10 +34,17 @@ public class WTBW
   
   public static final Logger LOGGER = LogManager.getLogger(MODID);
   
+  public static boolean debug()
+  {
+    return CommonConfig.get().debugOutput.get();
+  }
+  
   public WTBW()
   {
     IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
   
+    
+    
     eventBus.addListener(this::setup);
     
     eventBus.addGenericListener(Block.class, Registrator::registerBlocks);
@@ -42,6 +52,13 @@ public class WTBW
     eventBus.addGenericListener(TileEntityType.class, Registrator::registerTileEntity);
     eventBus.addGenericListener(ContainerType.class, Registrator::registerContainer);
   
+    IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+  
+    DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+    {
+      forgeEventBus.addListener(ClientEventHandler::onTooltip);
+    });
+    
     WTBWConfig.register(ModLoadingContext.get());
   }
   
