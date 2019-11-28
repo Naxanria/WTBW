@@ -1,6 +1,7 @@
 package com.wtbw;
 
 import com.wtbw.block.ModBlocks;
+import com.wtbw.config.WTBWConfig;
 import com.wtbw.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
@@ -12,6 +13,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -39,6 +41,8 @@ public class WTBW
     eventBus.addGenericListener(Item.class, Registrator::registerItems);
     eventBus.addGenericListener(TileEntityType.class, Registrator::registerTileEntity);
     eventBus.addGenericListener(ContainerType.class, Registrator::registerContainer);
+  
+    WTBWConfig.register(ModLoadingContext.get());
   }
   
   private void setup(final FMLCommonSetupEvent event)

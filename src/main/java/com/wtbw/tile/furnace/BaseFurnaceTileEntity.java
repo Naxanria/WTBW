@@ -41,11 +41,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @SuppressWarnings("NullableProblems")
 public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IContentHolder
 {
+  protected final FurnaceTier tier;
+  
   protected int burnTime;
   protected int burnTimeTotal;
   protected int cookTime;
   protected int cookTimeTotal;
-  protected float speed = 1;
   public final IRecipeType<? extends AbstractCookingRecipe> recipeType;
   
   protected LazyOptional<ItemStackHandler> inputHandler;
@@ -54,17 +55,17 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
   
   protected IInventory inventoryInput;
   
-  public BaseFurnaceTileEntity(float speed, IRecipeType<? extends AbstractCookingRecipe> recipeType)
+  public BaseFurnaceTileEntity(FurnaceTier tier, IRecipeType<? extends AbstractCookingRecipe> recipeType)
   {
     super(ModTiles.IRON_FURNACE);
-    this.speed = speed;
+    this.tier = tier;
     this.recipeType = recipeType;
 
     inputHandler = LazyOptional.of(this::createInputHandler);
     fuelHandler = LazyOptional.of(this::createFuelHandler);
     outputHandler = LazyOptional.of(this::createOutputHandler);
     
-    cookTimeTotal = (int) (200 / speed);
+    cookTimeTotal = tier.cookTime;
     
     inventoryInput = new IInventory()
     {
@@ -140,6 +141,8 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
       dirty = true;
     }
     
+    
+    
     if (!world.isRemote)
     {
       IRecipe<?> recipe = getRecipe();
@@ -180,7 +183,6 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
       if (lit != currentBurn)
       {
         world.setBlockState(pos, state.with(BaseFurnaceBlock.LIT, currentBurn), 3);
-        WTBW.LOGGER.info("Changed lit {} to {} burning: ", lit, currentBurn, burning);
         dirty = true;
       }
   
@@ -416,7 +418,11 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
     burnTimeTotal = NBTHelper.getInt(compound, "burnTimeTotal");
     cookTime = NBTHelper.getInt(compound, "cookTime");
     cookTimeTotal = NBTHelper.getInt(compound, "cookTimeTotal");
-    speed = NBTHelper.getFloat(compound, "speed", 1f);
+    
+    if (world != null && world.isRemote)
+    {
+      cookTimeTotal = NBTHelper.getInt(compound, "cookSpeed", tier.cookTime);
+    }
     
     inputHandler.ifPresent(handler -> handler.deserializeNBT(NBTHelper.getCompound(compound, "input")));
     fuelHandler.ifPresent(handler -> handler.deserializeNBT(NBTHelper.getCompound(compound, "fuel")));
@@ -432,6 +438,11 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
     compound.putInt("burnTimeTotal", burnTimeTotal);
     compound.putInt("cookTime", cookTime);
     compound.putInt("cookTimeTotal", cookTimeTotal);
+    
+    if (world != null && !world.isRemote)
+    {
+      compound.putInt("cookSpeed", cookTimeTotal);
+    }
     
     inputHandler.ifPresent(handler -> compound.put("input" ,handler.serializeNBT()));
     fuelHandler.ifPresent(handler -> compound.put("fuel" ,handler.serializeNBT()));
