@@ -4,9 +4,13 @@
   "item.wtbw.tiny_coal": "Tiny Coal",
   "item.wtbw.tiny_charcoal": "Tiny Charcoal",
 
+  "item.wtbw.stone_hammer": "Stone Hammer",
+  "item.wtbw.iron_hammer": "Iron Hammer",
+  "item.wtbw.gold_hammer": "Gold Hammer",
+  "item.wtbw.diamond_hammer": "Diamond Hammer",
+
   "block.wtbw.charcoal_block": "Block of Charcoal",
-
   "block.wtbw.redstone_timer": "Redstone Timer",
-
+  "block.wtbw.redstone_emitter": "Redstone Emitter",
   "block.wtbw.iron_furnace": "Iron Furnace"
 }

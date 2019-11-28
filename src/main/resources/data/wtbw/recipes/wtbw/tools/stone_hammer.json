@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "B": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "item": "wtbw:stone_hammer"
+  }
+}
