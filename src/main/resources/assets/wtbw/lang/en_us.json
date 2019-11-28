@@ -12,5 +12,8 @@
   "block.wtbw.charcoal_block": "Block of Charcoal",
   "block.wtbw.redstone_timer": "Redstone Timer",
   "block.wtbw.redstone_emitter": "Redstone Emitter",
-  "block.wtbw.iron_furnace": "Iron Furnace"
+  "block.wtbw.iron_furnace": "Iron Furnace",
+  "block.wtbw.gold_furnace": "Gold Furnace",
+  "block.wtbw.diamond_furnace": "Diamond Furnace",
+  "block.wtbw.end_furnace": "End Furnace"
 }
