@@ -26,6 +26,14 @@ public abstract class BaseContainerScreen<C extends Container> extends Container
     tooltipProviders.add(provider);
   }
   
+  @Override
+  public void render(int mouseX, int mouseY, float partialTicks)
+  {
+    renderBackground();
+    super.render(mouseX, mouseY, partialTicks);
+    renderTooltip(mouseX, mouseY);
+  }
+  
   protected void renderTooltip(int mouseX, int mouseY)
   {
     if (this.minecraft.player.inventory.getItemStack().isEmpty())
