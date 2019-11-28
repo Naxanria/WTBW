@@ -289,6 +289,10 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
   
   private IRecipe<?> getRecipe()
   {
+    if (inventoryInput.getStackInSlot(0).getCount() <= 0)
+    {
+      return null;
+    }
     return this.world.getRecipeManager().getRecipe(recipeType, inventoryInput, this.world).orElse(null);
   }
   
