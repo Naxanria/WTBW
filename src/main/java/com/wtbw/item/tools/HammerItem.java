@@ -16,6 +16,7 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -47,7 +48,7 @@ public class HammerItem extends PickaxeItem
         PlayerEntity player = (PlayerEntity) entity;
         if (!player.isSneaking())
         {
-          breakNeighbours(world, pos, player, true);
+          breakNeighbours(world, pos, (ServerPlayerEntity) player, true);
           return true;
         }
         else
@@ -70,9 +71,9 @@ public class HammerItem extends PickaxeItem
   
   
   
-  private void breakNeighbours(World world, BlockPos pos, PlayerEntity player, boolean damageItem)
+  private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem)
   {
-    Direction facing = Utilities.getFacingFromVector(player.getForward());
+    Direction facing = Utilities.getFacingFromVector(Vec3d.fromPitchYaw(player.getPitchYaw()));
     List<BlockPos> brokenBlocks = getBrokenBlocks(world, pos, facing);
     for (BlockPos blockPos : brokenBlocks)
     {

@@ -132,7 +132,7 @@ public class Registrator
     registry.register(IForgeContainerType.create((windowId, inv, data) ->
       {
         BlockPos pos = data.readBlockPos();
-        return new IronFurnaceContainer(windowId, Minecraft.getInstance().world, pos, inv);
+        return new IronFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
       }
     ).setRegistryName(WTBW.MODID, "iron_furnace"));
   }
