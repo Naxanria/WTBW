@@ -3,6 +3,7 @@ package com.wtbw.tile.redstone;
 import com.wtbw.WTBW;
 import com.wtbw.block.ModBlocks;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
+import com.wtbw.config.CommonConfig;
 import com.wtbw.config.WTBWConfig;
 import com.wtbw.tile.ModTiles;
 import com.wtbw.util.Cooldown;
@@ -23,8 +24,8 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
   {
     super(ModTiles.REDSTONE_TIMER);
     
-    cooldown = new Cooldown(WTBWConfig.common.redstoneClockRepeat.get()).start();
-    windDown = new Cooldown(WTBWConfig.common.redstoneClockDuration.get()).start();
+    cooldown = new Cooldown(CommonConfig.get().redstoneClockRepeat.get()).start();
+    windDown = new Cooldown(CommonConfig.get().redstoneClockDuration.get()).start();
   }
   
   @Override

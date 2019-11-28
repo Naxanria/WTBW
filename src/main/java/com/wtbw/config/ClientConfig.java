@@ -25,7 +25,7 @@ public class ClientConfig
     instance = this;
     this.builder = builder;
     
-    builder.push("WTBW client settings");
+    builder.comment("WTBW client settings");
     
     qol();
   }
@@ -42,7 +42,7 @@ public class ClientConfig
     showTags = builder
       .comment("Show the tags of an item")
       .translation(key("qol.show_tags"))
-      .define(key("show_tags"), true);
+      .define("show_tags", true);
     
     showTagsRequireShift = builder
       .comment("Require shift to show tags")
@@ -53,8 +53,13 @@ public class ClientConfig
     builder.pop();
   }
   
-  private String key(String name)
+  private static String key(String name)
   {
     return WTBW.MODID + ".config.client." + name;
+  }
+  
+  public void reload()
+  {
+  
   }
 }

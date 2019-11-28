@@ -4,6 +4,7 @@ import com.wtbw.block.IronFurnaceBlock;
 import com.wtbw.block.ModBlocks;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
+import com.wtbw.config.CommonConfig;
 import com.wtbw.config.WTBWConfig;
 import com.wtbw.gui.container.IronFurnaceContainer;
 import com.wtbw.item.tools.HammerItem;
@@ -75,7 +76,7 @@ public class Registrator
     }, "charcoal_block");
     
     // durability multiplier
-    int dMul = WTBWConfig.common.toolsDurabilityMultiplier.get();
+    int dMul = CommonConfig.get().toolsDurabilityMultiplier.get();
     register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
     register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");
     register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul)), "gold_hammer");

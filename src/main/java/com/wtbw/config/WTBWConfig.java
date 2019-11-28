@@ -12,10 +12,10 @@ import org.apache.commons.lang3.tuple.Pair;
 */
 public class WTBWConfig
 {
-  public static CommonConfig common;
+  private static CommonConfig common;
   private static ForgeConfigSpec commonSpec;
   
-  public static ClientConfig client;
+  private static ClientConfig client;
   private static ForgeConfigSpec clientSpec;
   
   public static void initCommon()
@@ -45,8 +45,16 @@ public class WTBWConfig
   
   public static void reload(ModConfig.ModConfigEvent event)
   {
-//    ModConfig config = event.getConfig();
-    // todo: reload client config if needed
+    ModConfig config = event.getConfig();
+    
+    if (config.getSpec() == commonSpec)
+    {
+      common.reload();
+    }
+    else if (config.getSpec() == clientSpec)
+    {
+      client.reload();
+    }
     
   }
 }

@@ -1,6 +1,7 @@
 package com.wtbw.config;
 
 import com.wtbw.WTBW;
+import com.wtbw.tile.furnace.FurnaceTier;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 /*
@@ -20,13 +21,24 @@ public class CommonConfig
   public ForgeConfigSpec.IntValue toolsDurabilityMultiplier;
   
   // furnaces //
-  public ForgeConfigSpec.IntValue ironFurnaceSpeed;
+  public FurnaceConfig ironFurnace;
+  public FurnaceConfig goldFurnace;
+  public FurnaceConfig diamondFurnace;
+  public FurnaceConfig endFurnace;
   
   // redstone //
   public ForgeConfigSpec.IntValue redstoneClockRepeat;
   public ForgeConfigSpec.IntValue redstoneClockDuration;
   
   private final ForgeConfigSpec.Builder builder;
+  
+  public void reload()
+  {
+    ironFurnace.reload();
+    goldFurnace.reload();
+    diamondFurnace.reload();
+    endFurnace.reload();
+  }
   
   public CommonConfig(ForgeConfigSpec.Builder builder)
   {
@@ -75,13 +87,11 @@ public class CommonConfig
   {
     builder.push("furnace");
     
-    builder.push("iron");
-    ironFurnaceSpeed = builder
-      .comment("Iron furnace speed")
-      .translation("furnace.iron_furnace_speed")
-      .defineInRange("speed", 180, 1, 500);
+    ironFurnace = new FurnaceConfig(FurnaceTier.IRON, builder);
+    goldFurnace = new FurnaceConfig(FurnaceTier.GOLD, builder);
+    diamondFurnace = new FurnaceConfig(FurnaceTier.DIAMOND, builder);
+    endFurnace = new FurnaceConfig(FurnaceTier.END, builder);
     
-    builder.pop();
     builder.pop();
   }
   
@@ -115,7 +125,38 @@ public class CommonConfig
     builder.pop();
   }
   
-  private String key(String name)
+  public static class FurnaceConfig
+  {
+    public final FurnaceTier tier;
+    public final String name;
+    public ForgeConfigSpec.IntValue speed;
+  
+    public FurnaceConfig(FurnaceTier tier, ForgeConfigSpec.Builder builder)
+    {
+      this.tier = tier;
+      this.name = tier.name;
+      init(builder);
+    }
+    
+    void init(ForgeConfigSpec.Builder builder)
+    {
+      builder.push(name);
+      
+      speed = builder
+        .comment(name + " furnace smelting speed, in how many ticks it takes to smelt")
+        .translation(key("furnace." + name + "_furnace_speed"))
+        .defineInRange("speed", tier.getCookTime(), 1, 500);
+      
+      builder.pop();
+    }
+  
+    public void reload()
+    {
+      tier.setCookTime(speed.get());
+    }
+  }
+  
+  private static String key(String name)
   {
     return WTBW.MODID + ".config.common." + name;
   }

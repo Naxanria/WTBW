@@ -65,7 +65,7 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
     fuelHandler = LazyOptional.of(this::createFuelHandler);
     outputHandler = LazyOptional.of(this::createOutputHandler);
     
-    cookTimeTotal = tier.cookTime;
+    cookTimeTotal = tier.getCookTime();
     
     inventoryInput = new IInventory()
     {
@@ -417,12 +417,12 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
     burnTime = NBTHelper.getInt(compound, "burnTime");
     burnTimeTotal = NBTHelper.getInt(compound, "burnTimeTotal");
     cookTime = NBTHelper.getInt(compound, "cookTime");
-    cookTimeTotal = NBTHelper.getInt(compound, "cookTimeTotal");
-    
-    if (world != null && world.isRemote)
-    {
-      cookTimeTotal = NBTHelper.getInt(compound, "cookSpeed", tier.cookTime);
-    }
+//    cookTimeTotal = NBTHelper.getInt(compound, "cookTimeTotal");
+//
+//    if (world != null && world.isRemote)
+//    {
+//      cookTimeTotal = NBTHelper.getInt(compound, "cookSpeed", tier.getCookTime());
+//    }
     
     inputHandler.ifPresent(handler -> handler.deserializeNBT(NBTHelper.getCompound(compound, "input")));
     fuelHandler.ifPresent(handler -> handler.deserializeNBT(NBTHelper.getCompound(compound, "fuel")));
@@ -437,13 +437,13 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
     compound.putInt("burnTime", burnTime);
     compound.putInt("burnTimeTotal", burnTimeTotal);
     compound.putInt("cookTime", cookTime);
-    compound.putInt("cookTimeTotal", cookTimeTotal);
-    
-    if (world != null && !world.isRemote)
-    {
-      compound.putInt("cookSpeed", cookTimeTotal);
-    }
-    
+//    compound.putInt("cookTimeTotal", cookTimeTotal);
+//
+//    if (world != null && !world.isRemote)
+//    {
+//      compound.putInt("cookSpeed", cookTimeTotal);
+//    }
+
     inputHandler.ifPresent(handler -> compound.put("input" ,handler.serializeNBT()));
     fuelHandler.ifPresent(handler -> compound.put("fuel" ,handler.serializeNBT()));
     outputHandler.ifPresent(handler -> compound.put("output" ,handler.serializeNBT()));
