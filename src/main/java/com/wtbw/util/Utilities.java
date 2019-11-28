@@ -6,6 +6,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,4 +38,10 @@ public class Utilities
     Collection<IRecipe<?>> recipes = manager.getRecipes();
     return recipes.stream().filter(iRecipe -> iRecipe.getType() == type).collect(Collectors.toList());
   }
+  
+  public static Direction getFacingFromVector(Vec3d vec)
+  {
+    return Direction.getFacingFromVector(vec.x, vec.y, vec.z);
+  }
+  
 }

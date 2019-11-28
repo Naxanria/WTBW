@@ -5,15 +5,14 @@ import com.wtbw.block.ModBlocks;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.gui.container.IronFurnaceContainer;
+import com.wtbw.item.tools.HammerItem;
 import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -72,6 +71,13 @@ public class Registrator
         return 14400;
       }
     }, "charcoal_block");
+    
+    // durability multiplier
+    int dMul = 7;
+    register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
+    register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");
+    register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul)), "gold_hammer");
+    register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul)), "diamond_hammer");
   }
   
   private static void registerAllTiles()
