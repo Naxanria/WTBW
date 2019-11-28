@@ -1,6 +1,8 @@
 package com.wtbw.tile.redstone;
 
 import com.wtbw.WTBW;
+import com.wtbw.block.ModBlocks;
+import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.WTBWConfig;
 import com.wtbw.tile.ModTiles;
 import com.wtbw.util.Cooldown;
@@ -65,6 +67,7 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
     {
       sendPower = newPower;
       world.notifyNeighbors(pos, world.getBlockState(pos).getBlock());
+      world.setBlockState(pos, world.getBlockState(pos).with(RedstoneTimerBlock.ACTIVE, newPower > 0), 3);
     }
     else
     {
