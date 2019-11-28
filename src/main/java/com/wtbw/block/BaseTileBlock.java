@@ -32,8 +32,7 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
     TE get(IBlockReader world, BlockState state);
   }
   
-  private final TileEntityProvider<TE> tileEntityProvider;
-  
+  public final TileEntityProvider<TE> tileEntityProvider;
   
   public BaseTileBlock(Properties properties, TileEntityProvider<TE> tileEntityProvider)
   {

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IFI",
+    "BBB"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "B": {
+      "item": "minecraft:gold_block"
+    },
+    "F": {
+      "item": "wtbw:iron_furnace"
+    }
+  },
+  "result": {
+    "item": "wtbw:gold_furnace"
+  }
+}

@@ -18,9 +18,9 @@ import javax.annotation.Nonnull;
 /*
   @author: Naxanria
 */
-public class IronFurnaceContainer extends BaseTileContainer<BaseFurnaceTileEntity>
+public class TieredFurnaceContainer extends BaseTileContainer<BaseFurnaceTileEntity>
 {
-  public IronFurnaceContainer( int id, World world, BlockPos pos, PlayerInventory playerInventory)
+  public TieredFurnaceContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory)
   {
     super(ModContainers.IRON_FURNACE, id, world, pos, playerInventory);
     
@@ -170,7 +170,7 @@ public class IronFurnaceContainer extends BaseTileContainer<BaseFurnaceTileEntit
   @Override
   public boolean canInteractWith(PlayerEntity playerIn)
   {
-    return canInteractWith(playerIn, ModBlocks.IRON_FURNACE);
+    return true;
   }
   
   public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)

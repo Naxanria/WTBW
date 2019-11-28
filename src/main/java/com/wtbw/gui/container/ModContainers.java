@@ -10,5 +10,5 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(WTBW.MODID)
 public class ModContainers
 {
-  public static final ContainerType<IronFurnaceContainer> IRON_FURNACE = null;
+  public static final ContainerType<TieredFurnaceContainer> IRON_FURNACE = null;
 }

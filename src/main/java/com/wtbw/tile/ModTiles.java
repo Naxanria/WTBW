@@ -13,5 +13,10 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModTiles
 {
   public static final TileEntityType<BaseFurnaceTileEntity> IRON_FURNACE = null;
+  public static final TileEntityType<BaseFurnaceTileEntity> GOLD_FURNACE = null;
+  public static final TileEntityType<BaseFurnaceTileEntity> DIAMOND_FURNACE = null;
+  public static final TileEntityType<BaseFurnaceTileEntity> END_FURNACE = null;
+  
+  
   public static final TileEntityType<RedstoneTimerTileEntity> REDSTONE_TIMER = null;
 }

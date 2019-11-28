@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "INI",
+    "IFI",
+    "BBB"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:end_stone"
+    },
+    "B": {
+      "item": "minecraft:diamond_block"
+    },
+    "F": {
+      "item": "wtbw:diamond_furnace"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "wtbw:end_furnace"
+  }
+}

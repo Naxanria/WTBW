@@ -1,22 +1,19 @@
 package com.wtbw;
 
-import com.wtbw.block.IronFurnaceBlock;
+import com.wtbw.block.BaseTileBlock;
 import com.wtbw.block.ModBlocks;
+import com.wtbw.block.TieredFurnaceBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
-import com.wtbw.config.WTBWConfig;
-import com.wtbw.gui.container.IronFurnaceContainer;
+import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.item.tools.HammerItem;
-import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
@@ -31,6 +28,7 @@ import java.util.function.Supplier;
 /*
   @author: Naxanria
 */
+@SuppressWarnings("ConstantConditions")
 public class Registrator
 {
   private static List<BlockItem> blockItems = new ArrayList<>();
@@ -43,7 +41,11 @@ public class Registrator
     // register blocks here
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
     
-    register(new IronFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7)), "iron_furnace");
+    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.IRON), "iron_furnace");
+    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.GOLD), "gold_furnace");
+    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.DIAMOND), "diamond_furnace");
+    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.END), "end_furnace");
+    
     register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
     register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
   }
@@ -85,7 +87,13 @@ public class Registrator
   
   private static void registerAllTiles()
   {
-    register(() -> new BaseFurnaceTileEntity(FurnaceTier.IRON, IRecipeType.SMELTING), ModBlocks.IRON_FURNACE, "iron_furnace");
+//    register(() -> new BaseFurnaceTileEntity(FurnaceTier.IRON, IRecipeType.SMELTING), ModBlocks.IRON_FURNACE, "iron_furnace");
+//    register(ModBlocks.IRON_FURNACE.tileEntityProvider::get, ModBlocks.IRON_FURNACE, "iron_furnace");
+    register(ModBlocks.IRON_FURNACE);
+    register(ModBlocks.GOLD_FURNACE);
+    register(ModBlocks.DIAMOND_FURNACE);
+    register(ModBlocks.END_FURNACE);
+    
     register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
   }
   
@@ -133,7 +141,7 @@ public class Registrator
     registry.register(IForgeContainerType.create((windowId, inv, data) ->
       {
         BlockPos pos = data.readBlockPos();
-        return new IronFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
+        return new TieredFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
       }
     ).setRegistryName(WTBW.MODID, "iron_furnace"));
   }
@@ -169,6 +177,11 @@ public class Registrator
   {
     itemRegistry.register(item.setRegistryName(WTBW.MODID, name));
     return item;
+  }
+  
+  private static TileEntityType<?> register(BaseTileBlock tileBlock)
+  {
+    return register(tileBlock.tileEntityProvider::get, tileBlock, tileBlock.getRegistryName().getPath());
   }
   
   private static TileEntityType<?> register(Supplier<TileEntity> factory, Block block, String registryName)

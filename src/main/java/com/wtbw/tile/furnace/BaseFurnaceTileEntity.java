@@ -2,8 +2,7 @@ package com.wtbw.tile.furnace;
 
 import com.wtbw.WTBW;
 import com.wtbw.block.BaseFurnaceBlock;
-import com.wtbw.gui.container.IronFurnaceContainer;
-import com.wtbw.tile.ModTiles;
+import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.Utilities;
@@ -57,7 +56,7 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
   
   public BaseFurnaceTileEntity(FurnaceTier tier, IRecipeType<? extends AbstractCookingRecipe> recipeType)
   {
-    super(ModTiles.IRON_FURNACE);
+    super(tier.getTileEntityType());
     this.tier = tier;
     this.recipeType = recipeType;
 
@@ -303,7 +302,7 @@ public class BaseFurnaceTileEntity extends TileEntity implements ITickableTileEn
   @Override
   public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity player)
   {
-    return new IronFurnaceContainer(id, world, pos, playerInventory);
+    return new TieredFurnaceContainer(id, world, pos, playerInventory);
   }
   
   protected ItemStackHandler createInputHandler()
