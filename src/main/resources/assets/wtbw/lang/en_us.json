@@ -19,5 +19,5 @@
   "block.wtbw.diamond_furnace": "Diamond Furnace",
   "block.wtbw.end_furnace": "End Furnace",
 
-  "wtbw.tooltip.burntime": "Burns for: %s"
+  "wtbw.tooltip.burntime": "Burns for: %s ticks"
 }
