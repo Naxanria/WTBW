@@ -8,6 +8,7 @@ import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.item.tools.HammerItem;
+import com.wtbw.item.tools.Trowel;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
@@ -83,6 +84,8 @@ public class Registrator
     register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");
     register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul)), "gold_hammer");
     register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul)), "diamond_hammer");
+    
+    register(new Trowel(getItemProperties()), "trowel");
   }
   
   private static void registerAllTiles()

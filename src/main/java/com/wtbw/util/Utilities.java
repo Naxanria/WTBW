@@ -1,5 +1,6 @@
 package com.wtbw.util;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -9,6 +10,7 @@ import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,4 +46,23 @@ public class Utilities
     return Direction.getFacingFromVector(vec.x, vec.y, vec.z);
   }
   
+  public static List<ItemStack> getHotbar(PlayerEntity player)
+  {
+    return getHotbar(player, -1);
+  }
+  
+  public static List<ItemStack> getHotbar(PlayerEntity player, int exclude)
+  {
+    List<ItemStack> hotbar = new ArrayList<>();
+    for (int i = 0; i < 9; i++)
+    {
+      if (i == exclude)
+      {
+        continue;
+      }
+      
+      hotbar.add(player.inventory.mainInventory.get(i));
+    }
+    return hotbar;
+  }
 }
