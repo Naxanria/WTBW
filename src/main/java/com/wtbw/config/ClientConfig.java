@@ -19,6 +19,7 @@ public class ClientConfig
   public ForgeConfigSpec.BooleanValue showFullDurabilityOfTools;
   public ForgeConfigSpec.BooleanValue showTags;
   public ForgeConfigSpec.BooleanValue showTagsRequireShift;
+  public ForgeConfigSpec.BooleanValue showBurnTime;
   
   public ClientConfig(ForgeConfigSpec.Builder builder)
   {
@@ -48,6 +49,11 @@ public class ClientConfig
       .comment("Require shift to show tags")
       .translation(key("qol.show_tags_shift"))
       .define("show_tags_shift", true);
+    
+    showBurnTime = builder
+      .comment("Shows the burn time of the item, in ticks")
+      .translation(key("qol.show_burn_time"))
+      .define("burn_time", true);
       
     builder.pop();
     builder.pop();
