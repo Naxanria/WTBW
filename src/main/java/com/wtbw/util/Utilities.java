@@ -67,27 +67,6 @@ public class Utilities
     return hotbar;
   }
   
-  public static <T> List<T> insert(List<T> list, int index, T item)
-  {
-    if (index >= list.size())
-    {
-      list.add(item);
-      
-      return list;
-    }
-    
-    list.add(list.get(list.size() - 1));
-    
-    for (int i = list.size() - 1; i > index; i--)
-    {
-      swap(list, i, i - 1);
-    }
-    
-    list.set(index, item);
-  
-    return list;
-  }
-  
   public static <T> List<T> swap(List<T> list, int indexA, int indexB)
   {
     T temp = list.get(indexA);
