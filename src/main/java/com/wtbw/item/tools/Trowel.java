@@ -69,6 +69,7 @@ public class Trowel extends Item
     if (!world.isRemote)
     {
       ItemStack toPlace = RandomUtil.get(world.rand, collected);
+      int prePlaceCount = toPlace.getCount();
       BlockItem blockItem = (BlockItem) toPlace.getItem().getItem();
       
       
@@ -81,7 +82,7 @@ public class Trowel extends Item
       }
       if (player.isCreative())
       {
-        toPlace.grow(1);
+        toPlace.setCount(prePlaceCount);
       }
       
       return placeResult;
