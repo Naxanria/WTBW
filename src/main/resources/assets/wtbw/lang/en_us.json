@@ -17,5 +17,7 @@
   "block.wtbw.iron_furnace": "Iron Furnace",
   "block.wtbw.gold_furnace": "Gold Furnace",
   "block.wtbw.diamond_furnace": "Diamond Furnace",
-  "block.wtbw.end_furnace": "End Furnace"
+  "block.wtbw.end_furnace": "End Furnace",
+
+  "wtbw.tooltip.burntime": "Burns for: %s"
 }

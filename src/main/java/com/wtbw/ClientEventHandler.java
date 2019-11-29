@@ -5,10 +5,7 @@ import com.wtbw.util.Utilities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.List;
@@ -33,7 +30,7 @@ public class ClientEventHandler
       if (burnTime > 0)
       {
         int index = toolTip.size() - 1;
-        Utilities.insert(toolTip, index, new StringTextComponent("Burns for " + burnTime + " ticks").setStyle(darkGrey));
+        Utilities.insert(toolTip, index, new TranslationTextComponent("wtbw.tooltip.burntime", burnTime).setStyle(darkGrey));
       }
     }
     
@@ -45,7 +42,7 @@ public class ClientEventHandler
         if (max > 0 && !stack.isDamaged())
         {
           int index = toolTip.size() - 1;
-          Utilities.insert(toolTip, index, new StringTextComponent("Durability: " + max + "/" + max).setStyle(white));
+          Utilities.insert(toolTip, index, new TranslationTextComponent("item.durability", max, max));
         }
       }
       
@@ -61,10 +58,5 @@ public class ClientEventHandler
         }
       }
     }
-  }
-  
-  private static void insertAt(List<ITextComponent> toolTip, int index, ITextComponent textComponent)
-  {
-  
   }
 }
