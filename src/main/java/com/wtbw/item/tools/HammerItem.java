@@ -9,6 +9,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -53,7 +54,8 @@ public class HammerItem extends PickaxeItem
         }
         else
         {
-          stack.attemptDamageItem(1, world.rand, (ServerPlayerEntity) player);
+//          stack.attemptDamageItem(1, world.rand, (ServerPlayerEntity) player);
+          stack.damageItem(1, player, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
         }
       }
       
@@ -89,7 +91,7 @@ public class HammerItem extends PickaxeItem
       {
         if (damageItem)
         {
-          player.getHeldItemMainhand().attemptDamageItem(1, world.rand, player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
+          player.getHeldItemMainhand().damageItem(1, player, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));//attemptDamageItem(1, world.rand, player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
         }
         
         dropItems(world, Block.getDrops(blockState, (ServerWorld) world, blockPos, null, player, player.getHeldItemMainhand()), blockPos);

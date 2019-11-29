@@ -9,6 +9,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -75,7 +76,8 @@ public class Trowel extends Item
       
       if (placeResult == ActionResultType.SUCCESS && !player.isCreative() && player instanceof ServerPlayerEntity)
       {
-        context.getItem().attemptDamageItem(1, world.rand, (ServerPlayerEntity) player);
+        context.getItem().damageItem(1, player, playerEntity -> playerEntity.sendBreakAnimation(context.getHand() == Hand.MAIN_HAND ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND));
+//        context.getItem().attemptDamageItem(1, world.rand, (ServerPlayerEntity) player);
       }
       if (player.isCreative())
       {
