@@ -24,25 +24,25 @@ public class ClientEventHandler
     ItemStack stack = event.getItemStack();
     List<ITextComponent> toolTip = event.getToolTip();
   
-    if (ClientConfig.get().showBurnTime.get())
-    {
-      int burnTime = Utilities.getBurnTime(stack);
-      if (burnTime > 0)
-      {
-        int index = toolTip.size() - 1;
-        Utilities.insert(toolTip, index, new TranslationTextComponent("wtbw.tooltip.burntime", burnTime).setStyle(darkGrey));
-      }
-    }
-    
     if (event.getFlags().isAdvanced())
     {
+      if (ClientConfig.get().showBurnTime.get())
+      {
+        int burnTime = Utilities.getBurnTime(stack);
+        if (burnTime > 0)
+        {
+          int index = toolTip.size() - 1;
+          toolTip.add(index, new TranslationTextComponent("wtbw.tooltip.burntime", burnTime).setStyle(darkGrey));
+        }
+      }
+      
       if (ClientConfig.get().showFullDurabilityOfTools.get())
       {
         int max = stack.getMaxDamage();
         if (max > 0 && !stack.isDamaged())
         {
           int index = toolTip.size() - 1;
-          Utilities.insert(toolTip, index, new TranslationTextComponent("item.durability", max, max));
+          toolTip.add(index, new TranslationTextComponent("item.durability", max, max));
         }
       }
       
