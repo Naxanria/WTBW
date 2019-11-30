@@ -17,6 +17,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -27,11 +28,13 @@ import java.util.List;
 /*
   @author: Naxanria
 */
-public class SwapTool extends TieredItem
+public class SwapTool extends TieredItem implements ICycleTool
 {
-  public static final String TOOLTIP_PRE =  WTBW.MODID + ".tooltip.swap_target_pre";
-  public static final String TOOLTIP_NONE =  WTBW.MODID + ".tooltip.swap_none";
-  public static final String MESSAGE_TARGET_CHANGED =  WTBW.MODID + ".text.swap_target_changed";
+  public static final String TOOLTIP_PRE = WTBW.MODID + ".tooltip.swap_target_pre";
+  public static final String TOOLTIP_NONE = WTBW.MODID + ".tooltip.swap_none";
+  public static final String TOOLTIP_RANGE = WTBW.MODID + ".tooltip.swap_range";
+  public static final String MESSAGE_TARGET_CHANGED = WTBW.MODID + ".text.swap_target_changed";
+  
   
   public static CommonConfig config = CommonConfig.get();
   
@@ -92,29 +95,39 @@ public class SwapTool extends TieredItem
       
       Block target = getTarget(stack);
       
-      if (target != Blocks.AIR)
+      if (target != Blocks.AIR && target != block)
       {
         BlockRayTraceResult look = Utilities.getLookingAt(player, 5);
-        List<BlockPos> blocks = Utilities.getBlocks(pos, look.getFace(), maxRadius);
-  
-  
-        if (block != target)
+        List<BlockPos> blocks = Utilities.getBlocks(pos, look.getFace(), getRadius(stack));
+        
+        boolean success = false;
+        
+        for (BlockPos blockPos : blocks)
         {
-          if (isBlacklisted(block))
-          {
-            return ActionResultType.FAIL;
-          }
+          BlockState foundState = world.getBlockState(blockPos);
+          Block found = foundState.getBlock();
           
-          if (state.getBlockHardness(world, pos) > config.swapperMaxHardness.get())
+          if (found == block)
           {
-            return ActionResultType.FAIL;
-          }
-      
-          if (swapBlock(player, pos, target))
-          {
-            stack.damageItem(1, player, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+            if (isBlacklisted(found))
+            {
+              continue;
+            }
+    
+            if (foundState.getBlockHardness(world, blockPos) > config.swapperMaxHardness.get())
+            {
+              continue;
+            }
+    
+            if (swapBlock(player, blockPos, target))
+            {
+              success = true;
+              stack.damageItem(1, player, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+            }
           }
         }
+        
+        return success ? ActionResultType.SUCCESS : ActionResultType.FAIL;
       }
     }
     
@@ -189,6 +202,12 @@ public class SwapTool extends TieredItem
   
     tooltip.add(builder.build());
     
+    if (maxRadius > 1)
+    {
+      tooltip.add(TextComponentBuilder.createTranslated(TOOLTIP_RANGE).next(getRadius(stack)).green().next("/").white().next(maxRadius).green().build());
+    }
+    
+    
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
   
@@ -209,5 +228,49 @@ public class SwapTool extends TieredItem
     return Blocks.AIR;
   }
   
+//  public void setRadius(ItemStack stack, int radius)
+//  {
+//    stack.getOrCreateChildTag("data").putInt("radius", radius);
+//  }
+//
+//  public int getRadius(ItemStack stack)
+//  {
+//    CompoundNBT data = stack.getOrCreateChildTag("data");
+//
+//    if (data.contains("radius"))
+//    {
+//      return MathHelper.clamp(data.getInt("radius"), 1, maxRadius);
+//    }
+//    return maxRadius;
+//  }
   
+  @Override
+  public int cycleRadius(ItemStack stack, int dir)
+  {
+    int r = getRadius(stack);
+    if (dir == 1)
+    {
+      r += 2;
+      if (r > maxRadius)
+      {
+        r = 1;
+      }
+    }
+    else
+    {
+      r -= 2;
+      if (r < 0)
+      {
+        r = maxRadius;
+      }
+    }
+    
+    return setRadius(stack, r);
+  }
+  
+  @Override
+  public int getMaxRadius()
+  {
+    return maxRadius;
+  }
 }

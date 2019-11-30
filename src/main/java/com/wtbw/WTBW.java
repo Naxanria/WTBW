@@ -5,6 +5,8 @@ import com.wtbw.config.ClientConfig;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.config.WTBWConfig;
 import com.wtbw.item.ModItems;
+import com.wtbw.keybinds.KeyEventListener;
+import com.wtbw.network.Networking;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -42,9 +44,7 @@ public class WTBW
   public WTBW()
   {
     IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-  
-    
-    
+
     eventBus.addListener(this::setup);
     
     eventBus.addGenericListener(Block.class, Registrator::registerBlocks);
@@ -54,9 +54,14 @@ public class WTBW
   
     IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
   
+    Networking.registerMessages();
+  
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
     {
       forgeEventBus.addListener(ClientEventHandler::onTooltip);
+      
+      KeyEventListener.registerKeys();
+      forgeEventBus.addListener(KeyEventListener::update);
     });
     
     WTBWConfig.register(ModLoadingContext.get());
