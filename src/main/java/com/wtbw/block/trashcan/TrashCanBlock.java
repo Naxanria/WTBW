@@ -1,6 +1,7 @@
-package com.wtbw.block;
+package com.wtbw.block.trashcan;
 
-import com.wtbw.tile.TrashCanTileEntity;
+import com.wtbw.block.BaseTileBlock;
+import com.wtbw.tile.trashcan.TrashCanTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.BlockRenderLayer;
@@ -15,7 +16,7 @@ import net.minecraft.world.IBlockReader;
 */
 public class TrashCanBlock extends BaseTileBlock<TrashCanTileEntity>
 {
-  public static final VoxelShape BOTTOM = Block.makeCuboidShape(2, 0, 2, 14, 9, 14);
+  public static final VoxelShape BOTTOM = Block.makeCuboidShape(2, 0, 2, 14, 10, 14);
   public static final VoxelShape TOP = Block.makeCuboidShape(1, 10, 1, 15, 12, 15);
   public static final VoxelShape SHAPE = VoxelShapes.or(BOTTOM, TOP);
   

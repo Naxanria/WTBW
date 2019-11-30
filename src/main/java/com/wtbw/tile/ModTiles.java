@@ -3,6 +3,8 @@ package com.wtbw.tile;
 import com.wtbw.WTBW;
 import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
+import com.wtbw.tile.trashcan.FluidTrashCanTileEntity;
+import com.wtbw.tile.trashcan.TrashCanTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -20,4 +22,6 @@ public class ModTiles
   public static final TileEntityType<RedstoneTimerTileEntity> REDSTONE_TIMER = null;
   
   public static final TileEntityType<TrashCanTileEntity> TRASHCAN = null;
+  public static final TileEntityType<FluidTrashCanTileEntity> FLUID_TRASHCAN = null;
+  public static final TileEntityType<TrashCanTileEntity> ENERGY_TRASHCAN = null;
 }

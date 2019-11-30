@@ -3,7 +3,9 @@ package com.wtbw;
 import com.wtbw.block.BaseTileBlock;
 import com.wtbw.block.ModBlocks;
 import com.wtbw.block.TieredFurnaceBlock;
-import com.wtbw.block.TrashCanBlock;
+import com.wtbw.block.trashcan.EnergyTrashCanBlock;
+import com.wtbw.block.trashcan.FluidTrashCanBlock;
+import com.wtbw.block.trashcan.TrashCanBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
@@ -53,6 +55,8 @@ public class Registrator
     register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
     
     register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
+    register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
+    register(new EnergyTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "energy_trashcan");
   }
   
   private static void registerAllItems()
@@ -104,6 +108,8 @@ public class Registrator
     register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
     
     register(ModBlocks.TRASHCAN);
+    register(ModBlocks.FLUID_TRASHCAN);
+    register(ModBlocks.ENERGY_TRASHCAN);
   }
   
   private static Item.Properties getItemProperties()

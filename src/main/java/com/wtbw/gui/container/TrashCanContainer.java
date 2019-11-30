@@ -1,7 +1,7 @@
 package com.wtbw.gui.container;
 
 import com.wtbw.block.ModBlocks;
-import com.wtbw.tile.TrashCanTileEntity;
+import com.wtbw.tile.trashcan.TrashCanTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;

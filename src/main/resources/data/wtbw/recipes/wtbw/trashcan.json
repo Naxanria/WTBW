@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SBS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stone"
+    },
+    "B": {
+      "item": "minecraft:barrel"
+    }
+  },
+  "result": {
+    "item": "wtbw:trashcan"
+  }
+}

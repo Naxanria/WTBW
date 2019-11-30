@@ -1,6 +1,9 @@
 package com.wtbw.block;
 
 import com.wtbw.WTBW;
+import com.wtbw.block.trashcan.EnergyTrashCanBlock;
+import com.wtbw.block.trashcan.FluidTrashCanBlock;
+import com.wtbw.block.trashcan.TrashCanBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.registries.ObjectHolder;
@@ -21,4 +24,6 @@ public class ModBlocks
   public static final Block REDSTONE_TIMER = Blocks.AIR;
   
   public static final TrashCanBlock TRASHCAN = null;
+  public static final FluidTrashCanBlock FLUID_TRASHCAN = null;
+  public static final EnergyTrashCanBlock ENERGY_TRASHCAN = null;
 }
