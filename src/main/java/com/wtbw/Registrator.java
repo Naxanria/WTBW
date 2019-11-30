@@ -12,6 +12,7 @@ import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.gui.container.TrashCanContainer;
 import com.wtbw.item.tools.HammerItem;
+import com.wtbw.item.tools.SwapTool;
 import com.wtbw.item.tools.Trowel;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
@@ -94,6 +95,8 @@ public class Registrator
     register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul)), "diamond_hammer");
     
     register(new Trowel(getItemProperties()), "trowel");
+    
+    register(new SwapTool(ItemTier.IRON, getItemProperties()), "iron_swap_tool");
   }
   
   private static void registerAllTiles()

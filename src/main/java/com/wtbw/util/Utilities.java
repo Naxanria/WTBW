@@ -16,6 +16,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,4 +103,8 @@ public class Utilities
     return new Vec3d(entity.posX, entity.posY, entity.posZ);
   }
   
+  public static <T> List<T> listOf(T... toList)
+  {
+    return Arrays.asList(toList);
+  }
 }

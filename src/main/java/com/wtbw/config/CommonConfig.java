@@ -2,7 +2,12 @@ package com.wtbw.config;
 
 import com.wtbw.WTBW;
 import com.wtbw.tile.furnace.FurnaceTier;
+import com.wtbw.util.Utilities;
 import net.minecraftforge.common.ForgeConfigSpec;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /*
   @author: Naxanria
@@ -19,6 +24,9 @@ public class CommonConfig
   
   // tools //
   public ForgeConfigSpec.IntValue toolsDurabilityMultiplier;
+  
+  public ForgeConfigSpec.ConfigValue<String> swapperBlackList;
+  public ForgeConfigSpec.DoubleValue swapperMaxHardness;
   
   // furnaces //
   public FurnaceConfig ironFurnace;
@@ -99,6 +107,7 @@ public class CommonConfig
   {
     builder.push("tools");
     
+    builder.push("hammer");
     toolsDurabilityMultiplier = builder
       .comment
         (
@@ -106,9 +115,22 @@ public class CommonConfig
           "The durability is calculated by the equivalant tools durability",
           "multiplied by this multiplier"
         )
-      .translation(key("tools.multiplier"))
+      .translation(key("tools.hammer.multiplier"))
       .defineInRange("multiplier", 7, 1, 15);
     
+    builder.pop().push("swapping");
+    
+    swapperBlackList = builder
+      .comment("The blacklisted blocks")
+      .translation(key("tools.swapping.blacklist"))
+      .define("blacklist", "minecraft:bedrock");
+
+    swapperMaxHardness = builder
+      .comment("Maximum hardness that can be swapped")
+      .translation(key("tools.swapping.hardness"))
+      .defineInRange("max_hardness", 49, 0, Double.MAX_VALUE);
+    
+    builder.pop();
     
     builder.pop();
   }

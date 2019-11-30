@@ -23,5 +23,6 @@
   "block.wtbw.fluid_trashcan": "Fluid Trashcan",
   "block.wtbw.energy_trashcan": "Energy Trashcan",
 
-  "wtbw.tooltip.burntime": "Burns for: %s ticks"
+  "wtbw.tooltip.burntime": "Burns for: %s ticks",
+  "wtbw.tooltip.swap_target_pre": "Target block:"
 }

@@ -13,4 +13,6 @@ public class ModItems
 {
   public static final Item TINY_COAL = Items.AIR;
   public static final Item TINY_CHARCOAL = Items.AIR;
+  
+  public static final Item IRON_SWAP_TOOL = Items.AIR;
 }
