@@ -4,6 +4,7 @@ import com.wtbw.WTBW;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.util.StackUtil;
 import com.wtbw.util.TextComponentBuilder;
+import com.wtbw.util.Utilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,6 +16,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -33,9 +35,20 @@ public class SwapTool extends TieredItem
   
   public static CommonConfig config = CommonConfig.get();
   
+  private int maxRadius = 1;
+  
   public SwapTool(IItemTier tierIn, Properties builder)
   {
     super(tierIn, builder);
+    
+    if (tierIn == ItemTier.IRON)
+    {
+      maxRadius = 3;
+    }
+    if (tierIn == ItemTier.DIAMOND)
+    {
+      maxRadius = 5;
+    }
   }
   
   @Override
@@ -81,6 +94,10 @@ public class SwapTool extends TieredItem
       
       if (target != Blocks.AIR)
       {
+        BlockRayTraceResult look = Utilities.getLookingAt(player, 5);
+        List<BlockPos> blocks = Utilities.getBlocks(pos, look.getFace(), maxRadius);
+  
+  
         if (block != target)
         {
           if (isBlacklisted(block))

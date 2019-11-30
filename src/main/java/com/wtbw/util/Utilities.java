@@ -1,5 +1,6 @@
 package com.wtbw.util;
 
+import com.wtbw.WTBW;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -117,14 +118,30 @@ public class Utilities
   public static List<BlockPos> getBlocks(BlockPos pos, Direction facing, int radius)
   {
     List<BlockPos> positions = new ArrayList<>();
+  
+    if (radius % 2 == 0)
+    {
+      WTBW.LOGGER.error("Trying to get blocks with an even radius! Aborting");
+      return positions;
+    }
+    
+    if (radius < 3)
+    {
+      positions.add(pos);
+      return positions;
+    }
+  
+    int d = radius / 2;
+    int min = -d;
+    int max = d;
     
     switch (facing)
     {
       case DOWN:
       case UP:
-        for (int x = -1; x <= 1; x++)
+        for (int x = min; x <= max; x++)
         {
-          for (int z = -1; z <= 1; z++)
+          for (int z = min; z <= max; z++)
           {
             positions.add(pos.add(x, 0, z));
           }
@@ -133,9 +150,9 @@ public class Utilities
         break;
       case NORTH:
       case SOUTH:
-        for (int x = -1; x <= 1; x++)
+        for (int x = min; x <= max; x++)
         {
-          for (int y = -1; y <= 1; y++)
+          for (int y = min; y <= max; y++)
           {
             positions.add(pos.add(x, y, 0));
           }
@@ -143,9 +160,9 @@ public class Utilities
         break;
       case WEST:
       case EAST:
-        for (int z = -1; z <= 1; z++)
+        for (int z = min; z <= max; z++)
         {
-          for (int y = -1; y <= 1; y++)
+          for (int y = min; y <= max; y++)
           {
             positions.add(pos.add(0, y, z));
           }
