@@ -11,4 +11,5 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModContainers
 {
   public static final ContainerType<TieredFurnaceContainer> IRON_FURNACE = null;
+  public static final ContainerType<TrashCanContainer> TRASHCAN = null;
 }

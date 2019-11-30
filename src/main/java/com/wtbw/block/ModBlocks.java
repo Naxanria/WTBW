@@ -19,4 +19,6 @@ public class ModBlocks
   public static final TieredFurnaceBlock END_FURNACE = null;
   
   public static final Block REDSTONE_TIMER = Blocks.AIR;
+  
+  public static final TrashCanBlock TRASHCAN = null;
 }

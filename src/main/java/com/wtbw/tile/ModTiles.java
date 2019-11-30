@@ -17,6 +17,7 @@ public class ModTiles
   public static final TileEntityType<BaseFurnaceTileEntity> DIAMOND_FURNACE = null;
   public static final TileEntityType<BaseFurnaceTileEntity> END_FURNACE = null;
   
-  
   public static final TileEntityType<RedstoneTimerTileEntity> REDSTONE_TIMER = null;
+  
+  public static final TileEntityType<TrashCanTileEntity> TRASHCAN = null;
 }

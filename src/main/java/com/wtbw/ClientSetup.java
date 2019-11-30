@@ -2,6 +2,7 @@ package com.wtbw;
 
 import com.wtbw.gui.container.ModContainers;
 import com.wtbw.gui.screen.TieredFurnaceScreen;
+import com.wtbw.gui.screen.TrashCanScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.World;
@@ -15,6 +16,7 @@ public class ClientSetup
   public static void init()
   {
     ScreenManager.registerFactory(ModContainers.IRON_FURNACE, TieredFurnaceScreen::new);
+    ScreenManager.registerFactory(ModContainers.TRASHCAN, TrashCanScreen::new);
   }
   
   public static World getWorld()

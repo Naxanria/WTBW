@@ -3,10 +3,12 @@ package com.wtbw;
 import com.wtbw.block.BaseTileBlock;
 import com.wtbw.block.ModBlocks;
 import com.wtbw.block.TieredFurnaceBlock;
+import com.wtbw.block.TrashCanBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.TieredFurnaceContainer;
+import com.wtbw.gui.container.TrashCanContainer;
 import com.wtbw.item.tools.HammerItem;
 import com.wtbw.item.tools.Trowel;
 import com.wtbw.tile.furnace.FurnaceTier;
@@ -49,6 +51,8 @@ public class Registrator
     
     register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
     register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
+    
+    register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
   }
   
   private static void registerAllItems()
@@ -98,6 +102,8 @@ public class Registrator
     register(ModBlocks.END_FURNACE);
     
     register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
+    
+    register(ModBlocks.TRASHCAN);
   }
   
   private static Item.Properties getItemProperties()
@@ -147,6 +153,13 @@ public class Registrator
         return new TieredFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
       }
     ).setRegistryName(WTBW.MODID, "iron_furnace"));
+  
+    registry.register(IForgeContainerType.create((windowId, inv, data) ->
+      {
+        BlockPos pos = data.readBlockPos();
+        return new TrashCanContainer(windowId, ClientSetup.getWorld(), pos, inv);
+      }
+    ).setRegistryName(WTBW.MODID, "trashcan"));
   }
   
   private static <T extends Block> T register(T block, String registryName)
