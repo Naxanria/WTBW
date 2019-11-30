@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "wtbt:block/fancy/water_stone_brick" }
+        "": { "model": "wtbw:block/water_stone_brick" }
     }
 }

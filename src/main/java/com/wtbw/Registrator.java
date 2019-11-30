@@ -48,6 +48,9 @@ public class Registrator
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
 
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6).lightValue(15)), "lava_stone_brick");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6).lightValue(15)), "lava_chiseled_stone_brick");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "water_stone_brick");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "water_chiseled_stone_brick");
     
     register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.IRON), "iron_furnace");
     register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.GOLD), "gold_furnace");

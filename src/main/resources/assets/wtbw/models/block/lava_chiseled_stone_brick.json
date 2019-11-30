@@ -1,7 +1,7 @@
 {
     "parent" : "block/cube_all",
     "textures": {
-        "all": "wtbt:block/fancy/water_stone_brick"
+        "all": "wtbw:block/fancy/lava_chiseled_stone_brick"
     }
 }
 

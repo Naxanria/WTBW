@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "wtbt:block/fancy/lava_stone_brick" }
+        "": { "model": "wtbw:block/lava_stone_brick" }
     }
 }
