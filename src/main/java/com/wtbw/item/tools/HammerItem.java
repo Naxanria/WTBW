@@ -17,6 +17,8 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -75,7 +77,9 @@ public class HammerItem extends PickaxeItem
   
   private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem)
   {
-    Direction facing = Utilities.getFacingFromVector(Vec3d.fromPitchYaw(player.getPitchYaw()));
+    BlockRayTraceResult rayTraceResult = Utilities.getLookingAt(player, 6);
+    Direction facing = rayTraceResult.getFace();
+    
     List<BlockPos> brokenBlocks = getBrokenBlocks(world, pos, facing);
     for (BlockPos blockPos : brokenBlocks)
     {
