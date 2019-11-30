@@ -160,6 +160,6 @@ public class HammerItem extends PickaxeItem
   @Override
   public float getDestroySpeed(ItemStack stack, BlockState state)
   {
-    return super.getDestroySpeed(stack, state) / 4f;
+    return super.getDestroySpeed(stack, state) / 6f;
   }
 }
