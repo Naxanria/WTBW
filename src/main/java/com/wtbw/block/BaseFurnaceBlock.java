@@ -79,6 +79,12 @@ public class BaseFurnaceBlock<TE extends TileEntity> extends BaseTileBlock<TE>
     builder.add(FACING, LIT);
   }
   
+  @Override
+  public int getLightValue(BlockState state)
+  {
+    return state.get(LIT) ? 13 : 0;
+  }
+  
   @OnlyIn(Dist.CLIENT)
   public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.get(LIT))
