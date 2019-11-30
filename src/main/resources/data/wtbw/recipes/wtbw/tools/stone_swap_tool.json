@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CP",
+    " SC",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "C": {
+      "tag": "forge:cobblestone"
+    },
+    "P": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "result": {
+    "item": "wtbw:stone_swap_tool"
+  }
+}

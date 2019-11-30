@@ -9,6 +9,10 @@
   "item.wtbw.gold_hammer": "Gold Hammer",
   "item.wtbw.diamond_hammer": "Diamond Hammer",
 
+  "item.wtbw.stone_swap_tool": "Stone Swapper",
+  "item.wtbw.iron_swap_tool": "Iron Swapper",
+  "item.wtbw.diamond_swap_tool": "Diamond Swapper",
+
   "item.wtbw.trowel": "Trowel",
 
   "block.wtbw.charcoal_block": "Block of Charcoal",
@@ -24,5 +28,8 @@
   "block.wtbw.energy_trashcan": "Energy Trashcan",
 
   "wtbw.tooltip.burntime": "Burns for: %s ticks",
-  "wtbw.tooltip.swap_target_pre": "Target block:"
+  "wtbw.tooltip.swap_target_pre": "Target block:",
+  "wtbw.tooltip.swap_none": "NONE",
+
+  "wtbw.text.swap_target_changed": "Changed block to "
 }

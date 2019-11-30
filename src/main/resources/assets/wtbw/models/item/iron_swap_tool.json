@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "wtbw:item/tools/hammers/iron_hammer"
+    "layer0": "wtbw:item/tools/swappers/iron_swapper"
   }
 }

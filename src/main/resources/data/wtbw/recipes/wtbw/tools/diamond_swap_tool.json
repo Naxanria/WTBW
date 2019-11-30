@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " DP",
+    " SD",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "P": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "result": {
+    "item": "wtbw:diamond_swap_tool"
+  }
+}

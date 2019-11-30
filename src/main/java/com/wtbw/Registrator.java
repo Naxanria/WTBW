@@ -98,7 +98,9 @@ public class Registrator
     
     register(new Trowel(getItemProperties()), "trowel");
     
+    register(new SwapTool(ItemTier.STONE, getItemProperties()), "stone_swap_tool");
     register(new SwapTool(ItemTier.IRON, getItemProperties()), "iron_swap_tool");
+    register(new SwapTool(ItemTier.DIAMOND, getItemProperties()), "diamond_swap_tool");
   }
   
   private static void registerAllTiles()
