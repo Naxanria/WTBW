@@ -15,7 +15,8 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModBlocks
 {
   public static final Block CHARCOAL_BLOCK = Blocks.AIR;
-  
+  public static final Block LAVA_STONE_BRICK = Blocks.AIR;
+
   public static final TieredFurnaceBlock IRON_FURNACE = null;
   public static final TieredFurnaceBlock GOLD_FURNACE = null;
   public static final TieredFurnaceBlock DIAMOND_FURNACE = null;
