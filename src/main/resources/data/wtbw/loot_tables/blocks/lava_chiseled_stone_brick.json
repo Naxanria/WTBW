@@ -1,0 +1,19 @@
+{
+  "type": "wtbt:lava_chiseled_stone_brick",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "wtbw:lava_chiseled_stone_brick"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
