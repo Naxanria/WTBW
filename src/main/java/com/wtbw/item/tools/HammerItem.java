@@ -78,7 +78,7 @@ public class HammerItem extends PickaxeItem
     BlockRayTraceResult rayTraceResult = Utilities.getLookingAt(player, 6);
     Direction facing = rayTraceResult.getFace();
     
-    List<BlockPos> brokenBlocks = Utilities.getBlocks(pos, facing, 3);
+    List<BlockPos> brokenBlocks = Utilities.getBlocks(pos, facing);
     for (BlockPos blockPos : brokenBlocks)
     {
       BlockState blockState = world.getBlockState(blockPos);
