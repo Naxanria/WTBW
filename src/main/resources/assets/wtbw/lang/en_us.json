@@ -22,6 +22,10 @@
   "block.wtbw.gold_furnace": "Gold Furnace",
   "block.wtbw.diamond_furnace": "Diamond Furnace",
   "block.wtbw.end_furnace": "End Furnace",
+  "block.wtbw.lava_stone_brick": "Lava Stone Brick",
+  "block.wtbw.lava_chiseled_stone_brick": "Lava Chisel Stone Brick",
+  "block.wtbw.water_stone_brick": "Water Stone Brick",
+  "block.wtbw.water_chiseled_stone_brick": "Water Chisel Stone Brick",
 
   "block.wtbw.trashcan": "Trashcan",
   "block.wtbw.fluid_trashcan": "Fluid Trashcan",
