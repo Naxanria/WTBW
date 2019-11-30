@@ -9,6 +9,7 @@ import com.wtbw.block.trashcan.TrashCanBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
+import com.wtbw.gui.container.BaseTileContainer;
 import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.gui.container.TrashCanContainer;
 import com.wtbw.item.tools.HammerItem;
@@ -18,11 +19,16 @@ import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -41,6 +47,7 @@ public class Registrator
   private static IForgeRegistry<Block> blockRegistry;
   private static IForgeRegistry<Item> itemRegistry;
   private static IForgeRegistry<TileEntityType<?>> tileRegistry;
+  private static IForgeRegistry<ContainerType<?>> containerRegistry;
   
   private static void registerAllBlocks()
   {
@@ -108,8 +115,8 @@ public class Registrator
   
   private static void registerAllTiles()
   {
-//    register(() -> new BaseFurnaceTileEntity(FurnaceTier.IRON, IRecipeType.SMELTING), ModBlocks.IRON_FURNACE, "iron_furnace");
-//    register(ModBlocks.IRON_FURNACE.tileEntityProvider::get, ModBlocks.IRON_FURNACE, "iron_furnace");
+//    register(() -> new BaseFurnaceTileEntity(FurnaceTier.IRON, IRecipeType.SMELTING), ModBlocks.TIERED_FURNACE, "iron_furnace");
+//    register(ModBlocks.TIERED_FURNACE.tileEntityProvider::get, ModBlocks.TIERED_FURNACE, "iron_furnace");
     register(ModBlocks.IRON_FURNACE);
     register(ModBlocks.GOLD_FURNACE);
     register(ModBlocks.DIAMOND_FURNACE);
@@ -121,6 +128,17 @@ public class Registrator
     register(ModBlocks.FLUID_TRASHCAN);
     register(ModBlocks.ENERGY_TRASHCAN);
   }
+  
+  private static void registerAllContainers()
+  {
+    registerContainer(TieredFurnaceContainer::new, "tiered_furnace");
+    registerContainer(TrashCanContainer::new, "trashcan");
+  }
+  
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
   
   private static Item.Properties getItemProperties()
   {
@@ -161,21 +179,38 @@ public class Registrator
   
   public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event)
   {
-    IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
+    containerRegistry = event.getRegistry();
+//
+//    registry.register(IForgeContainerType.create(Registrator::register
+//    ).setRegistryName(WTBW.MODID, "tiered_furnace"));
     
-    registry.register(IForgeContainerType.create((windowId, inv, data) ->
-      {
-        BlockPos pos = data.readBlockPos();
-        return new TieredFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
-      }
-    ).setRegistryName(WTBW.MODID, "iron_furnace"));
+    registerAllContainers();
   
-    registry.register(IForgeContainerType.create((windowId, inv, data) ->
-      {
-        BlockPos pos = data.readBlockPos();
-        return new TrashCanContainer(windowId, ClientSetup.getWorld(), pos, inv);
-      }
-    ).setRegistryName(WTBW.MODID, "trashcan"));
+//    containerRegistry.register(IForgeContainerType.create((windowId, inv, data) ->
+//      {
+//        BlockPos pos = data.readBlockPos();
+//        return new TrashCanContainer(windowId, ClientSetup.getWorld(), pos, inv);
+//      }
+//    ).setRegistryName(WTBW.MODID, "trashcan"));
+  }
+  
+  interface IContainerFactory
+  {
+    BaseTileContainer<?> create(int windowId, World world, BlockPos pos, PlayerInventory inv);
+  }
+  
+  
+//  private static TieredFurnaceContainer register(int windowId, PlayerInventory inv, PacketBuffer data)
+//  {
+//    BlockPos pos = data.readBlockPos();
+//    return new TieredFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
+//  }
+  
+  private static void registerContainer(IContainerFactory factory, String name)
+  {
+    containerRegistry.register(IForgeContainerType.create((windowId, inv, data) ->
+      factory.create(windowId, ClientSetup.getWorld(), data.readBlockPos(), inv)
+    ).setRegistryName(WTBW.MODID, name));
   }
   
   private static <T extends Block> T register(T block, String registryName)
@@ -223,5 +258,5 @@ public class Registrator
     tileRegistry.register(type);
     return type;
   }
-  
+
 }

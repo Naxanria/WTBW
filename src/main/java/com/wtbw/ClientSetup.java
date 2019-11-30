@@ -15,7 +15,7 @@ public class ClientSetup
 {
   public static void init()
   {
-    ScreenManager.registerFactory(ModContainers.IRON_FURNACE, TieredFurnaceScreen::new);
+    ScreenManager.registerFactory(ModContainers.TIERED_FURNACE, TieredFurnaceScreen::new);
     ScreenManager.registerFactory(ModContainers.TRASHCAN, TrashCanScreen::new);
   }
   

@@ -1,6 +1,5 @@
 package com.wtbw.gui.container;
 
-import com.wtbw.block.ModBlocks;
 import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import com.wtbw.util.Utilities;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,7 +21,7 @@ public class TieredFurnaceContainer extends BaseTileContainer<BaseFurnaceTileEnt
 {
   public TieredFurnaceContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory)
   {
-    super(ModContainers.IRON_FURNACE, id, world, pos, playerInventory);
+    super(ModContainers.TIERED_FURNACE, id, world, pos, playerInventory);
     
     tileEntity.getInputHandler().ifPresent(
       handler -> addSlot
