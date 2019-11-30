@@ -3,6 +3,7 @@ package com.wtbw.item.tools;
 import com.wtbw.util.Utilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -68,9 +69,14 @@ public class HammerItem extends PickaxeItem
   }
   
   @Override
-  public boolean canHarvestBlock(BlockState blockIn)
+  public boolean canHarvestBlock(BlockState state)
   {
-    return super.canHarvestBlock(blockIn);
+    if (state.getBlock() == Blocks.BEDROCK)
+    {
+      return false;
+    }
+    
+    return super.canHarvestBlock(state);
   }
   
   
@@ -85,6 +91,11 @@ public class HammerItem extends PickaxeItem
     {
       BlockState blockState = world.getBlockState(blockPos);
       if (!canHarvestBlock(blockState))
+      {
+        continue;
+      }
+  
+      if (blockState.getBlock().hasTileEntity(blockState))
       {
         continue;
       }
