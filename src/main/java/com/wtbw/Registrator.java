@@ -19,19 +19,24 @@ import com.wtbw.item.tools.Trowel;
 import com.wtbw.tile.MagnetInhibitorTileEntity;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
+import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -70,7 +75,18 @@ public class Registrator
     register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
     register(new EnergyTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "energy_trashcan");
     
-    register(new BaseTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new MagnetInhibitorTileEntity()), "magnet_inhibitor");
+    register(new BaseTileBlock<MagnetInhibitorTileEntity>(getBlockProperties(Material.IRON).hardnessAndResistance(4),
+      (world, state) -> new MagnetInhibitorTileEntity())
+     {
+       @Override
+       public void addInformation(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag flag)
+       {
+         tooltip.add(TextComponentBuilder.createTranslated(WTBW.MODID + ".tooltip.magnet_inhibitor", 3).aqua().build());
+         
+         super.addInformation(stack, world, tooltip, flag);
+       }
+     }
+      , "magnet_inhibitor");
   }
   
   private static void registerAllItems()

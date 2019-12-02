@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BMB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "M" : {
+      "item": "wtbw:magnet"
+    }
+
+  },
+  "result": {
+    "item": "wtbw:magnet_inhibitor"
+  }
+}
