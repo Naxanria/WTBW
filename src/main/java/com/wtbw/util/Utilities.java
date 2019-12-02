@@ -11,10 +11,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -179,5 +176,10 @@ public class Utilities
     {
       InventoryHelper.spawnItemStack(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, stack);
     }
+  }
+  
+  public static AxisAlignedBB getBoundingBox(BlockPos center, double radius)
+  {
+    return new AxisAlignedBB(center.add(-radius, -radius, -radius), center.add(radius, radius, radius));
   }
 }

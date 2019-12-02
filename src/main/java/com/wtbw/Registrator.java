@@ -16,16 +16,14 @@ import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.HammerItem;
 import com.wtbw.item.tools.SwapTool;
 import com.wtbw.item.tools.Trowel;
+import com.wtbw.tile.MagnetInhibitorTileEntity;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
@@ -71,6 +69,8 @@ public class Registrator
     register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
     register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
     register(new EnergyTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "energy_trashcan");
+    
+    register(new BaseTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new MagnetInhibitorTileEntity()), "magnet_inhibitor");
   }
   
   private static void registerAllItems()
@@ -130,6 +130,8 @@ public class Registrator
     register(ModBlocks.TRASHCAN);
     register(ModBlocks.FLUID_TRASHCAN);
     register(ModBlocks.ENERGY_TRASHCAN);
+    
+    register(ModBlocks.MAGNET_INHIBITOR);
   }
   
   private static void registerAllContainers()

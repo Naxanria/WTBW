@@ -1,20 +1,18 @@
 package com.wtbw.item;
 
 import com.wtbw.config.CommonConfig;
+import com.wtbw.tile.MagnetInhibitorTileEntity;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.StackUtil;
+import com.wtbw.util.Utilities;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -25,11 +23,6 @@ import java.util.List;
 */
 public class MagnetItem extends Item
 {
-  private AxisAlignedBB getBoundingBox(BlockPos center, double radius)
-  {
-    return new AxisAlignedBB(center.add(-radius, -radius, -radius), center.add(radius, radius, radius));
-  }
-  
   public MagnetItem(Properties properties)
   {
     super(properties);
@@ -63,7 +56,7 @@ public class MagnetItem extends Item
         int radius = config.magnetRadius.get();
         boolean checkCanPickup = config.magnetCheckCanPickUp.get();
         
-        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, getBoundingBox(entity.getPosition(), radius));
+        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, Utilities.getBoundingBox(entity.getPosition(), radius));
     
         for (Entity e : entities)
         {
@@ -78,6 +71,11 @@ public class MagnetItem extends Item
                 {
                   continue;
                 }
+              }
+              
+              if (MagnetInhibitorTileEntity.isInhibitorInRange(e))
+              {
+                continue;
               }
               
               float speed = 3;

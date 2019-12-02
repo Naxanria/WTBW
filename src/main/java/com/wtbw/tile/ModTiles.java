@@ -24,4 +24,6 @@ public class ModTiles
   public static final TileEntityType<TrashCanTileEntity> TRASHCAN = null;
   public static final TileEntityType<FluidTrashCanTileEntity> FLUID_TRASHCAN = null;
   public static final TileEntityType<TrashCanTileEntity> ENERGY_TRASHCAN = null;
+  
+  public static final TileEntityType<MagnetInhibitorTileEntity> MAGNET_INHIBITOR = null;
 }
