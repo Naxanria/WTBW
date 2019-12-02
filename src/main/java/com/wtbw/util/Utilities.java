@@ -13,6 +13,7 @@ import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -168,6 +169,50 @@ public class Utilities
     }
     
     return positions;
+  }
+  
+  public static BiValue<BlockPos, BlockPos> getRegion(BlockPos center, Direction facing, int radius)
+  {
+    if (radius % 2 == 0)
+    {
+      WTBW.LOGGER.error("Trying to get blocks with an even radius! Aborting");
+      return new BiValue<>(null, null);
+    }
+  
+    if (radius < 3)
+    {
+      return new BiValue<>(center, center);
+    }
+  
+    int d = radius / 2;
+    int min = -d;
+    int max = d;
+    
+    BlockPos start = null;
+    BlockPos end = null;
+
+    switch (facing)
+    {
+      case DOWN:
+      case UP:
+        start = center.add(min, 0, min);
+        end = center.add(max, 0, max);
+        break;
+        
+      case NORTH:
+      case SOUTH:
+        start = center.add(min, min, 0);
+        end = center.add(max, max, 0);
+        break;
+        
+      case WEST:
+      case EAST:
+        start = center.add(0, min, min);
+        end = center.add(0, max, max);
+        break;
+    }
+    
+    return new BiValue<>(start, end);
   }
   
   public static void dropItems(World world, List<ItemStack> items, BlockPos pos)
