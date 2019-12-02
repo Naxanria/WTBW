@@ -51,4 +51,14 @@ public class NBTHelper
   
     return defaultValue;
   }
+  
+  public static boolean getBoolean(CompoundNBT compoundNBT, String name, boolean defaultValue)
+  {
+    if (compoundNBT.contains(name))
+    {
+      return compoundNBT.getBoolean(name);
+    }
+    
+    return defaultValue;
+  }
 }

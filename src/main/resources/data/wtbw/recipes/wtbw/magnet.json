@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R L",
+    "I I",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "L": {
+      "tag": "forge:gems/lapis"
+    }
+  },
+  "result": {
+    "item": "wtbw:magnet"
+  }
+}
