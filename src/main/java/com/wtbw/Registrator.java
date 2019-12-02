@@ -1,6 +1,8 @@
 package com.wtbw;
 
 import com.wtbw.block.*;
+import com.wtbw.block.decoration.LavaBlock;
+import com.wtbw.block.decoration.WaterBlock;
 import com.wtbw.block.trashcan.EnergyTrashCanBlock;
 import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
