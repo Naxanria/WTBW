@@ -1,8 +1,6 @@
 package com.wtbw;
 
-import com.wtbw.block.BaseTileBlock;
-import com.wtbw.block.ModBlocks;
-import com.wtbw.block.TieredFurnaceBlock;
+import com.wtbw.block.*;
 import com.wtbw.block.trashcan.EnergyTrashCanBlock;
 import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
@@ -19,13 +17,11 @@ import com.wtbw.item.tools.Trowel;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
@@ -59,6 +55,10 @@ public class Registrator
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_chiseled_stone_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_chiseled_stone_brick");
+
+    register(new LavaBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).lightValue(15)), "lava_glass");
+
+    register(new WaterBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "water_glass");
 
     register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.IRON), "iron_furnace");
     register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.GOLD), "gold_furnace");
