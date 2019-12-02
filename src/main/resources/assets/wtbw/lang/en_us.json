@@ -30,7 +30,10 @@
   "block.wtbw.water_chiseled_stone_brick": "Water Chisel Stone Brick",
   "block.wtbw.water_glass": "Water Glass",
   "block.wtbw.lava_glass": "Lava Glass",
-
+  "block.wtbw.polished_andesite_brick": "Polished Andesite Brick",
+  "block.wtbw.polished_diorite_brick": "Polished Diorite Brick",
+  "block.wtbw.polished_granite_brick": "Polished Granite Brick",
+  "block.wtbw.blaze_block": "Block of Blaze",
 
   "block.wtbw.magnet_inhibitor": "Magnet Inhibitor",
 

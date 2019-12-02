@@ -56,11 +56,15 @@ public class Registrator
   {
     // register blocks here
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "blaze_block", false);
 
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_stone_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_chiseled_stone_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_chiseled_stone_brick");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_andesite_brick");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_diorite_brick");
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_granite_brick");
 
     register(new LavaBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).lightValue(15)), "lava_glass");
 
@@ -118,6 +122,14 @@ public class Registrator
         return 14400;
       }
     }, "charcoal_block");
+
+    register(new BlockItem(ModBlocks.BLAZE_BLOCK, getItemProperties()){
+      @Override
+      public int getBurnTime(ItemStack itemStack)
+      {
+        return 21600;
+      }
+    }, "blaze_block");
     
     // durability multiplier
     int dMul = CommonConfig.get().toolsDurabilityMultiplier.get();

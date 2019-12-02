@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:polished_andesite"
+    }
+  },
+  "result": {
+    "item": "wtbw:polished_andesite_brick"
+  }
+}
