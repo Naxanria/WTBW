@@ -1,6 +1,11 @@
 {
-  "parent" : "block/cube_all",
+  "parent" : "block/cube",
   "textures" : {
-    "all" : "wtbw:block/magnet_inhibitor"
+    "north" : "wtbw:block/magnet_inhibitor",
+    "south" : "wtbw:block/magnet_inhibitor",
+    "west" : "wtbw:block/magnet_inhibitor",
+    "east" : "wtbw:block/magnet_inhibitor",
+    "up" : "block/black_concrete",
+    "down" : "block/black_concrete"
   }
 }
