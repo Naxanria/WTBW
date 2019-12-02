@@ -9,17 +9,14 @@ import net.minecraft.util.math.Vec3d;
 /*
   @author: Naxanria
 */
-public abstract class ItemStackWorldRenderer
-{
-  public static Vec3d getPlayerPos()
-  {
-    return new Vec3d(TileEntityRendererDispatcher.staticPlayerX, TileEntityRendererDispatcher.staticPlayerY, TileEntityRendererDispatcher.staticPlayerZ);
-  }
-  
-  public static Vec3d getPosTranslated(BlockPos pos)
-  {
-    return getPlayerPos().subtract(pos.getX(), pos.getY(), pos.getZ());
-  }
-  
-  public abstract void render(ItemStack stack, PlayerEntity player);
+public abstract class ItemStackWorldRenderer {
+    public static Vec3d getPlayerPos() {
+        return new Vec3d(TileEntityRendererDispatcher.staticPlayerX, TileEntityRendererDispatcher.staticPlayerY, TileEntityRendererDispatcher.staticPlayerZ);
+    }
+
+    public static Vec3d getPosTranslated(BlockPos pos) {
+        return getPlayerPos().subtract(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    public abstract void render(ItemStack stack, PlayerEntity player);
 }

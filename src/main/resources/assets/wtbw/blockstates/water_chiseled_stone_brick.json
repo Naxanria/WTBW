@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "wtbw:block/water_chiseled_stone_brick"}
+  "variants": {
+    "": {
+      "model": "wtbw:block/water_chiseled_stone_brick"
     }
+  }
 }

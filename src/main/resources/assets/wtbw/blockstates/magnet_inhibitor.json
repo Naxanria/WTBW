@@ -1,5 +1,7 @@
 {
-  "variants" : {
-    "" : { "model" : "wtbw:block/magnet_inhibitor" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/magnet_inhibitor"
+    }
   }
 }

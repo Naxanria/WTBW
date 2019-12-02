@@ -1,11 +1,11 @@
 {
-  "parent" : "block/cube",
-  "textures" : {
-    "north" : "wtbw:block/magnet_inhibitor",
-    "south" : "wtbw:block/magnet_inhibitor",
-    "west" : "wtbw:block/magnet_inhibitor",
-    "east" : "wtbw:block/magnet_inhibitor",
-    "up" : "block/black_concrete",
-    "down" : "block/black_concrete"
+  "parent": "block/cube",
+  "textures": {
+    "north": "wtbw:block/magnet_inhibitor",
+    "south": "wtbw:block/magnet_inhibitor",
+    "west": "wtbw:block/magnet_inhibitor",
+    "east": "wtbw:block/magnet_inhibitor",
+    "up": "block/black_concrete",
+    "down": "block/black_concrete"
   }
 }

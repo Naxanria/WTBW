@@ -1,11 +1,11 @@
 {
-	"parent": "wtbw:block/trashcan",
-	"credit": "Made with Blockbench",
-	"textures": {
-		"1": "wtbw:block/trashcan/energy_trashcan_side",
-		"2": "wtbw:block/trashcan/energy_trashcan_top",
-		"3": "wtbw:block/trashcan/energy_trashcan_bottom",
-		"missing": "wtbw:block/trashcan/energy_trashcan_top",
-		"particle": "wtbw:block/trashcan/energy_trashcan_top"
-	}
+  "parent": "wtbw:block/trashcan",
+  "credit": "Made with Blockbench",
+  "textures": {
+    "1": "wtbw:block/trashcan/energy_trashcan_side",
+    "2": "wtbw:block/trashcan/energy_trashcan_top",
+    "3": "wtbw:block/trashcan/energy_trashcan_bottom",
+    "missing": "wtbw:block/trashcan/energy_trashcan_top",
+    "particle": "wtbw:block/trashcan/energy_trashcan_top"
+  }
 }

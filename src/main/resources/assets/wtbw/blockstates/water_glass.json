@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "wtbw:block/water_glass" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/water_glass"
     }
+  }
 }

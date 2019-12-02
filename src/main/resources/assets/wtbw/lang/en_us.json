@@ -1,22 +1,16 @@
 {
   "itemGroup.wtbw": "What the B wants",
-
   "item.wtbw.tiny_coal": "Tiny Coal",
   "item.wtbw.tiny_charcoal": "Tiny Charcoal",
-
   "item.wtbw.stone_hammer": "Stone Hammer",
   "item.wtbw.iron_hammer": "Iron Hammer",
   "item.wtbw.gold_hammer": "Gold Hammer",
   "item.wtbw.diamond_hammer": "Diamond Hammer",
-
   "item.wtbw.stone_swap_tool": "Stone Swapper",
   "item.wtbw.iron_swap_tool": "Iron Swapper",
   "item.wtbw.diamond_swap_tool": "Diamond Swapper",
-
   "item.wtbw.trowel": "Trowel",
-
   "item.wtbw.magnet": "Magnet",
-
   "block.wtbw.charcoal_block": "Block of Charcoal",
   "block.wtbw.redstone_timer": "Redstone Timer",
   "block.wtbw.redstone_emitter": "Redstone Emitter",
@@ -34,19 +28,14 @@
   "block.wtbw.polished_diorite_brick": "Polished Diorite Brick",
   "block.wtbw.polished_granite_brick": "Polished Granite Brick",
   "block.wtbw.blaze_block": "Block of Blaze",
-
   "block.wtbw.magnet_inhibitor": "Magnet Inhibitor",
-
   "block.wtbw.trashcan": "Trashcan",
   "block.wtbw.fluid_trashcan": "Fluid Trashcan",
   "block.wtbw.energy_trashcan": "Energy Trashcan",
-
   "wtbw.tooltip.burntime": "Burns for: %s ticks",
   "wtbw.tooltip.swap_target_pre": "Target block:",
   "wtbw.tooltip.swap_none": "NONE",
   "wtbw.tooltip.magnet_inhibitor": "Stops the magnet from working in a %s block radius",
-
-
   "wtbw.text.swap_target_changed": "Changed block to ",
   "wtbw.text.cycled": "Changed radius to %s"
 }

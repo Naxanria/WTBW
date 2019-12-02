@@ -1,13 +1,15 @@
 package com.wtbw;
 
-import com.wtbw.block.*;
+import com.wtbw.block.BaseTileBlock;
+import com.wtbw.block.ModBlocks;
+import com.wtbw.block.TieredFurnaceBlock;
 import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
+import com.wtbw.block.redstone.RedstoneEmitterBlock;
+import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.block.trashcan.EnergyTrashCanBlock;
 import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
-import com.wtbw.block.redstone.RedstoneEmitterBlock;
-import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.BaseTileContainer;
 import com.wtbw.gui.container.TieredFurnaceContainer;
@@ -46,237 +48,209 @@ import java.util.function.Supplier;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class Registrator
-{
-  private static List<BlockItem> blockItems = new ArrayList<>();
-  private static IForgeRegistry<Block> blockRegistry;
-  private static IForgeRegistry<Item> itemRegistry;
-  private static IForgeRegistry<TileEntityType<?>> tileRegistry;
-  private static IForgeRegistry<ContainerType<?>> containerRegistry;
-  
-  private static void registerAllBlocks()
-  {
-    // register blocks here
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "blaze_block", false);
+public class Registrator {
+    private static List<BlockItem> blockItems = new ArrayList<>();
+    private static IForgeRegistry<Block> blockRegistry;
+    private static IForgeRegistry<Item> itemRegistry;
+    private static IForgeRegistry<TileEntityType<?>> tileRegistry;
+    private static IForgeRegistry<ContainerType<?>> containerRegistry;
 
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_stone_brick");
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_chiseled_stone_brick");
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick");
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_chiseled_stone_brick");
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_andesite_brick");
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_diorite_brick");
-    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_granite_brick");
+    private static void registerAllBlocks() {
+        // register blocks here
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "charcoal_block", false);
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "blaze_block", false);
 
-    register(new LavaBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).lightValue(15)), "lava_glass");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_stone_brick");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_chiseled_stone_brick");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_chiseled_stone_brick");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_andesite_brick");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_diorite_brick");
+        register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_granite_brick");
 
-    register(new WaterBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "water_glass");
+        register(new LavaBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).lightValue(15)), "lava_glass");
 
-    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.IRON), "iron_furnace");
-    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.GOLD), "gold_furnace");
-    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.DIAMOND), "diamond_furnace");
-    register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.END), "end_furnace");
-    
-    register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
-    register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
-    
-    register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
-    register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
-    register(new EnergyTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "energy_trashcan");
-    
-    register(new BaseTileBlock<MagnetInhibitorTileEntity>(getBlockProperties(Material.IRON).hardnessAndResistance(4),
-      (world, state) -> new MagnetInhibitorTileEntity())
-     {
-       @Override
-       public void addInformation(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag flag)
-       {
-         tooltip.add(TextComponentBuilder.createTranslated(WTBW.MODID + ".tooltip.magnet_inhibitor", 3).aqua().build());
-         
-         super.addInformation(stack, world, tooltip, flag);
-       }
-     },
-      "magnet_inhibitor");
-  }
-  
-  private static void registerAllItems()
-  {
-    // register items here
-    register(new Item(getItemProperties()){
-      @Override
-      public int getBurnTime(ItemStack itemStack)
-      {
-        return 200;
-      }
-    }, "tiny_coal");
-  
-    register(new Item(getItemProperties()){
-      @Override
-      public int getBurnTime(ItemStack itemStack)
-      {
-        return 200;
-      }
-    }, "tiny_charcoal");
-    
-    register(new BlockItem(ModBlocks.CHARCOAL_BLOCK, getItemProperties()){
-      @Override
-      public int getBurnTime(ItemStack itemStack)
-      {
-        return 14400;
-      }
-    }, "charcoal_block");
+        register(new WaterBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "water_glass");
 
-    register(new BlockItem(ModBlocks.BLAZE_BLOCK, getItemProperties()){
-      @Override
-      public int getBurnTime(ItemStack itemStack)
-      {
-        return 21600;
-      }
-    }, "blaze_block");
-    
-    // durability multiplier
-    int dMul = CommonConfig.get().toolsDurabilityMultiplier.get();
-    register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
-    register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");
-    register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul)), "gold_hammer");
-    register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul)), "diamond_hammer");
-    
-    register(new Trowel(getItemProperties()), "trowel");
-    
-    register(new SwapTool(ItemTier.STONE, getItemProperties()), "stone_swap_tool");
-    register(new SwapTool(ItemTier.IRON, getItemProperties()), "iron_swap_tool");
-    register(new SwapTool(ItemTier.DIAMOND, getItemProperties()), "diamond_swap_tool");
-    
-    register(new MagnetItem(getItemProperties().maxStackSize(1)), "magnet");
-  }
-  
-  private static void registerAllTiles()
-  {
-    register(ModBlocks.IRON_FURNACE);
-    register(ModBlocks.GOLD_FURNACE);
-    register(ModBlocks.DIAMOND_FURNACE);
-    register(ModBlocks.END_FURNACE);
+        register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.IRON), "iron_furnace");
+        register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.GOLD), "gold_furnace");
+        register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.DIAMOND), "diamond_furnace");
+        register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.END), "end_furnace");
 
-    register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
-    
-    register(ModBlocks.TRASHCAN);
-    register(ModBlocks.FLUID_TRASHCAN);
-    register(ModBlocks.ENERGY_TRASHCAN);
-    
-    register(ModBlocks.MAGNET_INHIBITOR);
-  }
-  
-  private static void registerAllContainers()
-  {
-    registerContainer(TieredFurnaceContainer::new, "tiered_furnace");
-    registerContainer(TrashCanContainer::new, "trashcan");
-  }
-  
-  ////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////
-  
-  private static Item.Properties getItemProperties()
-  {
-    return new Item.Properties().group(WTBW.GROUP);
-  }
-  
-  private static Block.Properties getBlockProperties(Material material)
-  {
-    return Block.Properties.create(material);
-  }
-  
-  
-  public static void registerBlocks(RegistryEvent.Register<Block> event)
-  {
-    blockRegistry = event.getRegistry();
-    
-    registerAllBlocks();
-  }
-  
-  public static void registerItems(RegistryEvent.Register<Item> event)
-  {
-    itemRegistry = event.getRegistry();
-    for (BlockItem blockItem : blockItems)
-    {
-      itemRegistry.register(blockItem);
+        register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
+        register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
+
+        register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
+        register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
+        register(new EnergyTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "energy_trashcan");
+
+        register(new BaseTileBlock<MagnetInhibitorTileEntity>(getBlockProperties(Material.IRON).hardnessAndResistance(4),
+                         (world, state) -> new MagnetInhibitorTileEntity()) {
+                     @Override
+                     public void addInformation(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+                         tooltip.add(TextComponentBuilder.createTranslated(WTBW.MODID + ".tooltip.magnet_inhibitor", 3).aqua().build());
+
+                         super.addInformation(stack, world, tooltip, flag);
+                     }
+                 },
+                "magnet_inhibitor");
     }
-  
-    blockItems.clear();
-    
-    registerAllItems();
-  }
-  
-  public static void registerTileEntity(RegistryEvent.Register<TileEntityType<?>> event)
-  {
-    tileRegistry = event.getRegistry();
-    
-    registerAllTiles();
-  }
-  
-  public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event)
-  {
-    containerRegistry = event.getRegistry();
-    
-    registerAllContainers();
-  }
-  
-  interface IContainerFactory
-  {
-    BaseTileContainer<?> create(int windowId, World world, BlockPos pos, PlayerInventory inv);
-  }
 
-  private static void registerContainer(IContainerFactory factory, String name)
-  {
-    containerRegistry.register(IForgeContainerType.create((windowId, inv, data) ->
-      factory.create(windowId, ClientSetup.getWorld(), data.readBlockPos(), inv)
-    ).setRegistryName(WTBW.MODID, name));
-  }
-  
-  private static <T extends Block> T register(T block, String registryName)
-  {
-    return register(block, registryName, true, null);
-  }
-  
-  private static <T extends Block> T register(T block, String registryName, boolean createBlockItem)
-  {
-    return register(block, registryName, createBlockItem, null);
-  }
-  
-  private static <T extends Block> T register(T block, String registryName, boolean createBlockItem, Item.Properties blockItemProperties)
-  {
-    block.setRegistryName(WTBW.MODID, registryName);
-    if (createBlockItem)
-    {
-      if (blockItemProperties == null)
-      {
-        blockItemProperties = getItemProperties();
-      }
-      blockItems.add((BlockItem) new BlockItem(block, blockItemProperties).setRegistryName(WTBW.MODID, registryName));
+    private static void registerAllItems() {
+        // register items here
+        register(new Item(getItemProperties()) {
+            @Override
+            public int getBurnTime(ItemStack itemStack) {
+                return 200;
+            }
+        }, "tiny_coal");
+
+        register(new Item(getItemProperties()) {
+            @Override
+            public int getBurnTime(ItemStack itemStack) {
+                return 200;
+            }
+        }, "tiny_charcoal");
+
+        register(new BlockItem(ModBlocks.CHARCOAL_BLOCK, getItemProperties()) {
+            @Override
+            public int getBurnTime(ItemStack itemStack) {
+                return 14400;
+            }
+        }, "charcoal_block");
+
+        register(new BlockItem(ModBlocks.BLAZE_BLOCK, getItemProperties()) {
+            @Override
+            public int getBurnTime(ItemStack itemStack) {
+                return 21600;
+            }
+        }, "blaze_block");
+
+        // durability multiplier
+        int dMul = CommonConfig.get().toolsDurabilityMultiplier.get();
+        register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
+        register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");
+        register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul)), "gold_hammer");
+        register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul)), "diamond_hammer");
+
+        register(new Trowel(getItemProperties()), "trowel");
+
+        register(new SwapTool(ItemTier.STONE, getItemProperties()), "stone_swap_tool");
+        register(new SwapTool(ItemTier.IRON, getItemProperties()), "iron_swap_tool");
+        register(new SwapTool(ItemTier.DIAMOND, getItemProperties()), "diamond_swap_tool");
+
+        register(new MagnetItem(getItemProperties().maxStackSize(1)), "magnet");
     }
-    
-    blockRegistry.register(block);
-    
-    return block;
-  }
-  
-  private static <T extends Item> T register(T item, String name)
-  {
-    itemRegistry.register(item.setRegistryName(WTBW.MODID, name));
-    return item;
-  }
-  
-  private static TileEntityType<?> register(BaseTileBlock tileBlock)
-  {
-    return register(tileBlock.tileEntityProvider::get, tileBlock, tileBlock.getRegistryName().getPath());
-  }
-  
-  private static TileEntityType<?> register(Supplier<TileEntity> factory, Block block, String registryName)
-  {
-    TileEntityType<TileEntity> type = TileEntityType.Builder.create(factory, block).build(null);
-    type.setRegistryName(WTBW.MODID, registryName);
-    tileRegistry.register(type);
-    return type;
-  }
+
+    private static void registerAllTiles() {
+        register(ModBlocks.IRON_FURNACE);
+        register(ModBlocks.GOLD_FURNACE);
+        register(ModBlocks.DIAMOND_FURNACE);
+        register(ModBlocks.END_FURNACE);
+
+        register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
+
+        register(ModBlocks.TRASHCAN);
+        register(ModBlocks.FLUID_TRASHCAN);
+        register(ModBlocks.ENERGY_TRASHCAN);
+
+        register(ModBlocks.MAGNET_INHIBITOR);
+    }
+
+    private static void registerAllContainers() {
+        registerContainer(TieredFurnaceContainer::new, "tiered_furnace");
+        registerContainer(TrashCanContainer::new, "trashcan");
+    }
+
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+
+    private static Item.Properties getItemProperties() {
+        return new Item.Properties().group(WTBW.GROUP);
+    }
+
+    private static Block.Properties getBlockProperties(Material material) {
+        return Block.Properties.create(material);
+    }
+
+
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        blockRegistry = event.getRegistry();
+
+        registerAllBlocks();
+    }
+
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        itemRegistry = event.getRegistry();
+        for (BlockItem blockItem : blockItems) {
+            itemRegistry.register(blockItem);
+        }
+
+        blockItems.clear();
+
+        registerAllItems();
+    }
+
+    public static void registerTileEntity(RegistryEvent.Register<TileEntityType<?>> event) {
+        tileRegistry = event.getRegistry();
+
+        registerAllTiles();
+    }
+
+    public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event) {
+        containerRegistry = event.getRegistry();
+
+        registerAllContainers();
+    }
+
+    private static void registerContainer(IContainerFactory factory, String name) {
+        containerRegistry.register(IForgeContainerType.create((windowId, inv, data) ->
+                factory.create(windowId, ClientSetup.getWorld(), data.readBlockPos(), inv)
+        ).setRegistryName(WTBW.MODID, name));
+    }
+
+    private static <T extends Block> T register(T block, String registryName) {
+        return register(block, registryName, true, null);
+    }
+
+    private static <T extends Block> T register(T block, String registryName, boolean createBlockItem) {
+        return register(block, registryName, createBlockItem, null);
+    }
+
+    private static <T extends Block> T register(T block, String registryName, boolean createBlockItem, Item.Properties blockItemProperties) {
+        block.setRegistryName(WTBW.MODID, registryName);
+        if (createBlockItem) {
+            if (blockItemProperties == null) {
+                blockItemProperties = getItemProperties();
+            }
+            blockItems.add((BlockItem) new BlockItem(block, blockItemProperties).setRegistryName(WTBW.MODID, registryName));
+        }
+
+        blockRegistry.register(block);
+
+        return block;
+    }
+
+    private static <T extends Item> T register(T item, String name) {
+        itemRegistry.register(item.setRegistryName(WTBW.MODID, name));
+        return item;
+    }
+
+    private static TileEntityType<?> register(BaseTileBlock tileBlock) {
+        return register(tileBlock.tileEntityProvider::get, tileBlock, tileBlock.getRegistryName().getPath());
+    }
+
+    private static TileEntityType<?> register(Supplier<TileEntity> factory, Block block, String registryName) {
+        TileEntityType<TileEntity> type = TileEntityType.Builder.create(factory, block).build(null);
+        type.setRegistryName(WTBW.MODID, registryName);
+        tileRegistry.register(type);
+        return type;
+    }
+
+    interface IContainerFactory {
+        BaseTileContainer<?> create(int windowId, World world, BlockPos pos, PlayerInventory inv);
+    }
 
 }

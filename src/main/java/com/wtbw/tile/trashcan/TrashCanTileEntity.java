@@ -23,49 +23,40 @@ import javax.annotation.Nullable;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class TrashCanTileEntity extends TileEntity implements INamedContainerProvider
-{
-  private LazyOptional<ItemStackHandler> inventory = LazyOptional.of(this::createInventory);
-  
-  public TrashCanTileEntity()
-  {
-    super(ModTiles.TRASHCAN);
-  }
-  
-  private ItemStackHandler createInventory()
-  {
-    return new ItemStackHandler()
-    {
-      @Override
-      protected void onContentsChanged(int slot)
-      {
-        stacks.set(0, ItemStack.EMPTY);
-      }
-    };
-  }
-  
-  @Nonnull
-  @Override
-  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
-  {
-    if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-    {
-      return inventory.cast();
+public class TrashCanTileEntity extends TileEntity implements INamedContainerProvider {
+    private LazyOptional<ItemStackHandler> inventory = LazyOptional.of(this::createInventory);
+
+    public TrashCanTileEntity() {
+        super(ModTiles.TRASHCAN);
     }
-    
-    return super.getCapability(cap, side);
-  }
-  
-  @Override
-  public ITextComponent getDisplayName()
-  {
-    return new StringTextComponent(getType().getRegistryName().getPath());
-  }
-  
-  @Nullable
-  @Override
-  public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player)
-  {
-    return new TrashCanContainer(id, world, pos, inventory);
-  }
+
+    private ItemStackHandler createInventory() {
+        return new ItemStackHandler() {
+            @Override
+            protected void onContentsChanged(int slot) {
+                stacks.set(0, ItemStack.EMPTY);
+            }
+        };
+    }
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return inventory.cast();
+        }
+
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return new StringTextComponent(getType().getRegistryName().getPath());
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
+        return new TrashCanContainer(id, world, pos, inventory);
+    }
 }

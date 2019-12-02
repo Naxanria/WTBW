@@ -14,26 +14,22 @@ import net.minecraft.world.IBlockReader;
 /*
   @author: Naxanria
 */
-public class TrashCanBlock extends BaseTileBlock<TrashCanTileEntity>
-{
-  public static final VoxelShape BOTTOM = Block.makeCuboidShape(2, 0, 2, 14, 10, 14);
-  public static final VoxelShape TOP = Block.makeCuboidShape(1, 10, 1, 15, 12, 15);
-  public static final VoxelShape SHAPE = VoxelShapes.or(BOTTOM, TOP);
-  
-  public TrashCanBlock(Properties properties)
-  {
-    super(properties, (world, state) -> new TrashCanTileEntity());
-  }
-  
-  @Override
-  public BlockRenderLayer getRenderLayer()
-  {
-    return BlockRenderLayer.CUTOUT;
-  }
-  
-  @Override
-  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-  {
-    return SHAPE;
-  }
+public class TrashCanBlock extends BaseTileBlock<TrashCanTileEntity> {
+    public static final VoxelShape BOTTOM = Block.makeCuboidShape(2, 0, 2, 14, 10, 14);
+    public static final VoxelShape TOP = Block.makeCuboidShape(1, 10, 1, 15, 12, 15);
+    public static final VoxelShape SHAPE = VoxelShapes.or(BOTTOM, TOP);
+
+    public TrashCanBlock(Properties properties) {
+        super(properties, (world, state) -> new TrashCanTileEntity());
+    }
+
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return SHAPE;
+    }
 }

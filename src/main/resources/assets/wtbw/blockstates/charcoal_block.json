@@ -1,5 +1,7 @@
 {
-  "variants" : {
-    "" : { "model" : "wtbw:block/charcoal_block" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/charcoal_block"
+    }
   }
 }

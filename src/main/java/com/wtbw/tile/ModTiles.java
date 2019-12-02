@@ -12,18 +12,17 @@ import net.minecraftforge.registries.ObjectHolder;
   @author: Naxanria
 */
 @ObjectHolder(WTBW.MODID)
-public class ModTiles
-{
-  public static final TileEntityType<BaseFurnaceTileEntity> IRON_FURNACE = null;
-  public static final TileEntityType<BaseFurnaceTileEntity> GOLD_FURNACE = null;
-  public static final TileEntityType<BaseFurnaceTileEntity> DIAMOND_FURNACE = null;
-  public static final TileEntityType<BaseFurnaceTileEntity> END_FURNACE = null;
-  
-  public static final TileEntityType<RedstoneTimerTileEntity> REDSTONE_TIMER = null;
-  
-  public static final TileEntityType<TrashCanTileEntity> TRASHCAN = null;
-  public static final TileEntityType<FluidTrashCanTileEntity> FLUID_TRASHCAN = null;
-  public static final TileEntityType<TrashCanTileEntity> ENERGY_TRASHCAN = null;
-  
-  public static final TileEntityType<MagnetInhibitorTileEntity> MAGNET_INHIBITOR = null;
+public class ModTiles {
+    public static final TileEntityType<BaseFurnaceTileEntity> IRON_FURNACE = null;
+    public static final TileEntityType<BaseFurnaceTileEntity> GOLD_FURNACE = null;
+    public static final TileEntityType<BaseFurnaceTileEntity> DIAMOND_FURNACE = null;
+    public static final TileEntityType<BaseFurnaceTileEntity> END_FURNACE = null;
+
+    public static final TileEntityType<RedstoneTimerTileEntity> REDSTONE_TIMER = null;
+
+    public static final TileEntityType<TrashCanTileEntity> TRASHCAN = null;
+    public static final TileEntityType<FluidTrashCanTileEntity> FLUID_TRASHCAN = null;
+    public static final TileEntityType<TrashCanTileEntity> ENERGY_TRASHCAN = null;
+
+    public static final TileEntityType<MagnetInhibitorTileEntity> MAGNET_INHIBITOR = null;
 }

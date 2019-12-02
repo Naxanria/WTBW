@@ -1,6 +1,6 @@
 {
-  "parent" : "block/cube_all",
-  "textures" : {
-    "all" : "wtbw:block/emitter/15"
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "wtbw:block/emitter/15"
   }
 }

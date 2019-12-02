@@ -9,10 +9,9 @@
     "B": {
       "item": "minecraft:iron_bars"
     },
-    "M" : {
+    "M": {
       "item": "wtbw:magnet"
     }
-
   },
   "result": {
     "item": "wtbw:magnet_inhibitor"

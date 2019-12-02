@@ -13,19 +13,15 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class LavaBlock extends Block
-{
-  public LavaBlock(Block.Properties properties)
-  {
-    super(properties);
-  }
-  
-  public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
-  {
-    super.harvestBlock(worldIn, player, pos, state, te, stack);
-    if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0)
-    {
-      worldIn.setBlockState(pos, Blocks.LAVA.getDefaultState());
+public class LavaBlock extends Block {
+    public LavaBlock(Block.Properties properties) {
+        super(properties);
     }
-  }
+
+    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+            worldIn.setBlockState(pos, Blocks.LAVA.getDefaultState());
+        }
+    }
 }

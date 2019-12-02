@@ -14,45 +14,37 @@ import java.util.Set;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class MagnetInhibitorTileEntity extends TileEntity implements ITickableTileEntity
-{
-  private static Set<MagnetInhibitorTileEntity> inhibitors = Collections.newSetFromMap(new MapMaker().concurrencyLevel(2).weakKeys().makeMap());
-  
-  private AxisAlignedBB inhibitBox;
-  
-  public MagnetInhibitorTileEntity()
-  {
-    super(ModTiles.MAGNET_INHIBITOR);
-  }
-  
-  private AxisAlignedBB getInhibitBox()
-  {
-    if (inhibitBox == null)
-    {
-      inhibitBox = Utilities.getBoundingBox(pos, 3);
+public class MagnetInhibitorTileEntity extends TileEntity implements ITickableTileEntity {
+    private static Set<MagnetInhibitorTileEntity> inhibitors = Collections.newSetFromMap(new MapMaker().concurrencyLevel(2).weakKeys().makeMap());
+
+    private AxisAlignedBB inhibitBox;
+
+    public MagnetInhibitorTileEntity() {
+        super(ModTiles.MAGNET_INHIBITOR);
     }
-    
-    return inhibitBox;
-  }
-  
-  @Override
-  public void tick()
-  {
-    if (!world.isRemote)
-    {
-      if (!inhibitors.contains(this))
-      {
-        inhibitors.add(this);
-      }
+
+    public static boolean isInhibitorInRange(Entity e) {
+        return inhibitors.stream()
+                .filter(inhibitor -> !inhibitor.isRemoved())
+                .filter(inhibitor -> inhibitor.world == e.world)
+                .filter(inhibitor -> inhibitor.world.getTileEntity(inhibitor.pos) == inhibitor)
+                .anyMatch(inhibitor -> inhibitor.getInhibitBox().contains(e.getPositionVec()));
     }
-  }
-  
-  public static boolean isInhibitorInRange(Entity e)
-  {
-    return inhibitors.stream()
-      .filter(inhibitor -> !inhibitor.isRemoved())
-      .filter(inhibitor -> inhibitor.world == e.world)
-      .filter(inhibitor -> inhibitor.world.getTileEntity(inhibitor.pos) == inhibitor)
-      .anyMatch(inhibitor -> inhibitor.getInhibitBox().contains(e.getPositionVec()));
-  }
+
+    private AxisAlignedBB getInhibitBox() {
+        if (inhibitBox == null) {
+            inhibitBox = Utilities.getBoundingBox(pos, 3);
+        }
+
+        return inhibitBox;
+    }
+
+    @Override
+    public void tick() {
+        if (!world.isRemote) {
+            if (!inhibitors.contains(this)) {
+                inhibitors.add(this);
+            }
+        }
+    }
 }

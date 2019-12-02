@@ -4,58 +4,44 @@ import com.wtbw.block.BaseTileBlock;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 
 /*
   @author: Naxanria
 */
-public class RedstoneTimerBlock extends BaseTileBlock<RedstoneTimerTileEntity>
-{
-  public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-  
-  public RedstoneTimerBlock(Properties properties)
-  {
-    super(properties, (world, state) -> new RedstoneTimerTileEntity());
-    
-    setDefaultState(stateContainer.getBaseState().with(ACTIVE, false));
-  }
-  
-  public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
-  {
-    return 0;
-  }
+public class RedstoneTimerBlock extends BaseTileBlock<RedstoneTimerTileEntity> {
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-  public int getWeakPower(BlockState state, IBlockReader world, BlockPos pos, Direction side)
-  {
-    RedstoneTimerTileEntity tileEntity = getTileEntity(world, pos);
-    if (tileEntity != null)
-    {
-      return tileEntity.getPower();
+    public RedstoneTimerBlock(Properties properties) {
+        super(properties, (world, state) -> new RedstoneTimerTileEntity());
+
+        setDefaultState(stateContainer.getBaseState().with(ACTIVE, false));
     }
-    
-    return 0;
-  }
-  
-  @Override
-  protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
-  {
-    builder.add(ACTIVE);
-  }
-  
-  @Override
-  public boolean canProvidePower(BlockState state)
-  {
-    return true;
-  }
+
+    public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+        return 0;
+    }
+
+    public int getWeakPower(BlockState state, IBlockReader world, BlockPos pos, Direction side) {
+        RedstoneTimerTileEntity tileEntity = getTileEntity(world, pos);
+        if (tileEntity != null) {
+            return tileEntity.getPower();
+        }
+
+        return 0;
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(ACTIVE);
+    }
+
+    @Override
+    public boolean canProvidePower(BlockState state) {
+        return true;
+    }
 }

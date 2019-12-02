@@ -1,7 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {"item": "wtbw:charcoal_block"}
+    {
+      "item": "wtbw:charcoal_block"
+    }
   ],
   "result": {
     "item": "minecraft:charcoal",

@@ -1,5 +1,7 @@
 {
-  "variants" : {
-    "" : { "model" : "wtbw:block/energy_trashcan" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/energy_trashcan"
+    }
   }
 }

@@ -1,5 +1,7 @@
 {
-  "variants" : {
-    "" : { "model" : "wtbw:block/blaze_block" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/blaze_block"
+    }
   }
 }

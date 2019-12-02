@@ -1,5 +1,7 @@
 {
-  "variants" : {
-    "" : { "model" : "wtbw:block/polished_diorite_brick" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/polished_diorite_brick"
+    }
   }
 }

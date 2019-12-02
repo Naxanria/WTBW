@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "wtbw:block/lava_glass" }
+  "variants": {
+    "": {
+      "model": "wtbw:block/lava_glass"
     }
+  }
 }
