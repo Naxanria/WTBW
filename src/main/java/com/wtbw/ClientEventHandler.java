@@ -1,11 +1,14 @@
 package com.wtbw;
 
+import com.wtbw.client.rendering.RenderManager;
 import com.wtbw.config.ClientConfig;
 import com.wtbw.util.Utilities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package com.wtbw;
 
 import com.wtbw.block.ModBlocks;
+import com.wtbw.client.rendering.RenderManager;
 import com.wtbw.config.ClientConfig;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.config.WTBWConfig;
@@ -59,6 +60,7 @@ public class WTBW
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
     {
       forgeEventBus.addListener(ClientEventHandler::onTooltip);
+      forgeEventBus.addListener(RenderManager::render);
       
       KeyEventListener.registerKeys();
       forgeEventBus.addListener(KeyEventListener::update);
