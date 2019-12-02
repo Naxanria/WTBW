@@ -12,6 +12,7 @@ import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.BaseTileContainer;
 import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.gui.container.TrashCanContainer;
+import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.HammerItem;
 import com.wtbw.item.tools.SwapTool;
 import com.wtbw.item.tools.Trowel;
@@ -111,6 +112,8 @@ public class Registrator
     register(new SwapTool(ItemTier.STONE, getItemProperties()), "stone_swap_tool");
     register(new SwapTool(ItemTier.IRON, getItemProperties()), "iron_swap_tool");
     register(new SwapTool(ItemTier.DIAMOND, getItemProperties()), "diamond_swap_tool");
+    
+    register(new MagnetItem(getItemProperties().maxStackSize(1)), "magnet");
   }
   
   private static void registerAllTiles()
