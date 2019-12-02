@@ -1,5 +1,6 @@
 package com.wtbw.item;
 
+import com.wtbw.config.CommonConfig;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.StackUtil;
 import net.minecraft.entity.Entity;
@@ -53,13 +54,17 @@ public class MagnetItem extends Item
       
       PlayerEntity player = (PlayerEntity) entity;
       MinecraftServer server = world.getServer();
-      if (server != null && server.getTickCounter() % 10 == 0)
+      CommonConfig config = CommonConfig.get();
+      int tickRate = config.magnetTickRate.get();
+      
+      if (server != null && server.getTickCounter() % tickRate == 0)
       {
-        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, getBoundingBox(entity.getPosition(), 10));
-    
-        // fixme: use config
-        boolean checkCanPickup = true;
         
+        int radius = config.magnetRadius.get();
+        boolean checkCanPickup = config.magnetCheckCanPickUp.get();
+        
+        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, getBoundingBox(entity.getPosition(), radius));
+    
         for (Entity e : entities)
         {
           if (e instanceof ItemEntity)

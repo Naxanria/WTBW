@@ -3,6 +3,7 @@ package com.wtbw.config;
 import com.wtbw.WTBW;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.util.Utilities;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Collection;
@@ -15,6 +16,7 @@ import java.util.List;
 public class CommonConfig
 {
   private static CommonConfig instance;
+  
   public static CommonConfig get()
   {
     return instance;
@@ -27,6 +29,10 @@ public class CommonConfig
   
   public ForgeConfigSpec.ConfigValue<String> swapperBlackList;
   public ForgeConfigSpec.DoubleValue swapperMaxHardness;
+  
+  public ForgeConfigSpec.BooleanValue magnetCheckCanPickUp;
+  public ForgeConfigSpec.IntValue magnetTickRate;
+  public ForgeConfigSpec.IntValue magnetRadius;
   
   // furnaces //
   public FurnaceConfig ironFurnace;
@@ -106,7 +112,18 @@ public class CommonConfig
   private void tools()
   {
     builder.push("tools");
+  
+    hammers();
     
+    swapping();
+    
+    magnet();
+    
+    builder.pop();
+  }
+  
+  private void hammers()
+  {
     builder.push("hammer");
     toolsDurabilityMultiplier = builder
       .comment
@@ -118,19 +135,44 @@ public class CommonConfig
       .translation(key("tools.hammer.multiplier"))
       .defineInRange("multiplier", 7, 1, 15);
     
-    builder.pop().push("swapping");
+    builder.pop();
+  }
+  
+  private void swapping()
+  {
+    builder.push("swapping");
     
     swapperBlackList = builder
       .comment("The blacklisted blocks")
       .translation(key("tools.swapping.blacklist"))
       .define("blacklist", "minecraft:bedrock");
-
+    
     swapperMaxHardness = builder
       .comment("Maximum hardness that can be swapped")
       .translation(key("tools.swapping.hardness"))
       .defineInRange("max_hardness", 49, 0, Double.MAX_VALUE);
     
     builder.pop();
+  }
+  
+  private void magnet()
+  {
+    builder.push("magnet");
+    
+    magnetTickRate = builder
+      .comment("How often the magnet needs to check to magnetize, in ticks", "default: 10")
+      .translation(key("tools.magnet.tick_rate"))
+      .defineInRange("tick_rate", 10, 1, 60);
+    
+    magnetRadius = builder
+      .comment("The radius (cube) that items can be magnetized", "default: 6")
+      .translation(key("tools.magnet.radius"))
+      .defineInRange("radius", 6, 1, 16);
+    
+    magnetCheckCanPickUp = builder
+      .comment("Should the magnet only pickup items that fit into the inventory", "default: true")
+      .translation(key("tools.magnet.pick_up"))
+      .define("pick_up", true);
     
     builder.pop();
   }
