@@ -1,5 +1,6 @@
 package com.wtbw.item;
 
+import com.wtbw.util.NBTHelper;
 import com.wtbw.util.StackUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
@@ -7,6 +8,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -38,6 +40,11 @@ public class MagnetItem extends Item
     // todo: make config option
     if (!world.isRemote)
     {
+      if (!isActive(stack))
+      {
+        return;
+      }
+      
       if (!(entity instanceof PlayerEntity))
       {
         // we don't let mobs magnetize stuff... for now
@@ -83,9 +90,39 @@ public class MagnetItem extends Item
   }
   
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand handIn)
+  public boolean hasEffect(ItemStack stack)
   {
-
-    return super.onItemRightClick(world, player, handIn);
+    return isActive(stack);
+  }
+  
+  private boolean swapActive(ItemStack stack)
+  {
+    boolean active = !isActive(stack);
+    setActive(stack, active);
+    return active;
+  }
+  
+  private boolean setActive(ItemStack stack, boolean active)
+  {
+    stack.getOrCreateChildTag("data").putBoolean("active", active);
+    return active;
+  }
+  
+  private boolean isActive(ItemStack stack)
+  {
+    return NBTHelper.getBoolean(stack.getOrCreateChildTag("data"), "active", false);
+  }
+  
+  
+  @Override
+  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+  {
+    if (!world.isRemote)
+    {
+      ItemStack stack = player.getHeldItem(hand);
+      swapActive(stack);
+    }
+    
+    return super.onItemRightClick(world, player, hand);
   }
 }
