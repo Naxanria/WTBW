@@ -90,8 +90,8 @@ public class Registrator
          
          super.addInformation(stack, world, tooltip, flag);
        }
-     }
-      , "magnet_inhibitor");
+     },
+      "magnet_inhibitor");
   }
   
   private static void registerAllItems()
@@ -139,13 +139,11 @@ public class Registrator
   
   private static void registerAllTiles()
   {
-//    register(() -> new BaseFurnaceTileEntity(FurnaceTier.IRON, IRecipeType.SMELTING), ModBlocks.TIERED_FURNACE, "iron_furnace");
-//    register(ModBlocks.TIERED_FURNACE.tileEntityProvider::get, ModBlocks.TIERED_FURNACE, "iron_furnace");
     register(ModBlocks.IRON_FURNACE);
     register(ModBlocks.GOLD_FURNACE);
     register(ModBlocks.DIAMOND_FURNACE);
     register(ModBlocks.END_FURNACE);
-    
+
     register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
     
     register(ModBlocks.TRASHCAN);
@@ -200,38 +198,22 @@ public class Registrator
   public static void registerTileEntity(RegistryEvent.Register<TileEntityType<?>> event)
   {
     tileRegistry = event.getRegistry();
+    
     registerAllTiles();
   }
   
   public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event)
   {
     containerRegistry = event.getRegistry();
-//
-//    registry.register(IForgeContainerType.create(Registrator::register
-//    ).setRegistryName(WTBW.MODID, "tiered_furnace"));
     
     registerAllContainers();
-  
-//    containerRegistry.register(IForgeContainerType.create((windowId, inv, data) ->
-//      {
-//        BlockPos pos = data.readBlockPos();
-//        return new TrashCanContainer(windowId, ClientSetup.getWorld(), pos, inv);
-//      }
-//    ).setRegistryName(WTBW.MODID, "trashcan"));
   }
   
   interface IContainerFactory
   {
     BaseTileContainer<?> create(int windowId, World world, BlockPos pos, PlayerInventory inv);
   }
-  
-  
-//  private static TieredFurnaceContainer register(int windowId, PlayerInventory inv, PacketBuffer data)
-//  {
-//    BlockPos pos = data.readBlockPos();
-//    return new TieredFurnaceContainer(windowId, ClientSetup.getWorld(), pos, inv);
-//  }
-  
+
   private static void registerContainer(IContainerFactory factory, String name)
   {
     containerRegistry.register(IForgeContainerType.create((windowId, inv, data) ->
