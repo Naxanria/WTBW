@@ -43,6 +43,12 @@
   "block.wtbw.puller": "Puller",
   "block.wtbw.pusher": "Pusher",
 
+  "block.wtbw.wooden_spikes": "Wooden spikes",
+  "block.wtbw.bamboo_spikes": "Bamboo spikes",
+  "block.wtbw.iron_spikes": "Iron spikes",
+  "block.wtbw.gold_spikes": "Gold spikes",
+  "block.wtbw.diamond_spikes": "Diamond spikes",
+
   "block.wtbw.blaze_block": "Block of Blaze",
 
   "block.wtbw.magnet_inhibitor": "Magnet Inhibitor",
@@ -57,5 +63,11 @@
   "wtbw.tooltip.magnet_inhibitor": "Stops the magnet from working in a %s block radius",
 
   "wtbw.text.swap_target_changed": "Changed block to ",
-  "wtbw.text.cycled": "Changed radius to %s"
+  "wtbw.text.cycled": "Changed radius to %s",
+
+  "death.attack.spikes.wooden": "Wood spikes pierced %s",
+  "death.attack.spikes.bamboo": "Bamboo spikes pierced %s",
+  "death.attack.spikes.iron": "Iron spikes pierced %s",
+  "death.attack.spikes.gold": "Gold spikes pierced %s",
+  "death.attack.spikes.diamond": "Diamond spikes pierced %s"
 }

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "BSB",
+    "GGG"
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "G": {
+      "item": "wtbw:groundium"
+    },
+    "S": {
+      "item": "wtbw:gold_spikes"
+    }
+  },
+  "result": {
+    "item": "wtbw:diamond_spikes"
+  }
+}

@@ -8,6 +8,8 @@ import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
+import com.wtbw.block.spikes.SpikesBlock;
+import com.wtbw.block.spikes.SpikesType;
 import com.wtbw.block.trashcan.EnergyTrashCanBlock;
 import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
@@ -106,6 +108,12 @@ public class Registrator
     
     register(new PushBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), EntityPusherTileEntity.PushMode.PUSH), "pusher");
     register(new PushBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), EntityPusherTileEntity.PushMode.PULL), "puller");
+    
+    register(new SpikesBlock(getBlockProperties(Material.ROCK).hardnessAndResistance(3), SpikesType.BAMBOO), "bamboo_spikes");
+    register(new SpikesBlock(getBlockProperties(Material.ROCK).hardnessAndResistance(3), SpikesType.WOODEN), "wooden_spikes");
+    register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4), SpikesType.IRON), "iron_spikes");
+    register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(5), SpikesType.GOLD), "gold_spikes");
+    register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
   }
 
   private static void registerAllItems()

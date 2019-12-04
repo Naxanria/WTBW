@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "BBB",
+    "GGG"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/iron"
+    },
+    "G": {
+      "item": "wtbw:groundium"
+    }
+  },
+  "result": {
+    "item": "wtbw:iron_spikes"
+  }
+}
