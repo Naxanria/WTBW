@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "TRS",
-    "TCS",
-    "SRS"
+    "TRG",
+    "TCG",
+    "GRG"
   ],
   "key": {
-    "S": {
-      "tag": "forge:stone"
+    "G": {
+      "item": "wtbw:groundium"
     },
     "R": {
       "item": "minecraft:redstone"

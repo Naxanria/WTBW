@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SOS",
+    "OSO",
+    "SOS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stone"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "wtbw:groundium",
+    "count": 8
+  }
+}

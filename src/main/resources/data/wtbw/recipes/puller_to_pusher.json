@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wtbw:puller"
+    }
+  ],
+  "result": {
+    "item": "wtbw:pusher"
+  }
+}

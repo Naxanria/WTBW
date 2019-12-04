@@ -2,6 +2,7 @@ package com.wtbw;
 
 import com.wtbw.block.BaseTileBlock;
 import com.wtbw.block.ModBlocks;
+import com.wtbw.block.PushBlock;
 import com.wtbw.block.TieredFurnaceBlock;
 import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
@@ -18,6 +19,7 @@ import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.HammerItem;
 import com.wtbw.item.tools.SwapTool;
 import com.wtbw.item.tools.Trowel;
+import com.wtbw.tile.EntityPusherTileEntity;
 import com.wtbw.tile.MagnetInhibitorTileEntity;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
@@ -35,6 +37,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -69,6 +72,8 @@ public class Registrator
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_andesite_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_diorite_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_granite_brick");
+    
+    register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(3)), "groundium");
 
     register(new LavaBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).lightValue(15)), "lava_glass");
 
@@ -98,6 +103,9 @@ public class Registrator
                }
              },
       "magnet_inhibitor");
+    
+    register(new PushBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), EntityPusherTileEntity.PushMode.PUSH), "pusher");
+    register(new PushBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), EntityPusherTileEntity.PushMode.PULL), "puller");
   }
 
   private static void registerAllItems()
@@ -169,6 +177,9 @@ public class Registrator
     register(ModBlocks.ENERGY_TRASHCAN);
 
     register(ModBlocks.MAGNET_INHIBITOR);
+    
+    register(ModBlocks.PUSHER);
+    register(ModBlocks.PULLER);
   }
 
   private static void registerAllContainers()

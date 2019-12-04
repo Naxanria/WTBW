@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GMG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "wtbw:groundium"
+    },
+    "M": {
+      "item": "wtbw:magnet"
+    }
+  },
+  "result": {
+    "item": "wtbw:puller",
+    "count": 2
+  }
+}

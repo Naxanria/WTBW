@@ -30,4 +30,9 @@ public class ModBlocks
   public static final EnergyTrashCanBlock ENERGY_TRASHCAN = null;
 
   public static final BaseTileBlock<MagnetInhibitorTileEntity> MAGNET_INHIBITOR = null;
+  
+  public static final PushBlock PUSHER = null;
+  public static final PushBlock PULLER = null;
+  
+  public static final Block GROUNDIUM = Blocks.AIR;
 }

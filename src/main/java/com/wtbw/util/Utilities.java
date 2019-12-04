@@ -226,4 +226,9 @@ public class Utilities
   {
     return new AxisAlignedBB(center.add(-radius, -radius, -radius), center.add(radius, radius, radius));
   }
+  
+  public static AxisAlignedBB getHorizontalBoundingBox(BlockPos center, double radius, double height)
+  {
+    return new AxisAlignedBB(center.add(-radius, 0, -radius), center.add(radius, height, radius));
+  }
 }
