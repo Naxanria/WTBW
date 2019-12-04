@@ -128,7 +128,7 @@ public class Trowel extends Item
 
     public TrowelContext(ItemUseContext context, ItemStack toPlace)
     {
-      super(context.getWorld(), context.getPlayer(), context.getHand(), context.getItem(), new BlockRayTraceResult(context.getHitVec(), context.getFace(), context.getPos(), context.func_221533_k()));
+      super(context.getWorld(), context.getPlayer(), context.getHand(), context.getItem(), new BlockRayTraceResult(context.getHitVec(), context.getFace(), context.getPos(), context.isPlacerSneaking()));
       actualItem = toPlace;
     }
 
