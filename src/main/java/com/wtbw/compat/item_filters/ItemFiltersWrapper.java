@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 /*
   @author: Naxanria
 */
-public class ItemFilterFilter
+public class ItemFiltersWrapper
 {
   public static boolean filter(ItemStack filter, ItemStack insert)
   {
