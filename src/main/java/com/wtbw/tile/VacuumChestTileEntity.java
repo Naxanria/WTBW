@@ -1,5 +1,7 @@
 package com.wtbw.tile;
 
+import com.wtbw.Flags;
+import com.wtbw.compat.item_filters.ItemFilterFilter;
 import com.wtbw.gui.container.VacuumChestContainer;
 import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.util.NBTHelper;
@@ -32,6 +34,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 /*
   @author: Naxanria
@@ -43,6 +46,9 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   private int radius = 6;
   private int frequency = 10;
   private int tick;
+  
+//  private ItemStack filter = ItemStack.EMPTY;
+  private ItemStackHandler filter = new ItemStackHandler();
   
   private LazyOptional<ItemStackHandler> inventory = LazyOptional.of(this::createInventory);
   
@@ -74,6 +80,11 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
         for (Entity e : entities)
         {
           ItemEntity entity = (ItemEntity) e;
+          if (!filter(entity.getItem()))
+          {
+            continue;
+          }
+          
           inventory.ifPresent(
             handler ->
             {
@@ -130,6 +141,17 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   public void read(CompoundNBT compound)
   {
     tick = NBTHelper.getInt(compound, "tick");
+    
+    if (compound.contains("inventory"))
+    {
+      inventory.ifPresent(handler -> handler.deserializeNBT(compound.getCompound("inventory")));
+    }
+    
+    if (compound.contains("filter"))
+    {
+      filter.deserializeNBT(compound.getCompound("filter"));
+    }
+    
     super.read(compound);
   }
   
@@ -137,6 +159,11 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   public CompoundNBT write(CompoundNBT compound)
   {
     compound.putInt("tick", tick);
+    
+    inventory.ifPresent(handler -> compound.put("inventory", handler.serializeNBT()));
+    
+    compound.put("filter", filter.serializeNBT());
+    
     return super.write(compound);
   }
   
@@ -150,6 +177,11 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
         InventoryHelper.spawnItemStack(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, handler.getStackInSlot(i));
       }
     });
+    
+    if (!filter.getStackInSlot(0).isEmpty())
+    {
+      InventoryHelper.spawnItemStack(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, filter.getStackInSlot(0));
+    }
   }
   
   public LazyOptional<ItemStackHandler> getInventory()
@@ -168,5 +200,22 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player)
   {
     return new VacuumChestContainer(id, world, pos, inventory);
+  }
+  
+  private boolean filter(ItemStack stack)
+  {
+    ItemStack filter = this.filter.getStackInSlot(0);
+    
+    if (Flags.isItemFiltersLoaded())
+    {
+      return ItemFilterFilter.filter(filter, stack);
+    }
+    
+    return filter.isEmpty() || filter.getItem() == stack.getItem() && Objects.equals(stack.getTag(), filter.getTag());
+  }
+  
+  public ItemStackHandler getFilter()
+  {
+    return filter;
   }
 }

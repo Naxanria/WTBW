@@ -60,6 +60,7 @@ minecraft {
 dependencies {
     minecraft "net.minecraftforge:forge:${forge_version}"
     compile fg.deobf(curse.resolve('jei', project.jei_file))
+    compile fg.deobf(curse.resolve("item-filters", project.item_filters_file))
 }
 
 jar {
