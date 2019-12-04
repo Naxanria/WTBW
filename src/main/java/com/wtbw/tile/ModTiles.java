@@ -29,4 +29,6 @@ public class ModTiles
   
   public static final TileEntityType<EntityPusherTileEntity> PUSHER = null;
   public static final TileEntityType<EntityPusherTileEntity> PULLER = null;
+  
+  public static final TileEntityType<VacuumChestTileEntity> VACUUM_CHEST = null;
 }

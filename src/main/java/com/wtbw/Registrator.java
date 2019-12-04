@@ -17,12 +17,14 @@ import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.BaseTileContainer;
 import com.wtbw.gui.container.TieredFurnaceContainer;
 import com.wtbw.gui.container.TrashCanContainer;
+import com.wtbw.gui.container.VacuumChestContainer;
 import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.HammerItem;
 import com.wtbw.item.tools.SwapTool;
 import com.wtbw.item.tools.Trowel;
 import com.wtbw.tile.EntityPusherTileEntity;
 import com.wtbw.tile.MagnetInhibitorTileEntity;
+import com.wtbw.tile.VacuumChestTileEntity;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import com.wtbw.util.TextComponentBuilder;
@@ -106,6 +108,8 @@ public class Registrator
              },
       "magnet_inhibitor");
     
+    register(new BaseTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new VacuumChestTileEntity()), "vacuum_chest");
+    
     register(new PushBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), EntityPusherTileEntity.PushMode.PUSH), "pusher");
     register(new PushBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), EntityPusherTileEntity.PushMode.PULL), "puller");
     
@@ -188,12 +192,15 @@ public class Registrator
     
     register(ModBlocks.PUSHER);
     register(ModBlocks.PULLER);
+    
+    register(ModBlocks.VACUUM_CHEST);
   }
 
   private static void registerAllContainers()
   {
     registerContainer(TieredFurnaceContainer::new, "tiered_furnace");
     registerContainer(TrashCanContainer::new, "trashcan");
+    registerContainer(VacuumChestContainer::new, "vacuum_chest");
   }
 
   ////////////////////////////////////////////////////////
