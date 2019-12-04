@@ -28,48 +28,54 @@ import org.apache.logging.log4j.Logger;
 */
 @SuppressWarnings("Convert2MethodRef")
 @Mod(WTBW.MODID)
-public class WTBW {
-    public static final String MODID = "wtbw";
-
-    public static final Logger LOGGER = LogManager.getLogger(MODID);
-    public static ItemGroup GROUP = new ItemGroup(MODID) {
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ModBlocks.REDSTONE_TIMER);
-        }
-    };
-
-    public WTBW() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        eventBus.addListener(this::setup);
-
-        eventBus.addGenericListener(Block.class, Registrator::registerBlocks);
-        eventBus.addGenericListener(Item.class, Registrator::registerItems);
-        eventBus.addGenericListener(TileEntityType.class, Registrator::registerTileEntity);
-        eventBus.addGenericListener(ContainerType.class, Registrator::registerContainer);
-
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-
-        Networking.registerMessages();
-
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
-        {
-            forgeEventBus.addListener(ClientEventHandler::onTooltip);
-            forgeEventBus.addListener(RenderManager::render);
-
-            KeyEventListener.registerKeys();
-            forgeEventBus.addListener(KeyEventListener::update);
-        });
-
-        WTBWConfig.register(ModLoadingContext.get());
+public class WTBW
+{
+  public static final String MODID = "wtbw";
+  
+  public static final Logger LOGGER = LogManager.getLogger(MODID);
+  public static ItemGroup GROUP = new ItemGroup(MODID)
+  {
+    @Override
+    public ItemStack createIcon()
+    {
+      return new ItemStack(ModBlocks.REDSTONE_TIMER);
     }
-
-    public static boolean debug() {
-        return CommonConfig.get().debugOutput.get();
-    }
-
-    private void setup(final FMLCommonSetupEvent event) {
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientSetup.init());
-    }
+  };
+  
+  public WTBW()
+  {
+    IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    
+    eventBus.addListener(this::setup);
+    
+    eventBus.addGenericListener(Block.class, Registrator::registerBlocks);
+    eventBus.addGenericListener(Item.class, Registrator::registerItems);
+    eventBus.addGenericListener(TileEntityType.class, Registrator::registerTileEntity);
+    eventBus.addGenericListener(ContainerType.class, Registrator::registerContainer);
+    
+    IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+    
+    Networking.registerMessages();
+    
+    DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+    {
+      forgeEventBus.addListener(ClientEventHandler::onTooltip);
+      forgeEventBus.addListener(RenderManager::render);
+      
+      KeyEventListener.registerKeys();
+      forgeEventBus.addListener(KeyEventListener::update);
+    });
+    
+    WTBWConfig.register(ModLoadingContext.get());
+  }
+  
+  public static boolean debug()
+  {
+    return CommonConfig.get().debugOutput.get();
+  }
+  
+  private void setup(final FMLCommonSetupEvent event)
+  {
+    DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientSetup.init());
+  }
 }

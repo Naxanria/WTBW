@@ -18,52 +18,63 @@ import javax.annotation.Nullable;
 /*
   @author: Naxanria
 */
-public class BaseTileBlock<TE extends TileEntity> extends Block {
-    public final TileEntityProvider<TE> tileEntityProvider;
-    protected boolean hasGui = true;
+public class BaseTileBlock<TE extends TileEntity> extends Block
+{
+  public final TileEntityProvider<TE> tileEntityProvider;
+  protected boolean hasGui = true;
 
-    public BaseTileBlock(Properties properties, TileEntityProvider<TE> tileEntityProvider) {
-        super(properties);
+  public BaseTileBlock(Properties properties, TileEntityProvider<TE> tileEntityProvider)
+  {
+    super(properties);
 
-        this.tileEntityProvider = tileEntityProvider;
-    }
+    this.tileEntityProvider = tileEntityProvider;
+  }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+  @Override
+  public boolean hasTileEntity(BlockState state)
+  {
+    return true;
+  }
 
-    @Nullable
-    @Override
-    public TE createTileEntity(BlockState state, IBlockReader world) {
-        return tileEntityProvider.get(world, state);
-    }
+  @Nullable
+  @Override
+  public TE createTileEntity(BlockState state, IBlockReader world)
+  {
+    return tileEntityProvider.get(world, state);
+  }
 
-    protected TE getTileEntity(IBlockReader world, BlockPos pos) {
-        return (TE) world.getTileEntity(pos);
-    }
+  protected TE getTileEntity(IBlockReader world, BlockPos pos)
+  {
+    return (TE) world.getTileEntity(pos);
+  }
 
-    @Override
-    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult hit) {
-        if (!world.isRemote && hasGui) {
-            if (!playerEntity.isSneaking()) {
-                TileEntity tileEntity = world.getTileEntity(pos);
-                if (tileEntity != null && tileEntity instanceof INamedContainerProvider) {
-                    NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (INamedContainerProvider) tileEntity, tileEntity.getPos());
+  @Override
+  public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult hit)
+  {
+    if (!world.isRemote && hasGui)
+    {
+      if (!playerEntity.isSneaking())
+      {
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if (tileEntity != null && tileEntity instanceof INamedContainerProvider)
+        {
+          NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (INamedContainerProvider) tileEntity, tileEntity.getPos());
 
-                    return true;
-                }
-            }
+          return true;
         }
-
-        return super.onBlockActivated(state, world, pos, playerEntity, hand, hit);
+      }
     }
 
-    public interface TileEntityProvider<TE extends TileEntity> {
-        default TE get() {
-            return get(null, null);
-        }
+    return super.onBlockActivated(state, world, pos, playerEntity, hand, hit);
+  }
 
-        TE get(IBlockReader world, BlockState state);
+  public interface TileEntityProvider<TE extends TileEntity>
+  {
+    default TE get()
+    {
+      return get(null, null);
     }
+
+    TE get(IBlockReader world, BlockState state);
+  }
 }

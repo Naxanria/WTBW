@@ -3,5 +3,6 @@ package com.wtbw;
 /*
   @author: Naxanria
 */
-public class EventHandler {
+public class EventHandler
+{
 }

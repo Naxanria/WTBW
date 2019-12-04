@@ -16,62 +16,75 @@ import javax.annotation.Nullable;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class FluidTrashCanTileEntity extends TileEntity {
-    private LazyOptional<IFluidHandler> tank = LazyOptional.of(this::createTank);
+public class FluidTrashCanTileEntity extends TileEntity
+{
+  private LazyOptional<IFluidHandler> tank = LazyOptional.of(this::createTank);
 
-    public FluidTrashCanTileEntity() {
-        super(ModTiles.FLUID_TRASHCAN);
+  public FluidTrashCanTileEntity()
+  {
+    super(ModTiles.FLUID_TRASHCAN);
+  }
+
+  @Nonnull
+  @Override
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
+  {
+    if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+    {
+      return tank.cast();
     }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            return tank.cast();
-        }
+    return super.getCapability(cap, side);
+  }
 
-        return super.getCapability(cap, side);
-    }
+  private IFluidHandler createTank()
+  {
+    return new IFluidHandler()
+    {
+      @Override
+      public int getTanks()
+      {
+        return 1;
+      }
 
-    private IFluidHandler createTank() {
-        return new IFluidHandler() {
-            @Override
-            public int getTanks() {
-                return 1;
-            }
+      @Nonnull
+      @Override
+      public FluidStack getFluidInTank(int i)
+      {
+        return FluidStack.EMPTY;
+      }
 
-            @Nonnull
-            @Override
-            public FluidStack getFluidInTank(int i) {
-                return FluidStack.EMPTY;
-            }
+      @Override
+      public int getTankCapacity(int i)
+      {
+        return Integer.MAX_VALUE;
+      }
 
-            @Override
-            public int getTankCapacity(int i) {
-                return Integer.MAX_VALUE;
-            }
+      @Override
+      public boolean isFluidValid(int i, @Nonnull FluidStack fluidStack)
+      {
+        return true;
+      }
 
-            @Override
-            public boolean isFluidValid(int i, @Nonnull FluidStack fluidStack) {
-                return true;
-            }
+      @Override
+      public int fill(FluidStack fluidStack, FluidAction fluidAction)
+      {
+        return fluidStack.getAmount();
+      }
 
-            @Override
-            public int fill(FluidStack fluidStack, FluidAction fluidAction) {
-                return fluidStack.getAmount();
-            }
+      @Nonnull
+      @Override
+      public FluidStack drain(FluidStack fluidStack, FluidAction fluidAction)
+      {
+        return FluidStack.EMPTY;
+      }
 
-            @Nonnull
-            @Override
-            public FluidStack drain(FluidStack fluidStack, FluidAction fluidAction) {
-                return FluidStack.EMPTY;
-            }
-
-            @Nonnull
-            @Override
-            public FluidStack drain(int i, FluidAction fluidAction) {
-                return FluidStack.EMPTY;
-            }
-        };
-    }
+      @Nonnull
+      @Override
+      public FluidStack drain(int i, FluidAction fluidAction)
+      {
+        return FluidStack.EMPTY;
+      }
+    };
+  }
 }

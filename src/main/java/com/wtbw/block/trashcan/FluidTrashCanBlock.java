@@ -12,18 +12,22 @@ import net.minecraft.world.IBlockReader;
 /*
   @author: Naxanria
 */
-public class FluidTrashCanBlock extends BaseTileBlock<FluidTrashCanTileEntity> {
-    public FluidTrashCanBlock(Properties properties) {
-        super(properties, (world, state) -> new FluidTrashCanTileEntity());
-    }
+public class FluidTrashCanBlock extends BaseTileBlock<FluidTrashCanTileEntity>
+{
+  public FluidTrashCanBlock(Properties properties)
+  {
+    super(properties, (world, state) -> new FluidTrashCanTileEntity());
+  }
 
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+  @Override
+  public BlockRenderLayer getRenderLayer()
+  {
+    return BlockRenderLayer.CUTOUT;
+  }
 
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return TrashCanBlock.SHAPE;
-    }
+  @Override
+  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+  {
+    return TrashCanBlock.SHAPE;
+  }
 }

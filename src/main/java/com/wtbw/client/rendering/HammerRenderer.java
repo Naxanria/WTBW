@@ -12,16 +12,19 @@ import net.minecraft.util.math.RayTraceResult;
 /*
   @author: Naxanria
 */
-public class HammerRenderer extends ItemStackWorldRenderer {
-    @Override
-    public void render(ItemStack stack, PlayerEntity player) {
-        BlockRayTraceResult lookingAt = Utilities.getLookingAt(player, 5);
-        if (lookingAt.getType() == RayTraceResult.Type.MISS) {
-            return;
-        }
-
-        BiValue<BlockPos, BlockPos> region = Utilities.getRegion(lookingAt.getPos(), lookingAt.getFace(), 3);
-
-        WorldRenderer.drawBoundingBox(region.a.getX(), region.a.getY(), region.a.getZ(), region.b.getX(), region.b.getY(), region.b.getZ(), 1, 1, 1, 1);
+public class HammerRenderer extends ItemStackWorldRenderer
+{
+  @Override
+  public void render(ItemStack stack, PlayerEntity player)
+  {
+    BlockRayTraceResult lookingAt = Utilities.getLookingAt(player, 5);
+    if (lookingAt.getType() == RayTraceResult.Type.MISS)
+    {
+      return;
     }
+
+    BiValue<BlockPos, BlockPos> region = Utilities.getRegion(lookingAt.getPos(), lookingAt.getFace(), 3);
+
+    WorldRenderer.drawBoundingBox(region.a.getX(), region.a.getY(), region.a.getZ(), region.b.getX(), region.b.getY(), region.b.getZ(), 1, 1, 1, 1);
+  }
 }

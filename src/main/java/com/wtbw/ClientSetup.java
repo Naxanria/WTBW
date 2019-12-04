@@ -11,13 +11,16 @@ import net.minecraft.world.World;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class ClientSetup {
-    public static void init() {
-        ScreenManager.registerFactory(ModContainers.TIERED_FURNACE, TieredFurnaceScreen::new);
-        ScreenManager.registerFactory(ModContainers.TRASHCAN, TrashCanScreen::new);
-    }
+public class ClientSetup
+{
+  public static void init()
+  {
+    ScreenManager.registerFactory(ModContainers.TIERED_FURNACE, TieredFurnaceScreen::new);
+    ScreenManager.registerFactory(ModContainers.TRASHCAN, TrashCanScreen::new);
+  }
 
-    public static World getWorld() {
-        return Minecraft.getInstance().world;
-    }
+  public static World getWorld()
+  {
+    return Minecraft.getInstance().world;
+  }
 }

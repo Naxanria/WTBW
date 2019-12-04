@@ -15,57 +15,74 @@ import org.lwjgl.glfw.GLFW;
 /*
   @author: Naxanria
 */
-public class KeyEventListener {
-    public static final String KEY_BIND_CATEGORY = WTBW.MODID;
+public class KeyEventListener
+{
+  public static final String KEY_BIND_CATEGORY = WTBW.MODID;
 
-    public static void registerKeys() {
-        KeyHandler.register(new KeyParser(createKeyBinding("increase_tool_radius", GLFW.GLFW_KEY_EQUAL, KeyConflictContext.IN_GAME)) {
-            @Override
-            public void onKeyDown() {
-                ItemStack inHand = getInHand();
-                if (inHand.getItem() instanceof ICycleTool) {
-                    CycleToolPacket.send((byte) 1);
-                }
-            }
-
-            @Override
-            public boolean isListening() {
-                return mc.currentScreen == null && getInHand().getItem() instanceof ICycleTool;
-            }
-        });
-
-        KeyHandler.register(new KeyParser(createKeyBinding("decrease_tool_radius", GLFW.GLFW_KEY_MINUS, KeyConflictContext.IN_GAME)) {
-            @Override
-            public void onKeyDown() {
-                ItemStack inHand = getInHand();
-                if (inHand.getItem() instanceof ICycleTool) {
-                    CycleToolPacket.send((byte) -1);
-                }
-            }
-
-            @Override
-            public boolean isListening() {
-                return mc.currentScreen == null && getInHand().getItem() instanceof ICycleTool;
-            }
-        });
-    }
-
-    private static ItemStack getInHand() {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
-        if (player != null) {
-            return player.getHeldItemMainhand();
-        } else {
-            return ItemStack.EMPTY;
+  public static void registerKeys()
+  {
+    KeyHandler.register(new KeyParser(createKeyBinding("increase_tool_radius", GLFW.GLFW_KEY_EQUAL, KeyConflictContext.IN_GAME))
+    {
+      @Override
+      public void onKeyDown()
+      {
+        ItemStack inHand = getInHand();
+        if (inHand.getItem() instanceof ICycleTool)
+        {
+          CycleToolPacket.send((byte) 1);
         }
-    }
+      }
 
-    private static KeyBinding createKeyBinding(String name, int key, KeyConflictContext conflictContext) {
-        return new KeyBinding(name, conflictContext, InputMappings.Type.KEYSYM, key, KEY_BIND_CATEGORY);
-    }
+      @Override
+      public boolean isListening()
+      {
+        return mc.currentScreen == null && getInHand().getItem() instanceof ICycleTool;
+      }
+    });
 
-    public static void update(final TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) {
-            KeyHandler.update();
+    KeyHandler.register(new KeyParser(createKeyBinding("decrease_tool_radius", GLFW.GLFW_KEY_MINUS, KeyConflictContext.IN_GAME))
+    {
+      @Override
+      public void onKeyDown()
+      {
+        ItemStack inHand = getInHand();
+        if (inHand.getItem() instanceof ICycleTool)
+        {
+          CycleToolPacket.send((byte) -1);
         }
+      }
+
+      @Override
+      public boolean isListening()
+      {
+        return mc.currentScreen == null && getInHand().getItem() instanceof ICycleTool;
+      }
+    });
+  }
+
+  private static ItemStack getInHand()
+  {
+    ClientPlayerEntity player = Minecraft.getInstance().player;
+    if (player != null)
+    {
+      return player.getHeldItemMainhand();
     }
+    else
+    {
+      return ItemStack.EMPTY;
+    }
+  }
+
+  private static KeyBinding createKeyBinding(String name, int key, KeyConflictContext conflictContext)
+  {
+    return new KeyBinding(name, conflictContext, InputMappings.Type.KEYSYM, key, KEY_BIND_CATEGORY);
+  }
+
+  public static void update(final TickEvent.ClientTickEvent event)
+  {
+    if (event.phase == TickEvent.Phase.START)
+    {
+      KeyHandler.update();
+    }
+  }
 }

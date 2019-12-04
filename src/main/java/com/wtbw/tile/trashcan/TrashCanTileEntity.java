@@ -23,40 +23,49 @@ import javax.annotation.Nullable;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class TrashCanTileEntity extends TileEntity implements INamedContainerProvider {
-    private LazyOptional<ItemStackHandler> inventory = LazyOptional.of(this::createInventory);
+public class TrashCanTileEntity extends TileEntity implements INamedContainerProvider
+{
+  private LazyOptional<ItemStackHandler> inventory = LazyOptional.of(this::createInventory);
 
-    public TrashCanTileEntity() {
-        super(ModTiles.TRASHCAN);
+  public TrashCanTileEntity()
+  {
+    super(ModTiles.TRASHCAN);
+  }
+
+  private ItemStackHandler createInventory()
+  {
+    return new ItemStackHandler()
+    {
+      @Override
+      protected void onContentsChanged(int slot)
+      {
+        stacks.set(0, ItemStack.EMPTY);
+      }
+    };
+  }
+
+  @Nonnull
+  @Override
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
+  {
+    if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+    {
+      return inventory.cast();
     }
 
-    private ItemStackHandler createInventory() {
-        return new ItemStackHandler() {
-            @Override
-            protected void onContentsChanged(int slot) {
-                stacks.set(0, ItemStack.EMPTY);
-            }
-        };
-    }
+    return super.getCapability(cap, side);
+  }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return inventory.cast();
-        }
+  @Override
+  public ITextComponent getDisplayName()
+  {
+    return new StringTextComponent(getType().getRegistryName().getPath());
+  }
 
-        return super.getCapability(cap, side);
-    }
-
-    @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent(getType().getRegistryName().getPath());
-    }
-
-    @Nullable
-    @Override
-    public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-        return new TrashCanContainer(id, world, pos, inventory);
-    }
+  @Nullable
+  @Override
+  public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player)
+  {
+    return new TrashCanContainer(id, world, pos, inventory);
+  }
 }

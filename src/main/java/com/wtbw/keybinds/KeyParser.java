@@ -4,36 +4,46 @@ package com.wtbw.keybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
-public abstract class KeyParser {
-    public static final Minecraft mc = Minecraft.getInstance();
-    public final KeyBinding keyBinding;
-    private boolean state = false;
-    private boolean lastState = false;
+public abstract class KeyParser
+{
+  public static final Minecraft mc = Minecraft.getInstance();
+  public final KeyBinding keyBinding;
+  private boolean state = false;
+  private boolean lastState = false;
 
-    protected KeyParser(KeyBinding keyBinding) {
-        this.keyBinding = keyBinding;
+  protected KeyParser(KeyBinding keyBinding)
+  {
+    this.keyBinding = keyBinding;
+  }
+
+  final void update()
+  {
+    lastState = state;
+    state = keyBinding.isKeyDown();
+
+    if (isListening())
+    {
+      if (state && !lastState)
+      {
+        onKeyDown();
+      }
+      else if (!state && lastState)
+      {
+        onKeyUp();
+      }
     }
+  }
 
-    final void update() {
-        lastState = state;
-        state = keyBinding.isKeyDown();
+  public void onKeyDown()
+  {
+  }
 
-        if (isListening()) {
-            if (state && !lastState) {
-                onKeyDown();
-            } else if (!state && lastState) {
-                onKeyUp();
-            }
-        }
-    }
+  public void onKeyUp()
+  {
+  }
 
-    public void onKeyDown() {
-    }
-
-    public void onKeyUp() {
-    }
-
-    public boolean isListening() {
-        return true;
-    }
+  public boolean isListening()
+  {
+    return true;
+  }
 }

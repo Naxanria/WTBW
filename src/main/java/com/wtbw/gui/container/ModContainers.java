@@ -8,7 +8,8 @@ import net.minecraftforge.registries.ObjectHolder;
   @author: Naxanria
 */
 @ObjectHolder(WTBW.MODID)
-public class ModContainers {
-    public static final ContainerType<TieredFurnaceContainer> TIERED_FURNACE = null;
-    public static final ContainerType<TrashCanContainer> TRASHCAN = null;
+public class ModContainers
+{
+  public static final ContainerType<TieredFurnaceContainer> TIERED_FURNACE = null;
+  public static final ContainerType<TrashCanContainer> TRASHCAN = null;
 }

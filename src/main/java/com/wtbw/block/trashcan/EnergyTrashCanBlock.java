@@ -12,18 +12,22 @@ import net.minecraft.world.IBlockReader;
 /*
   @author: Naxanria
 */
-public class EnergyTrashCanBlock extends BaseTileBlock<EnergyTrashCanTileEntity> {
-    public EnergyTrashCanBlock(Properties properties) {
-        super(properties, (world, state) -> new EnergyTrashCanTileEntity());
-    }
+public class EnergyTrashCanBlock extends BaseTileBlock<EnergyTrashCanTileEntity>
+{
+  public EnergyTrashCanBlock(Properties properties)
+  {
+    super(properties, (world, state) -> new EnergyTrashCanTileEntity());
+  }
 
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+  @Override
+  public BlockRenderLayer getRenderLayer()
+  {
+    return BlockRenderLayer.CUTOUT;
+  }
 
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return TrashCanBlock.SHAPE;
-    }
+  @Override
+  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+  {
+    return TrashCanBlock.SHAPE;
+  }
 }

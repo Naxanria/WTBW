@@ -3,6 +3,7 @@ package com.wtbw.tile.util;
 /*
   @author: Naxanria
 */
-public interface IContentHolder {
-    void dropContents();
+public interface IContentHolder
+{
+  void dropContents();
 }
