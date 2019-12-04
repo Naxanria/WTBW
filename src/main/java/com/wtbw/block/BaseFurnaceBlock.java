@@ -54,21 +54,6 @@ public class BaseFurnaceBlock<TE extends TileEntity> extends BaseTileBlock<TE>
   }
 
   @Override
-  public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
-  {
-    if (state.getBlock() != newState.getBlock())
-    {
-      TE tileEntity = getTileEntity(worldIn, pos);
-      if (tileEntity != null && tileEntity instanceof IContentHolder)
-      {
-        ((IContentHolder) tileEntity).dropContents();
-      }
-    }
-
-    super.onReplaced(state, worldIn, pos, newState, isMoving);
-  }
-
-  @Override
   public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
   {
     return super.getDrops(state, builder);

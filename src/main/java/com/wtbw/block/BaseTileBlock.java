@@ -1,5 +1,6 @@
 package com.wtbw.block;
 
+import com.wtbw.tile.util.IContentHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -70,7 +71,23 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
 
     return super.onBlockActivated(state, world, pos, playerEntity, hand, hit);
   }
-
+  
+  @Override
+  public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+  {
+    if (state.getBlock() != newState.getBlock())
+    {
+      TE tileEntity = getTileEntity(worldIn, pos);
+      if (tileEntity != null && tileEntity instanceof IContentHolder)
+      {
+        ((IContentHolder) tileEntity).dropContents();
+      }
+    }
+    
+    super.onReplaced(state, worldIn, pos, newState, isMoving);
+  }
+  
+  
   public interface TileEntityProvider<TE extends TileEntity>
   {
     default TE get()
