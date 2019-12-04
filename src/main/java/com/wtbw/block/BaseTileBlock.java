@@ -51,14 +51,17 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
   @Override
   public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult hit)
   {
-    if (!world.isRemote && hasGui)
+    if (hasGui)
     {
       if (!playerEntity.isSneaking())
       {
         TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity != null && tileEntity instanceof INamedContainerProvider)
         {
-          NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (INamedContainerProvider) tileEntity, tileEntity.getPos());
+          if (!world.isRemote)
+          {
+            NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (INamedContainerProvider) tileEntity, tileEntity.getPos());
+          }
 
           return true;
         }
