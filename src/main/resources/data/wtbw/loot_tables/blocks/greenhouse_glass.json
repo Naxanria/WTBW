@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "wtb:greenhouse_glass"
+          "name": "wtbw:greenhouse_glass"
         }
       ],
       "conditions": [
