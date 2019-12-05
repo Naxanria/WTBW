@@ -9,6 +9,16 @@
   "item.wtbw.gold_hammer": "Gold Hammer",
   "item.wtbw.diamond_hammer": "Diamond Hammer",
 
+  "item.wtbw.stone_excavator": "Stone Excavator",
+  "item.wtbw.iron_excavator": "Iron Excavator",
+  "item.wtbw.gold_excavator": "Gold Excavator",
+  "item.wtbw.diamond_excavator": "Diamond Excavator",
+
+  "item.wtbw.stone_greataxe": "Stone Greataxe",
+  "item.wtbw.iron_greataxe": "Iron Greataxe",
+  "item.wtbw.gold_greataxe": "Gold Greataxe",
+  "item.wtbw.diamond_greataxe": "Diamond Greataxe",
+
   "item.wtbw.stone_swap_tool": "Stone Swapper",
   "item.wtbw.iron_swap_tool": "Iron Swapper",
   "item.wtbw.diamond_swap_tool": "Diamond Swapper",
