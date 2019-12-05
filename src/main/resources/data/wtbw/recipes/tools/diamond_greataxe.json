@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BS ",
+    "BS ",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "B": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "wtbw:diamond_greataxe"
+  }
+}
