@@ -1,9 +1,6 @@
 package com.wtbw;
 
-import com.wtbw.block.BaseTileBlock;
-import com.wtbw.block.ModBlocks;
-import com.wtbw.block.PushBlock;
-import com.wtbw.block.TieredFurnaceBlock;
+import com.wtbw.block.*;
 import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
@@ -116,6 +113,8 @@ public class Registrator
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4), SpikesType.IRON), "iron_spikes");
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(5), SpikesType.GOLD), "gold_spikes");
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
+    
+    register(new GreenHouseGlass(getBlockProperties(Material.GLASS).hardnessAndResistance(1)), "greenhouse_glass");
   }
 
   private static void registerAllItems()
