@@ -1,6 +1,7 @@
 package com.wtbw;
 
 import com.wtbw.block.*;
+import com.wtbw.block.ctm.CTMBlock;
 import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
@@ -53,6 +54,7 @@ import java.util.function.Supplier;
 public class Registrator
 {
   private static List<BlockItem> blockItems = new ArrayList<>();
+  static List<CTMBlock> ctmBlocks = new ArrayList<>();
   private static IForgeRegistry<Block> blockRegistry;
   private static IForgeRegistry<Item> itemRegistry;
   private static IForgeRegistry<TileEntityType<?>> tileRegistry;
@@ -115,6 +117,8 @@ public class Registrator
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
     
     register(new GreenHouseGlass(getBlockProperties(Material.GLASS).hardnessAndResistance(1)), "greenhouse_glass");
+    
+    register(new CTMBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), "connected/test/test"), "test_block");
   }
 
   private static void registerAllItems()
@@ -287,6 +291,11 @@ public class Registrator
         blockItemProperties = getItemProperties();
       }
       blockItems.add((BlockItem) new BlockItem(block, blockItemProperties).setRegistryName(WTBW.MODID, registryName));
+    }
+    
+    if (block instanceof CTMBlock)
+    {
+      ctmBlocks.add((CTMBlock) block);
     }
 
     blockRegistry.register(block);
