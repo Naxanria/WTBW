@@ -1,5 +1,8 @@
 package com.wtbw.block.redstone;
 
+import com.wtbw.util.Colors;
+import com.wtbw.util.PlayEvent;
+import com.wtbw.util.RandomUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,6 +16,8 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 /*
   @author: Naxanria
 */
@@ -22,7 +27,7 @@ public class RedstoneEmitterBlock extends Block
   
   public RedstoneEmitterBlock(Properties properties)
   {
-    super(properties);
+    super(properties.tickRandomly());
     
     setDefaultState(stateContainer.getBaseState().with(POWER, 0));
   }
@@ -80,5 +85,26 @@ public class RedstoneEmitterBlock extends Block
   public boolean canProvidePower(BlockState state)
   {
     return true;
+  }
+  
+  @Override
+  public void randomTick(BlockState state, World world, BlockPos pos, Random random)
+  {
+    int power = state.get(POWER);
+    if (power == 0)
+    {
+      return;
+    }
+    
+    int particles = (power - 5) / 3;
+    if (particles < 1)
+    {
+      particles = 1;
+    }
+  
+    for (int i = 0; i < particles; i++)
+    {
+      PlayEvent.redstoneParticle(world, pos.getX() + random.nextDouble(), pos.getY() + 1.1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * .2, 0, Colors.RED);
+    }
   }
 }
