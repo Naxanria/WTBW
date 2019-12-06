@@ -60,8 +60,6 @@ public class WTBW
     
     IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
     
-    Networking.registerMessages();
-    
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
     {
       forgeEventBus.addListener(ClientEventHandler::onTooltip);
@@ -79,6 +77,8 @@ public class WTBW
   
   private void setup(final FMLCommonSetupEvent event)
   {
+    Networking.registerMessages();
+    
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientSetup.init());
   }
 }

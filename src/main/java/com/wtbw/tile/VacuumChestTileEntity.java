@@ -5,6 +5,7 @@ import com.wtbw.compat.item_filters.ItemFiltersWrapper;
 import com.wtbw.gui.container.VacuumChestContainer;
 import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.util.NBTHelper;
+import com.wtbw.util.PlayEvent;
 import com.wtbw.util.StackUtil;
 import com.wtbw.util.Utilities;
 import net.minecraft.entity.Entity;
@@ -22,6 +23,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -98,14 +100,7 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
               if (stack == ItemStack.EMPTY)
               {
                 entity.remove();
-                world.addParticle
-                (
-                  ParticleTypes.SMOKE,
-                  entity.posX, entity.posY, entity.posZ,
-                  world.rand.nextDouble() * 0.4 - 0.2,
-                  world.rand.nextDouble() * 0.3 + 0.1,
-                  world.rand.nextDouble() * 0.4 - 0.2
-                );
+                PlayEvent.redstoneParticle(world, entity.getPositionVec(), new Vec3d(0, .1 * world.rand.nextDouble(), 0), 0xffffffff);
               }
               else
               {

@@ -1,9 +1,10 @@
 package com.wtbw.util;
 
+import com.wtbw.network.ColoredRedstoneParticlePacket;
+import com.wtbw.network.Networking;
 import net.minecraft.util.Direction;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 /*
@@ -11,6 +12,8 @@ import net.minecraft.world.World;
 */
 public class PlayEvent
 {
+  public static final int SEND_RADIUS = 48;
+  
   public static class Particle
   {
     public static final int SMOKE = 2000;
@@ -90,5 +93,24 @@ public class PlayEvent
   public static void smoke(World world, BlockPos pos, Direction direction)
   {
     world.playEvent(Particle.SMOKE, pos, direction.ordinal());
+  }
+  
+  public static void redstoneParticle(World world, BlockPos pos, double motionX, double motionY, double motionZ, int color)
+  {
+    redstoneParticle(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, motionX, motionY, motionZ, color);
+  }
+  
+  public static void redstoneParticle(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color)
+  {
+    redstoneParticle(world, new Vec3d(posX, posY, posZ), new Vec3d(motionX, motionY, motionZ), color);
+  }
+  
+  public static void redstoneParticle(World world, Vec3d pos, Vec3d motion, int color)
+  {
+    if (!world.isRemote)
+    {
+      BlockPos blockPos = new BlockPos(pos);
+      Networking.sendAround(world, blockPos, SEND_RADIUS, new ColoredRedstoneParticlePacket(pos, motion, color));
+    }
   }
 }
