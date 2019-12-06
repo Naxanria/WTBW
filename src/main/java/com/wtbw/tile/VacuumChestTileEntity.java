@@ -2,6 +2,7 @@ package com.wtbw.tile;
 
 import com.wtbw.Flags;
 import com.wtbw.compat.item_filters.ItemFiltersWrapper;
+import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.VacuumChestContainer;
 import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.util.NBTHelper;
@@ -44,7 +45,6 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
 {
   private AxisAlignedBB bound;
   private int radius = 6;
-  private int frequency = 10;
   private int tick;
   
 //  private ItemStack filter = ItemStack.EMPTY;
@@ -69,12 +69,19 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
     {
       tick++;
       
+      int r = CommonConfig.get().vacuumRange.get();
+      if (r != radius)
+      {
+        bound = null;
+        radius = r;
+      }
+      
       if (bound == null)
       {
         bound = Utilities.getBoundingBox(pos, radius);
       }
       
-      if (tick % frequency == 0)
+      if (tick % CommonConfig.get().vacuumTickRate.get() == 0)
       {
         List<Entity> entities = world.getEntitiesWithinAABB(EntityType.ITEM, bound, (e) -> canInsert(((ItemEntity) e).getItem()));
         for (Entity e : entities)

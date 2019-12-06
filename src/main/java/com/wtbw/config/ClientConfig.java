@@ -22,7 +22,16 @@ public class ClientConfig
     
     builder.comment("WTBW client settings");
     
+    visuals();
+    
     qol();
+  }
+  
+  private void visuals()
+  {
+    builder.push("visuals").comment("Visual options");
+    
+    builder.pop();
   }
   
   public static ClientConfig get()

@@ -24,6 +24,9 @@ public class CommonConfig
   public ForgeConfigSpec.IntValue magnetTickRate;
   public ForgeConfigSpec.IntValue magnetRadius;
   
+  public ForgeConfigSpec.IntValue vacuumRange;
+  public ForgeConfigSpec.IntValue vacuumTickRate;
+  
   // furnaces //
   public FurnaceConfig ironFurnace;
   public FurnaceConfig goldFurnace;
@@ -70,9 +73,28 @@ public class CommonConfig
     
     furnaces();
     redstone();
+    vacuumChest();
     
     builder.pop();
   }
+  
+  private void vacuumChest()
+  {
+    builder.push("vacuum");
+    
+    vacuumTickRate = builder
+      .comment("The time in ticks between trying to suck up items", "default: 10")
+      .translation(key("blocks.vacuum.tick_rate"))
+      .defineInRange("tick_rate", 10, 1, 100);
+    
+    vacuumRange = builder
+      .comment("The radius in which the vacuum can check", "default: 6")
+      .translation(key("blocks.vacuum.range"))
+      .defineInRange("range", 6, 1, 16);
+    
+    builder.pop();
+  }
+  
   
   private void redstone()
   {
