@@ -1,5 +1,7 @@
 package com.wtbw.util;
 
+import net.minecraft.util.math.Vec3d;
+
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
@@ -50,5 +52,15 @@ public class RandomUtil
     }
 
     return list;
+  }
+  
+  public static Vec3d normalized(Random random)
+  {
+    return new Vec3d(random.nextDouble(), random.nextDouble(), random.nextDouble()).normalize();
+  }
+  
+  public static Vec3d boundVec3d(Random random, double xBound, double yBound, double zBound)
+  {
+    return new Vec3d(random.nextDouble() * xBound, random.nextDouble() * yBound, random.nextDouble() * zBound);
   }
 }

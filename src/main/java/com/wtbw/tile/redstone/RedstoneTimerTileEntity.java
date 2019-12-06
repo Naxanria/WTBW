@@ -3,9 +3,16 @@ package com.wtbw.tile.redstone;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.tile.ModTiles;
+import com.wtbw.util.Colors;
 import com.wtbw.util.Cooldown;
+import com.wtbw.util.PlayEvent;
+import com.wtbw.util.RandomUtil;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.Vec3d;
+
+import java.util.Random;
 
 /*
   @author: Naxanria
@@ -66,6 +73,15 @@ public class RedstoneTimerTileEntity extends TileEntity implements ITickableTile
       sendPower = newPower;
       world.notifyNeighbors(pos, world.getBlockState(pos).getBlock());
       world.setBlockState(pos, world.getBlockState(pos).with(RedstoneTimerBlock.ACTIVE, newPower > 0), 3);
+      if (newPower > 0)
+      {
+        Random rand = world.rand;
+  
+        if (RandomUtil.chance(rand, 85))
+        {
+          PlayEvent.redstoneParticle(world, pos.getX() + rand.nextDouble(), pos.getY() + 1.1, pos.getZ() + rand.nextDouble(), 0, rand.nextDouble() * .2, 0, Colors.RED);
+        }
+      }
     }
     else
     {
