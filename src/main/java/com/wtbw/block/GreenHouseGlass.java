@@ -1,5 +1,6 @@
 package com.wtbw.block;
 
+import com.wtbw.util.PlayEvent;
 import com.wtbw.util.RandomUtil;
 import net.minecraft.block.*;
 import net.minecraft.command.impl.ParticleCommand;
@@ -60,14 +61,17 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
             Block block = foundState.getBlock();
             if (block instanceof CropsBlock)
             {
-              BoneMealItem.spawnBonemealParticles(world, check, rand.nextInt(7) + 5);
-              ((CropsBlock) block).grow(world, check, foundState);
-         
+              if (!((CropsBlock) block).isMaxAge(foundState))
+              {
+                PlayEvent.boneMeal(world, check, rand.nextInt(7) + 5);
+                ((CropsBlock) block).grow(world, check, foundState);
+              }
+              
               break;
             }
             if (block instanceof SaplingBlock)
             {
-              BoneMealItem.spawnBonemealParticles(world, check, rand.nextInt(7) + 5);
+              PlayEvent.boneMeal(world, check, rand.nextInt(7) + 5);
               ((SaplingBlock) block).grow(world, check, foundState, rand);
 
               break;
