@@ -6,7 +6,9 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
@@ -58,7 +60,17 @@ public class CTMBlock extends Block
   @Override
   public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor)
   {
-//    BlockState newState = makeConnections(world, pos);
+    BlockState newState = makeConnections(world, pos);
+    if (newState != world.getBlockState(pos))
+    {
+    
+    }
+  }
+  
+  @Override
+  public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+  {
+    return makeConnections(worldIn, currentPos);
   }
   
   public BlockState makeConnections(IWorldReader world, BlockPos pos)

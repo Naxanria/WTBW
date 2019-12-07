@@ -1,11 +1,13 @@
 package com.wtbw.block.ctm;
 
+import com.wtbw.WTBW;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -32,6 +34,7 @@ public class CTMBakedModel implements IDynamicBakedModel
   
   public CTMBakedModel(VertexFormat format, CTMTextureData textureData)
   {
+    WTBW.LOGGER.info(format == DefaultVertexFormats.BLOCK ? "BLOCK FORMAT" : "ITEM FORMAT");
     this.format = format;
     this.textureData = textureData;
   }
@@ -89,18 +92,48 @@ public class CTMBakedModel implements IDynamicBakedModel
       return Collections.emptyList();
     }
   
-    TextureAtlasSprite texture = getTexture(false, false, false, false);
+    if (state == null)
+    {
+      TextureAtlasSprite texture = getTexture(false, false, false, false);
+      List<BakedQuad> quads = new ArrayList<>();
+  
+      double l = 0;
+      double r = 1;
+  
+      quads.add(createQuad(v(l, r, l), v(l, r, r), v(r, r, r), v(r, r, l), texture));
+      quads.add(createQuad(v(l, l, l), v(r, l, l), v(r, l, r), v(l, l, r), texture));
+      quads.add(createQuad(v(r, r, r), v(r, l, r), v(r, l, l), v(r, r, l), texture));
+      quads.add(createQuad(v(l, r, l), v(l, l, l), v(l, l, r), v(l, r, r), texture));
+      quads.add(createQuad(v(r, r, l), v(r, l, l), v(l, l, l), v(l, r, l), texture));
+      quads.add(createQuad(v(l, r, r), v(l, l, r), v(r, l, r), v(r, r, r), texture));
+      
+      return quads;
+    }
+    
+    boolean north = state.get(CTMBlock.NORTH);
+    boolean south = state.get(CTMBlock.SOUTH);
+    boolean west = state.get(CTMBlock.WEST);
+    boolean east = state.get(CTMBlock.EAST);
+    boolean up = state.get(CTMBlock.UP);
+    boolean down = state.get(CTMBlock.DOWN);
+  
+    TextureAtlasSprite up_face = getTexture(north, south, west, east);
+    TextureAtlasSprite down_face = getTexture(north, south, west, east);
+    TextureAtlasSprite east_face = getTexture(up, down, south, north);
+    TextureAtlasSprite west_face = getTexture(up, down, north, south);
+    TextureAtlasSprite north_face = getTexture(up, down, east, west);
+    TextureAtlasSprite south_face = getTexture(up, down, west, east);
     List<BakedQuad> quads = new ArrayList<>();
   
     double l = 0;
     double r = 1;
   
-    quads.add(createQuad(v(l, r, l), v(l, r, r), v(r, r, r), v(r, r, l), texture));
-    quads.add(createQuad(v(l, l, l), v(r, l, l), v(r, l, r), v(l, l, r), texture));
-    quads.add(createQuad(v(r, r, r), v(r, l, r), v(r, l, l), v(r, r, l), texture));
-    quads.add(createQuad(v(l, r, l), v(l, l, l), v(l, l, r), v(l, r, r), texture));
-    quads.add(createQuad(v(r, r, l), v(r, l, l), v(l, l, l), v(l, r, l), texture));
-    quads.add(createQuad(v(l, r, r), v(l, l, r), v(r, l, r), v(r, r, r), texture));
+    quads.add(createQuad(v(l, r, l), v(l, r, r), v(r, r, r), v(r, r, l), up_face)); // up
+    quads.add(createQuad(v(l, l, l), v(r, l, l), v(r, l, r), v(l, l, r), down_face)); // down
+    quads.add(createQuad(v(r, r, r), v(r, l, r), v(r, l, l), v(r, r, l), east_face)); // east
+    quads.add(createQuad(v(l, r, l), v(l, l, l), v(l, l, r), v(l, r, r), west_face)); // west
+    quads.add(createQuad(v(r, r, l), v(r, l, l), v(l, l, l), v(l, r, l), north_face)); // north
+    quads.add(createQuad(v(l, r, r), v(l, l, r), v(r, l, r), v(r, r, r), south_face)); // south
   
     return quads;
   }

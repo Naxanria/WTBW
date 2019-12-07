@@ -48,9 +48,21 @@ public class ClientRegistration
         WTBW.LOGGER.error("No textures for " + ctmBlock.getRegistryName().toString());
         continue;
       }
-      
+      CTMBakedModel bakedModel = new CTMBakedModel(DefaultVertexFormats.BLOCK, textureData.get(ctmBlock));
       WTBW.LOGGER.info("Registering models for {}", ctmBlock.getRegistryName());
-      event.getModelRegistry().put(new ModelResourceLocation(ctmBlock.getRegistryName(), ""), new CTMBakedModel(DefaultVertexFormats.BLOCK, textureData.get(ctmBlock)));
+      for (int i = 0; i < 64; i++)
+      {
+        boolean north = (i & 1) != 0;
+        boolean south = ((i >> 1) & 1) != 0;
+        boolean west = ((i >> 2) & 1) != 0;
+        boolean east = ((i >> 3) & 1) != 0;
+        boolean up = ((i >> 4) & 1) != 0;
+        boolean down = ((i >> 5) & 1) != 0;
+        
+        String variant = "down="+down+",east="+east+",north="+north+",south="+south+",up="+up+",west="+west;
+        event.getModelRegistry().put(new ModelResourceLocation(ctmBlock.getRegistryName(), variant), bakedModel);
+      }
+      
       event.getModelRegistry().put(new ModelResourceLocation(ctmBlock.getRegistryName(), "inventory"), new CTMBakedModel(DefaultVertexFormats.ITEM, textureData.get(ctmBlock)));
     }
   }
