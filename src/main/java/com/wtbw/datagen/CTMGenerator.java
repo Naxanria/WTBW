@@ -2,6 +2,7 @@ package com.wtbw.datagen;
 
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
+import com.google.common.hash.PrimitiveSink;
 import com.wtbw.WTBW;
 import com.wtbw.block.ctm.CTMTextureData;
 import com.wtbw.block.ctm.CTMTextureProvider;
@@ -21,14 +22,12 @@ import java.util.Map;
 */
 public class CTMGenerator implements IDataProvider
 {
-  private final HashFunction HASH = Hashing.sha1();
   private final DataGenerator generator;
   
   private static Map<String, Map<String, NativeImage>> imagesMap = new HashMap<>();
   
   private static Map<String, NativeImage> convert(Path imagePath, String name)
   {
-    WTBW.LOGGER.info("Trying to convert {}", imagePath);
     NativeImage loaded = CTMTextureProvider.load(imagePath);
     if (loaded == null)
     {
@@ -124,11 +123,16 @@ public class CTMGenerator implements IDataProvider
       
       for (Map.Entry<String, NativeImage> images : imageData.getValue().entrySet())
       {
-        String suffix = images.getKey();
+        String fileName = images.getKey();
         NativeImage image = images.getValue();
-        Path path = folderOutput.resolve(name + "_" + suffix + ".png");
-        Files.createFile(path);
+        Path path = folderOutput.resolve(fileName + ".png");
+        if (!Files.exists(path))
+        {
+          Files.createFile(path);
+        }
         image.write(path);
+  
+        cache.recordHash(path, fileName + System.currentTimeMillis());
       }
     }
   }
