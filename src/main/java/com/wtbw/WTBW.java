@@ -3,9 +3,11 @@ package com.wtbw;
 import com.wtbw.block.ModBlocks;
 import com.wtbw.client.rendering.RenderManager;
 import com.wtbw.config.WTBWConfig;
+import com.wtbw.datagen.DataGenerators;
 import com.wtbw.keybinds.KeyEventListener;
 import com.wtbw.network.Networking;
 import net.minecraft.block.Block;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -52,6 +54,8 @@ public class WTBW
     eventBus.addGenericListener(Item.class, Registrator::registerItems);
     eventBus.addGenericListener(TileEntityType.class, Registrator::registerTileEntity);
     eventBus.addGenericListener(ContainerType.class, Registrator::registerContainer);
+    
+    eventBus.addListener(DataGenerators::gatherData);
     
     IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
     
