@@ -125,7 +125,7 @@ public class CTMGenerator implements IDataProvider
       {
         String fileName = images.getKey();
         NativeImage image = images.getValue();
-        Path path = folderOutput.resolve(fileName + ".png");
+        Path path = folderOutput.resolve(fileName);
         if (!Files.exists(path))
         {
           Files.createFile(path);

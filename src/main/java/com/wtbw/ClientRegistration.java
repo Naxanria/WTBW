@@ -5,6 +5,7 @@ import com.wtbw.block.ctm.CTMBlock;
 import com.wtbw.block.ctm.CTMTextureData;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
@@ -49,6 +50,10 @@ public class ClientRegistration
         continue;
       }
       CTMBakedModel bakedModel = new CTMBakedModel(DefaultVertexFormats.BLOCK, textureData.get(ctmBlock));
+      if (ctmBlock.getRenderLayer() != BlockRenderLayer.SOLID)
+      {
+        bakedModel.setAmbientOcclusion(false);
+      }
       WTBW.LOGGER.info("Registering models for {}", ctmBlock.getRegistryName());
       for (int i = 0; i < 64; i++)
       {

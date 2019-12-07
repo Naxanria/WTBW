@@ -34,9 +34,10 @@ public class CTMBakedModel implements IDynamicBakedModel
   private VertexFormat format;
   private ItemCameraTransforms transforms = getAllTransforms();
   
+  private boolean ambientOcclusion = true;
+  
   public CTMBakedModel(VertexFormat format, CTMTextureData textureData)
   {
-    WTBW.LOGGER.info(format == DefaultVertexFormats.BLOCK ? "BLOCK FORMAT" : "ITEM FORMAT");
     this.format = format;
     this.textureData = textureData;
   }
@@ -143,7 +144,13 @@ public class CTMBakedModel implements IDynamicBakedModel
   @Override
   public boolean isAmbientOcclusion()
   {
-    return true;
+    return ambientOcclusion;
+  }
+  
+  public CTMBakedModel setAmbientOcclusion(boolean ambientOcclusion)
+  {
+    this.ambientOcclusion = ambientOcclusion;
+    return this;
   }
   
   @Override
@@ -214,4 +221,6 @@ public class CTMBakedModel implements IDynamicBakedModel
     
     return ItemTransformVec3f.DEFAULT;
   }
+  
+  
 }
