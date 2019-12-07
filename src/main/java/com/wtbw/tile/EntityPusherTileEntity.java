@@ -1,5 +1,6 @@
 package com.wtbw.tile;
 
+import com.wtbw.config.CommonConfig;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.Utilities;
 import net.minecraft.entity.Entity;
@@ -7,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 
@@ -32,10 +32,9 @@ public class EntityPusherTileEntity extends TileEntity implements ITickableTileE
     }
   }
   
+  static CommonConfig config = CommonConfig.get();
+  
   public final PushMode pushMode;
-  private int interval = 10;
-  private int range = 10;
-  private float strength = 3f;
   private AxisAlignedBB bbox;
   private Vec3d vecPos;
   
@@ -57,7 +56,7 @@ public class EntityPusherTileEntity extends TileEntity implements ITickableTileE
       
       if (bbox == null)
       {
-        bbox = Utilities.getHorizontalBoundingBox(pos, range, 2);
+        bbox = Utilities.getHorizontalBoundingBox(pos, config.pusherRange.get(), 2);
       }
       
       if (vecPos == null)
@@ -65,7 +64,7 @@ public class EntityPusherTileEntity extends TileEntity implements ITickableTileE
         vecPos = Utilities.getVec3d(pos).add(.5, .5, .5);
       }
       
-      if (tickCount % interval == 0)
+      if (tickCount % config.pusherTickRate.get() == 0)
       {
         List<Entity> entitiesWithinAABB = world.getEntitiesWithinAABB(Entity.class, bbox);
         
@@ -88,7 +87,7 @@ public class EntityPusherTileEntity extends TileEntity implements ITickableTileE
   
   private Vec3d getMoveVector(Entity entity)
   {
-    float strength = 0.8f * pushMode.multiplier;
+    double strength = config.pusherStrength.get() * pushMode.multiplier;
     return vecPos.subtract(entity.getPositionVec()).normalize().mul(strength, strength, strength);
   }
   

@@ -27,6 +27,10 @@ public class CommonConfig
   public ForgeConfigSpec.IntValue vacuumRange;
   public ForgeConfigSpec.IntValue vacuumTickRate;
   
+  public ForgeConfigSpec.IntValue pusherRange;
+  public ForgeConfigSpec.DoubleValue pusherStrength;
+  public ForgeConfigSpec.IntValue pusherTickRate;
+  
   // furnaces //
   public FurnaceConfig ironFurnace;
   public FurnaceConfig goldFurnace;
@@ -74,6 +78,29 @@ public class CommonConfig
     furnaces();
     redstone();
     vacuumChest();
+    puller();
+    
+    builder.pop();
+  }
+  
+  private void puller()
+  {
+    builder.push("pusher_puller").comment("For both pusher and puller");
+    
+    pusherStrength = builder
+      .comment("Strength of pull/push", "default: 0.8")
+      .translation(key("pusher.strength"))
+      .defineInRange("strength", 0.8, 0.01, 5);
+    
+    pusherRange = builder
+      .comment("Range of pusher/puller", "default: 6")
+      .translation(key("pusher.range"))
+      .defineInRange("range", 6, 1, 16);
+    
+    pusherTickRate = builder
+      .comment("Ticks between pulls/pushes", "default: 10")
+      .translation(key("pusher.tickRate"))
+      .defineInRange("tick_rate", 10, 1, 100);
     
     builder.pop();
   }
