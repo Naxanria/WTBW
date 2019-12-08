@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "wtbw:block/fancy/lava_stone_brick",
+        "top": "wtbw:block/fancy/lava_stone_brick",
+        "side": "wtbw:block/fancy/lava_stone_brick"
+    }
+}

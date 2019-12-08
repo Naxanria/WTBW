@@ -37,8 +37,17 @@
   "block.wtbw.end_furnace": "End Furnace",
 
   "block.wtbw.lava_stone_brick": "Lava Stone Brick",
+  "block.wtbw.lava_stone_brick_wall": "Lava Stone Brick Wall",
+  "block.wtbw.lava_stone_brick_stairs": "Lava Stone Brick Stairs",
+  "block.wtbw.lava_stone_brick_slab": "Lava Stone Brick Slab",
+
   "block.wtbw.lava_chiseled_stone_brick": "Lava Chisel Stone Brick",
+
   "block.wtbw.water_stone_brick": "Water Stone Brick",
+  "block.wtbw.water_stone_brick_slab": "Water Stone Brick Slab",
+  "block.wtbw.water_stone_brick_stairs": "Water Stone Brick Stairs",
+  "block.wtbw.water_stone_brick_wall": "Water Stone Brick Wall",
+
   "block.wtbw.water_chiseled_stone_brick": "Water Chisel Stone Brick",
 
   "block.wtbw.water_glass": "Water Glass",

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wtbw:water_stone_brick"
+  },
+  "result": "wtbw:water_stone_brick_slab",
+  "count": 2
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wtbw:lava_stone_brick"
+  },
+  "result": "wtbw:lava_stone_brick_stairs",
+  "count": 1
+}

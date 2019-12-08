@@ -24,9 +24,7 @@ import com.wtbw.tile.VacuumChestTileEntity;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import com.wtbw.util.TextComponentBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.RedstoneLampBlock;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerInventory;
@@ -69,9 +67,17 @@ public class Registrator
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(5, 6)), "blaze_block", false);
 
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_stone_brick");
+    register(new SlabBlock(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_stone_brick_slab");
+    register(new StairsBlock(ModBlocks.LAVA_STONE_BRICK::getDefaultState, getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)),"lava_stone_brick_stairs");
+    register(new WallBlock(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_stone_brick_wall");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(15)), "lava_chiseled_stone_brick");
+
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick");
+    register(new SlabBlock(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick_slab");
+    register(new StairsBlock(ModBlocks.WATER_STONE_BRICK::getDefaultState, getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)),"water_stone_brick_stairs");
+    register(new WallBlock(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_stone_brick_wall");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "water_chiseled_stone_brick");
+
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_andesite_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_diorite_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_granite_brick");
@@ -91,6 +97,7 @@ public class Registrator
     register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "red_redstone_lamp");
     register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "white_redstone_lamp");
     register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "yellow_redstone_lamp");
+
 
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(3)), "groundium");
 
