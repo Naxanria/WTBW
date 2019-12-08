@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "wtbw:block/lamps/yellow_redstone_lamp_on"
+    "all": "wtbw:block/lamps/yellow_redstone_lamp"
   }
 }
