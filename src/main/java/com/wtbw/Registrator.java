@@ -24,6 +24,7 @@ import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.block.RedstoneLampBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -71,11 +72,16 @@ public class Registrator
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_andesite_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_diorite_brick");
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)), "polished_granite_brick");
-    
+
+    register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "white_redstone_lamp");
+    register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "orange_redstone_lamp");
+    register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "blue_redstone_lamp");
+    register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "cyan_redstone_lamp");
+    register(new RedstoneLampBlock(getBlockProperties(Material.REDSTONE_LIGHT).lightValue(15).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "brown_redstone_lamp");
+
     register(new Block(getBlockProperties(Material.ROCK).hardnessAndResistance(3)), "groundium");
 
     register(new LavaBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).lightValue(15)), "lava_glass");
-
     register(new WaterBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), "water_glass");
 
     register(new TieredFurnaceBlock(getBlockProperties(Material.IRON).hardnessAndResistance(7), FurnaceTier.IRON), "iron_furnace");
