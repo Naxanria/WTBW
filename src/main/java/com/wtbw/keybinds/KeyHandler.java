@@ -1,6 +1,7 @@
 package com.wtbw.keybinds;
 
 
+import com.wtbw.WTBW;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -23,6 +24,12 @@ public class KeyHandler
   
   public static void register(KeyParser parser)
   {
+    if (Minecraft.getInstance() == null || parser == null || parser.keyBinding == null)
+    {
+      WTBW.LOGGER.warn("Failed to add keybind. This is ok in data generation mode!");
+      return;
+    }
+    
     ClientRegistry.registerKeyBinding(parser.keyBinding);
     parsers.add(parser);
   }

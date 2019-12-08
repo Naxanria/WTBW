@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "" : { "model" : "wtbw:block/test_block" }
+  }
+}

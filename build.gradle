@@ -28,7 +28,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             mods {
-                examplemod {
+                wtbw {
                     source sourceSets.main
                 }
             }
@@ -38,7 +38,7 @@ minecraft {
             workingDirectory project.file('run/server')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             mods {
-                examplemod {
+                wtbw {
                     source sourceSets.main
                 }
             }
@@ -47,9 +47,9 @@ minecraft {
         data {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'wtbw', '--all', '--output', file('src/generated/resources/')
             mods {
-                examplemod {
+                wtbw {
                     source sourceSets.main
                 }
             }

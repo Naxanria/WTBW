@@ -1,6 +1,7 @@
 package com.wtbw;
 
 import com.wtbw.block.*;
+import com.wtbw.block.ctm.CTMBlock;
 import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
@@ -33,6 +34,7 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
@@ -54,6 +56,7 @@ import java.util.function.Supplier;
 public class Registrator
 {
   private static List<BlockItem> blockItems = new ArrayList<>();
+  static List<CTMBlock> ctmBlocks = new ArrayList<>();
   private static IForgeRegistry<Block> blockRegistry;
   private static IForgeRegistry<Item> itemRegistry;
   private static IForgeRegistry<TileEntityType<?>> tileRegistry;
@@ -121,6 +124,19 @@ public class Registrator
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
     
     register(new GreenHouseGlass(getBlockProperties(Material.GLASS).hardnessAndResistance(1)), "greenhouse_glass");
+    /*
+    //CTM is currently broken, dont use it
+    
+    register(new CTMBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), "connected/test/test"), "test_block");
+    register(new CTMBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(1), "connected/clearglass/clearglass")
+    {
+      @Override
+      public BlockRenderLayer getRenderLayer()
+      {
+        return BlockRenderLayer.CUTOUT;
+      }
+    }, "clearglass");
+    */
   }
 
   private static void registerAllItems()
@@ -293,6 +309,11 @@ public class Registrator
         blockItemProperties = getItemProperties();
       }
       blockItems.add((BlockItem) new BlockItem(block, blockItemProperties).setRegistryName(WTBW.MODID, registryName));
+    }
+    
+    if (block instanceof CTMBlock)
+    {
+      ctmBlocks.add((CTMBlock) block);
     }
 
     blockRegistry.register(block);
