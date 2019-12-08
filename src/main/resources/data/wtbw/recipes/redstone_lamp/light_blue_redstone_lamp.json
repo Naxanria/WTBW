@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RDR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:redstone_lamps"
+    },
+    "D": {
+      "tag": "forge:dyes/light_blue"
+    }
+  },
+  "result": {
+    "item": "wtbw:light_blue_redstone_lamp"
+  }
+}

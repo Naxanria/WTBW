@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "wtbw:block/lamps/lime_redstone_lamp_on"
+  }
+}
