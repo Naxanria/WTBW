@@ -1,14 +1,23 @@
 package com.wtbw.block.redstone;
 
+import com.wtbw.WTBW;
 import com.wtbw.block.BaseTileBlock;
+import com.wtbw.config.CommonConfig;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
+import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /*
   @author: Naxanria
@@ -50,5 +59,14 @@ public class RedstoneTimerBlock extends BaseTileBlock<RedstoneTimerTileEntity>
   public boolean canProvidePower(BlockState state)
   {
     return true;
+  }
+  
+  @Override
+  public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+  {
+    String baseKey = WTBW.MODID + ".tooltip.timer";
+    tooltip.add(TextComponentBuilder.createTranslated(baseKey, CommonConfig.get().redstoneClockRepeat.get()).aqua().build());
+    
+    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }

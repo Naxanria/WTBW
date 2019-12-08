@@ -1,17 +1,25 @@
 package com.wtbw.block.spikes;
 
+import com.wtbw.WTBW;
+import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /*
   @author: Naxanria
@@ -52,5 +60,18 @@ public class SpikesBlock extends Block
   public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
   {
     return SHAPE;
+  }
+  
+  @Override
+  public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+  {
+    String baseKey = WTBW.MODID + ".tooltip.spikes";
+    tooltip.add(TextComponentBuilder.createTranslated(baseKey).aqua().build());
+    
+    String lethal = baseKey + "_lethal";
+    String nonLethal = baseKey + "_non_lethal";
+    tooltip.add(TextComponentBuilder.createTranslated(type.lethal ? lethal : nonLethal).yellow().build());
+    
+    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }

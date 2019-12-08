@@ -1,7 +1,10 @@
 package com.wtbw.item.tools;
 
+import com.wtbw.WTBW;
 import com.wtbw.util.RandomUtil;
+import com.wtbw.util.TextComponentBuilder;
 import com.wtbw.util.Utilities;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,8 +17,11 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -143,5 +149,14 @@ public class Trowel extends Item
     {
       return Hand.MAIN_HAND;
     }
+  }
+  
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+  {
+    String baseKey = WTBW.MODID + ".tooltip.trowel";
+    tooltip.add(TextComponentBuilder.createTranslated(baseKey).aqua().build());
+  
+    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }
