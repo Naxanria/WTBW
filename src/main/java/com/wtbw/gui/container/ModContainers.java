@@ -13,4 +13,7 @@ public class ModContainers
   public static final ContainerType<TieredFurnaceContainer> TIERED_FURNACE = null;
   public static final ContainerType<TrashCanContainer> TRASHCAN = null;
   public static final ContainerType<VacuumChestContainer> VACUUM_CHEST = null;
+  
+  public static final ContainerType<BlockBreakerContainer> BLOCK_BREAKER = null;
+  public static final ContainerType<BlockPlacerContainer> BLOCK_PLACER = null;
 }

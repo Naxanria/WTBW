@@ -1,9 +1,14 @@
 package com.wtbw.gui.screen;
 
+import com.wtbw.gui.tools.ClickType;
 import com.wtbw.gui.tools.ITooltipProvider;
+import com.wtbw.network.ButtonClickedPacket;
+import com.wtbw.network.Networking;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 
 import java.util.ArrayList;
@@ -58,10 +63,33 @@ public abstract class BaseContainerScreen<C extends Container> extends Container
       }
     }
   }
-
+  
+  @Override
+  protected void init()
+  {
+    super.init();
+    
+    tooltipProviders.clear();
+  }
+  
   protected boolean inRegion(int x, int y, int rX, int rY, int rWidth, int rHeight)
   {
     return x >= rX && x < rX + rWidth
       && y >= rY && y < rY + rHeight;
+  }
+  
+  @Override
+  protected <T extends Widget> T addButton(T widget)
+  {
+    if (widget instanceof ITooltipProvider)
+    {
+      tooltipProviders.add((ITooltipProvider) widget);
+    }
+    return super.addButton(widget);
+  }
+  
+  public static void sendButton(int id, BlockPos pos, ClickType clickType)
+  {
+    Networking.INSTANCE.sendToServer(new ButtonClickedPacket(id, pos, clickType));
   }
 }

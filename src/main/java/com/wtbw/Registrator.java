@@ -12,10 +12,7 @@ import com.wtbw.block.trashcan.EnergyTrashCanBlock;
 import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
 import com.wtbw.config.CommonConfig;
-import com.wtbw.gui.container.BaseTileContainer;
-import com.wtbw.gui.container.TieredFurnaceContainer;
-import com.wtbw.gui.container.TrashCanContainer;
-import com.wtbw.gui.container.VacuumChestContainer;
+import com.wtbw.gui.container.*;
 import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.*;
 import com.wtbw.tile.EntityPusherTileEntity;
@@ -111,6 +108,9 @@ public class Registrator
 
     register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
     register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
+    
+    register(new BlockBreakerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_breaker");
+    register(new BlockPlacerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_placer");
 
     register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
     register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
@@ -141,6 +141,8 @@ public class Registrator
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
     
     register(new GreenHouseGlass(getBlockProperties(Material.GLASS).hardnessAndResistance(1)), "greenhouse_glass");
+    
+    
     /*
     //CTM is currently broken, dont use it
     
@@ -229,6 +231,9 @@ public class Registrator
     register(ModBlocks.END_FURNACE);
 
     register(RedstoneTimerTileEntity::new, ModBlocks.REDSTONE_TIMER, "redstone_timer");
+    
+    register(ModBlocks.BLOCK_BREAKER);
+    register(ModBlocks.BLOCK_PLACER);
 
     register(ModBlocks.TRASHCAN);
     register(ModBlocks.FLUID_TRASHCAN);
@@ -247,6 +252,8 @@ public class Registrator
     registerContainer(TieredFurnaceContainer::new, "tiered_furnace");
     registerContainer(TrashCanContainer::new, "trashcan");
     registerContainer(VacuumChestContainer::new, "vacuum_chest");
+    registerContainer(BlockBreakerContainer::new, "block_breaker");
+    registerContainer(BlockPlacerContainer::new, "block_placer");
   }
 
   ////////////////////////////////////////////////////////

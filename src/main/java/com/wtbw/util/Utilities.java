@@ -1,6 +1,7 @@
 package com.wtbw.util;
 
 import com.wtbw.WTBW;
+import com.wtbw.tile.util.RedstoneMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -13,6 +14,7 @@ import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +28,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings("WeakerAccess")
 public class Utilities
 {
+  private static int index;
+  
   public static int getBurnTime(ItemStack itemStack)
   {
     // copied form AbstractFurnaceTileEntity
@@ -81,7 +85,7 @@ public class Utilities
     return list;
   }
 
-  public static BlockRayTraceResult getLookingAt(PlayerEntity player, int range)
+  public static BlockRayTraceResult getLookingAt(PlayerEntity player, double range)
   {
     World world = player.world;
 
@@ -90,6 +94,13 @@ public class Utilities
     Vec3d endPos = startPos.add(look.mul(range, range, range));
     RayTraceContext context = new RayTraceContext(startPos, endPos, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player);
     return world.rayTraceBlocks(context);
+  }
+  
+  public static BlockRayTraceResult getLookingAt(Vec3d position, Vec3d look, double range, Entity entity)
+  {
+    Vec3d endPos = position.add(look.mul(range, range, range));
+    RayTraceContext context = new RayTraceContext(position, endPos, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, entity);
+    return entity.world.rayTraceBlocks(context);
   }
 
   public static Vec3d getVec3d(BlockPos pos)
@@ -213,13 +224,67 @@ public class Utilities
 
     return new BiValue<>(start, end);
   }
+  
+  public static float yaw(Direction direction)
+  {
+    float hpi = (float) (Math.PI / 2);
+    
+    switch (direction)
+    {
+      default:
+      case DOWN:
+      case UP:
+        return 0;
+
+      case NORTH:
+        return 0;
+        
+      case SOUTH:
+        return 2 * hpi;
+        
+      case WEST:
+        return hpi;
+        
+      case EAST:
+        return 3 * hpi;
+    }
+  }
+  
+  public static float pitch(Direction direction)
+  {
+    return (float)(direction == Direction.UP ? Math.PI / 2 : (direction == Direction.DOWN ? 3 * Math.PI / 2 : 0));
+  }
 
   public static void dropItems(World world, List<ItemStack> items, BlockPos pos)
   {
     for (ItemStack stack : items)
     {
-      InventoryHelper.spawnItemStack(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, stack);
+      if (stack.isEmpty())
+      {
+        continue;
+      }
+      
+      dropItem(world, stack, pos);
     }
+  }
+  
+  public static void dropItems(World world, ItemStackHandler handler, BlockPos pos)
+  {
+    for (int i = 0; i < handler.getSlots(); i++)
+    {
+      ItemStack stack = handler.getStackInSlot(i);
+      if (stack.isEmpty())
+      {
+        continue;
+      }
+      
+      dropItem(world, stack, pos);
+    }
+  }
+  
+  public static void dropItem(World world, ItemStack stack, BlockPos pos)
+  {
+    InventoryHelper.spawnItemStack(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, stack);
   }
 
   public static AxisAlignedBB getBoundingBox(BlockPos center, double radius)
@@ -230,5 +295,23 @@ public class Utilities
   public static AxisAlignedBB getHorizontalBoundingBox(BlockPos center, double radius, double height)
   {
     return new AxisAlignedBB(center.add(-radius, 0, -radius), center.add(radius, height, radius));
+  }
+  
+  public static <T> boolean contains(T[] array, T search)
+  {
+    return getIndex(array, search) != -1;
+  }
+  
+  public static <T> int getIndex(T[] array, T search)
+  {
+    for (int i = 0; i < array.length; i++)
+    {
+      if (array[i] == search)
+      {
+        return i;
+      }
+    }
+  
+    return -1;
   }
 }
