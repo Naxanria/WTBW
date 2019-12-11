@@ -5,6 +5,9 @@ import com.wtbw.compat.item_filters.ItemFiltersWrapper;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.VacuumChestContainer;
 import com.wtbw.tile.util.IContentHolder;
+import com.wtbw.tile.util.IRedstoneControlled;
+import com.wtbw.tile.util.RedstoneControl;
+import com.wtbw.tile.util.RedstoneMode;
 import com.wtbw.util.NBTHelper;
 import com.wtbw.util.PlayEvent;
 import com.wtbw.util.StackUtil;
@@ -41,11 +44,12 @@ import java.util.Objects;
   @author: Naxanria
 */
 @SuppressWarnings("ConstantConditions")
-public class VacuumChestTileEntity extends TileEntity implements ITickableTileEntity, IContentHolder, INamedContainerProvider
+public class VacuumChestTileEntity extends TileEntity implements ITickableTileEntity, IContentHolder, INamedContainerProvider, IRedstoneControlled
 {
   private AxisAlignedBB bound;
   private int radius = 6;
   private int tick;
+  private RedstoneControl control;
   
 //  private ItemStack filter = ItemStack.EMPTY;
   private ItemStackHandler filter = new ItemStackHandler();
@@ -55,6 +59,8 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   public VacuumChestTileEntity()
   {
     super(ModTiles.VACUUM_CHEST);
+    
+    control = new RedstoneControl(this, RedstoneMode.IGNORE);
   }
   
   private ItemStackHandler createInventory()
@@ -68,53 +74,58 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
     if (!world.isRemote)
     {
       tick++;
-      
+  
       int r = CommonConfig.get().vacuumRange.get();
       if (r != radius)
       {
         bound = null;
         radius = r;
       }
-      
+  
       if (bound == null)
       {
         bound = Utilities.getBoundingBox(pos, radius);
       }
-      
-      if (tick % CommonConfig.get().vacuumTickRate.get() == 0)
+  
+      if (control.update())
       {
-        List<Entity> entities = world.getEntitiesWithinAABB(EntityType.ITEM, bound, (e) -> canInsert(((ItemEntity) e).getItem()));
-        for (Entity e : entities)
+        if (tick % CommonConfig.get().vacuumTickRate.get() == 0)
         {
-          ItemEntity entity = (ItemEntity) e;
-          if (!filter(entity.getItem()))
+          List<Entity> entities = world.getEntitiesWithinAABB(EntityType.ITEM, bound, (e) -> canInsert(((ItemEntity) e).getItem()));
+          for (Entity e : entities)
           {
-            continue;
-          }
-          
-          inventory.ifPresent(
-            handler ->
+            ItemEntity entity = (ItemEntity) e;
+            if (!filter(entity.getItem()))
             {
-              ItemStack stack = entity.getItem();
-              for (int i = 0; i < handler.getSlots(); i++)
+              continue;
+            }
+      
+            inventory.ifPresent(
+              handler ->
               {
-                stack = handler.insertItem(i, stack, false);
+                ItemStack stack = entity.getItem();
+                for (int i = 0; i < handler.getSlots(); i++)
+                {
+                  stack = handler.insertItem(i, stack, false);
+                  if (stack == ItemStack.EMPTY)
+                  {
+                    break;
+                  }
+                }
                 if (stack == ItemStack.EMPTY)
                 {
-                  break;
+                  entity.remove();
+                  PlayEvent.redstoneParticle(world, entity.getPositionVec(), new Vec3d(0, .1 * world.rand.nextDouble(), 0), 0xffffffff);
+                }
+                else
+                {
+                  entity.setItem(stack);
                 }
               }
-              if (stack == ItemStack.EMPTY)
-              {
-                entity.remove();
-                PlayEvent.redstoneParticle(world, entity.getPositionVec(), new Vec3d(0, .1 * world.rand.nextDouble(), 0), 0xffffffff);
-              }
-              else
-              {
-                entity.setItem(stack);
-              }
-            }
-          );
+            );
+          }
+          
+          control.resetCooldown();
         }
       }
     }
@@ -152,6 +163,11 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
       filter.deserializeNBT(compound.getCompound("filter"));
     }
     
+    if (compound.contains("control"))
+    {
+      control.deserialize(compound.getCompound("control"));
+    }
+    
     super.read(compound);
   }
   
@@ -163,6 +179,8 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
     inventory.ifPresent(handler -> compound.put("inventory", handler.serializeNBT()));
     
     compound.put("filter", filter.serializeNBT());
+    
+    compound.put("control", control.serialize());
     
     return super.write(compound);
   }
@@ -217,5 +235,17 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   public ItemStackHandler getFilter()
   {
     return filter;
+  }
+  
+  @Override
+  public RedstoneControl getControl()
+  {
+    return control;
+  }
+  
+  @Override
+  public RedstoneMode[] availableModes()
+  {
+    return new RedstoneMode[]{ RedstoneMode.IGNORE, RedstoneMode.ON, RedstoneMode.OFF };
   }
 }

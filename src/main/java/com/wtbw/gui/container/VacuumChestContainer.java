@@ -2,10 +2,12 @@ package com.wtbw.gui.container;
 
 import com.wtbw.block.ModBlocks;
 import com.wtbw.tile.VacuumChestTileEntity;
+import com.wtbw.tile.util.RedstoneMode;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.SlotItemHandler;
@@ -18,6 +20,21 @@ public class VacuumChestContainer extends BaseTileContainer<VacuumChestTileEntit
   public VacuumChestContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory)
   {
     super(ModContainers.VACUUM_CHEST, id, world, pos, playerInventory);
+    
+    trackInt(new IntReferenceHolder()
+    {
+      @Override
+      public int get()
+      {
+        return tileEntity.getRedstoneMode().ordinal();
+      }
+  
+      @Override
+      public void set(int value)
+      {
+        tileEntity.getControl().setMode(RedstoneMode.values()[value % RedstoneMode.values().length]);
+      }
+    });
     
     addSlot(new SlotItemHandler(tileEntity.getFilter(), 0, 18, 35));
     
