@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "WEW",
+    "SWS"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:ender_chest"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "wtbw:ender_pouch"
+  }
+}

@@ -13,6 +13,7 @@ import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.*;
+import com.wtbw.item.EnderPouchItem;
 import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.*;
 import com.wtbw.tile.EntityPusherTileEntity;
@@ -221,6 +222,8 @@ public class Registrator
     register(new SwapTool(ItemTier.DIAMOND, getItemProperties()), "diamond_swap_tool");
 
     register(new MagnetItem(getItemProperties().maxStackSize(1)), "magnet");
+    
+    register(new EnderPouchItem(getItemProperties().maxStackSize(1)), "ender_pouch");
   }
 
   private static void registerAllTiles()
