@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPG",
+    "GCG",
+    "GRG"
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:chests"
+    },
+    "G": {
+      "item": "wtbw:groundium"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "result": {
+    "item": "wtbw:block_placer"
+  }
+}

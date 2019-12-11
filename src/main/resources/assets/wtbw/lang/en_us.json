@@ -69,6 +69,9 @@
   "block.wtbw.gold_spikes": "Gold spikes",
   "block.wtbw.diamond_spikes": "Diamond spikes",
 
+  "block.wtbw.block_breaker": "Block Breaker",
+  "block.wtbw.block_placer": "Block Placer",
+
   "block.wtbw.blaze_block": "Block of Blaze",
 
   "block.wtbw.magnet_inhibitor": "Magnet Inhibitor",
@@ -107,8 +110,8 @@
   "wtbw.tooltip.spikes": "Damages entities standing on top",
   "wtbw.tooltip.spikes_lethal": "This spike kills entities",
   "wtbw.tooltip.spikes_non_lethal": "This spike leaves entities at 1 health",
-  "wtbw.tooltip.pusher_range": "The range this block pushes entities: %s",
-  "wtbw.tooltip.puller_range": "The range this block pulles entities: %s",
+  "wtbw.tooltip.pusher_range": "This block pushes entities in a %s block radius",
+  "wtbw.tooltip.puller_range": "This block pulls entities in a %s block radius",
 
   "wtbw.text.swap_target_changed": "Changed block to ",
   "wtbw.text.cycled": "Changed radius to %s",
