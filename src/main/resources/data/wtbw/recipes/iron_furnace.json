@@ -3,14 +3,11 @@
   "pattern": [
     "III",
     "IFI",
-    "BBB"
+    "III"
   ],
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
-    },
-    "B": {
-      "item": "minecraft:iron_block"
     },
     "F": {
       "item": "minecraft:furnace"
