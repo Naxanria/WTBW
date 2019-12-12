@@ -2,7 +2,7 @@ package com.wtbw.tile;
 
 import com.wtbw.block.BlockBreakerBlock;
 import com.wtbw.gui.container.BlockBreakerContainer;
-import com.wtbw.gui.tools.ClickType;
+import com.wtbw.gui.util.ClickType;
 import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.tile.util.IRedstoneControlled;
 import com.wtbw.tile.util.RedstoneControl;
@@ -19,7 +19,6 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;

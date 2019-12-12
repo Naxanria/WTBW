@@ -1,4 +1,4 @@
-package com.wtbw.gui.tools;
+package com.wtbw.gui.util;
 
 /*
   @author: Naxanria

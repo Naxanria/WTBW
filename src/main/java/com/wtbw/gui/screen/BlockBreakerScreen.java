@@ -3,7 +3,7 @@ package com.wtbw.gui.screen;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.wtbw.WTBW;
 import com.wtbw.gui.container.BlockBreakerContainer;
-import com.wtbw.gui.tools.RedstoneButton;
+import com.wtbw.gui.util.RedstoneButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;

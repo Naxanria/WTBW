@@ -1,6 +1,6 @@
 package com.wtbw.network;
 
-import com.wtbw.gui.tools.ClickType;
+import com.wtbw.gui.util.ClickType;
 import com.wtbw.tile.util.IButtonHandler;
 import net.minecraft.entity.player.ServerPlayerEntity;
 

@@ -1,20 +1,15 @@
-package com.wtbw.gui.tools;
+package com.wtbw.gui.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.wtbw.WTBW;
-import com.wtbw.gui.screen.BaseContainerScreen;
 import com.wtbw.tile.util.IRedstoneControlled;
 import com.wtbw.tile.util.RedstoneMode;
 import com.wtbw.util.Utilities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +19,12 @@ import java.util.List;
 public class RedstoneButton<TE extends TileEntity & IRedstoneControlled> extends GuiButtonExt implements ITooltipProvider
 {
   public static final ResourceLocation ICONS = new ResourceLocation(WTBW.MODID, "textures/gui/redstone_buttons.png");
+  private final static SpriteMap SPRITE_MAP = new SpriteMap(64, ICONS);
+  private final static Sprite SPRITE_IGNORE = SPRITE_MAP.getSprite(0, getTextureYOffset(RedstoneMode.IGNORE), 16);
+  private final static Sprite SPRITE_ON = SPRITE_MAP.getSprite(0, getTextureYOffset(RedstoneMode.ON), 16);
+  private final static Sprite SPRITE_OFF = SPRITE_MAP.getSprite(0, getTextureYOffset(RedstoneMode.OFF), 16);
+  private final static Sprite SPRITE_PULSE = SPRITE_MAP.getSprite(0, getTextureYOffset(RedstoneMode.PULSE), 16);
+  
   
   private final IRedstoneControlled control;
   private final TE tile;
@@ -35,12 +36,7 @@ public class RedstoneButton<TE extends TileEntity & IRedstoneControlled> extends
     this.control = tile;
     this.tile = tile;
   }
-  
-  public int getTextureYOffset()
-  {
-    return getTextureYOffset(control.getRedstoneMode());
-  }
-  
+
   @Override
   public boolean isHover(int mouseX, int mouseY)
   {
@@ -58,7 +54,7 @@ public class RedstoneButton<TE extends TileEntity & IRedstoneControlled> extends
   @Override
   public void onPress()
   {
-    BaseContainerScreen.sendButton(control.getControl().getButtonId(getNextMode()), tile.getPos(), ClickType.LEFT);
+    GuiUtil.sendButton(control.getControl().getButtonId(getNextMode()), tile.getPos(), ClickType.LEFT);
   }
   
   @Override
@@ -74,12 +70,25 @@ public class RedstoneButton<TE extends TileEntity & IRedstoneControlled> extends
     this.blit(this.x, this.y, 0, 46 + yOff * 20, this.width / 2, this.height);
     this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + yOff * 20, this.width / 2, this.height);
 
-    minecraft.getTextureManager().bindTexture(ICONS);
-    yOff = getTextureYOffset();
-
-    blit(x + 1, y + 2, 0, yOff, 16, 16, 64, 64);
-
-
+    Sprite sprite;
+    switch (control.getRedstoneMode())
+    {
+      default:
+      case IGNORE:
+        sprite = SPRITE_IGNORE;
+        break;
+      case ON:
+        sprite = SPRITE_ON;
+        break;
+      case OFF:
+        sprite = SPRITE_OFF;
+        break;
+      case PULSE:
+        sprite = SPRITE_PULSE;
+        break;
+    }
+    
+    sprite.render(x + 1, y + 2);
 
     this.renderBg(minecraft, mouseX, mouseY);
   }

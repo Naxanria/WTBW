@@ -59,7 +59,7 @@ public class CTMTextureProvider
       int x = (i % 4) * s;
       int y = (i / 4) * s;
       
-//      WTBW.LOGGER.info("{}: {},{} size: {}", i, x, y, s);
+//      WTBW.LOGGER.info("{}: {},{} size: {}", i, u, v, s);
       array[convertMap.get(i)] = getPartial(source, x, y, s, s);
     }
     

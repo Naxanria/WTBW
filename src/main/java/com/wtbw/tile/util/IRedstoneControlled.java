@@ -1,6 +1,6 @@
 package com.wtbw.tile.util;
 
-import com.wtbw.gui.tools.ClickType;
+import com.wtbw.gui.util.ClickType;
 
 /*
   @author: Naxanria
