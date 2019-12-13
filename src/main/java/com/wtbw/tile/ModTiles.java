@@ -34,4 +34,5 @@ public class ModTiles
   public static final TileEntityType<VacuumChestTileEntity> VACUUM_CHEST = null;
   public static final TileEntityType<BlockBreakerTileEntity> BLOCK_BREAKER = null;
   public static final TileEntityType<BlockPlacerTileEntity> BLOCK_PLACER = null;
+  public static final TileEntityType<BlockDetectorTileEntity> BLOCK_DETECTOR = null;
 }

@@ -1,13 +1,11 @@
 package com.wtbw.block;
 
 import com.wtbw.WTBW;
+import com.wtbw.block.redstone.BlockDetectorBlock;
 import com.wtbw.block.trashcan.EnergyTrashCanBlock;
 import com.wtbw.block.trashcan.FluidTrashCanBlock;
 import com.wtbw.block.trashcan.TrashCanBlock;
-import com.wtbw.tile.BlockBreakerTileEntity;
-import com.wtbw.tile.BlockPlacerTileEntity;
-import com.wtbw.tile.MagnetInhibitorTileEntity;
-import com.wtbw.tile.VacuumChestTileEntity;
+import com.wtbw.tile.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.registries.ObjectHolder;
@@ -33,6 +31,7 @@ public class ModBlocks
   
   public static final SixWayTileBlock<BlockBreakerTileEntity> BLOCK_BREAKER = null;
   public static final SixWayTileBlock<BlockPlacerTileEntity> BLOCK_PLACER = null;
+  public static final BlockDetectorBlock BLOCK_DETECTOR = null;
 
   public static final TrashCanBlock TRASHCAN = null;
   public static final FluidTrashCanBlock FLUID_TRASHCAN = null;

@@ -4,6 +4,7 @@ import com.wtbw.block.*;
 import com.wtbw.block.ctm.CTMBlock;
 import com.wtbw.block.decoration.LavaBlock;
 import com.wtbw.block.decoration.WaterBlock;
+import com.wtbw.block.redstone.BlockDetectorBlock;
 import com.wtbw.block.redstone.RedstoneEmitterBlock;
 import com.wtbw.block.redstone.RedstoneTimerBlock;
 import com.wtbw.block.spikes.SpikesBlock;
@@ -113,7 +114,9 @@ public class Registrator
     
     register(new SixWayTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new BlockBreakerTileEntity()), "block_breaker");
     register(new SixWayTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new BlockPlacerTileEntity()), "block_placer");
-
+//    register(new SixWayTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new BlockDetectorTileEntity()), "block_detector");
+    register(new BlockDetectorBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_detector");
+    
     register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
     register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");
     register(new EnergyTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "energy_trashcan");
@@ -143,21 +146,6 @@ public class Registrator
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
     
     register(new GreenHouseGlass(getBlockProperties(Material.GLASS).hardnessAndResistance(1)), "greenhouse_glass");
-    
-    
-    /*
-    //CTM is currently broken, dont use it
-    
-    register(new CTMBlock(getBlockProperties(Material.IRON).hardnessAndResistance(1), "connected/test/test"), "test_block");
-    register(new CTMBlock(getBlockProperties(Material.GLASS).hardnessAndResistance(1), "connected/clearglass/clearglass")
-    {
-      @Override
-      public BlockRenderLayer getRenderLayer()
-      {
-        return BlockRenderLayer.CUTOUT;
-      }
-    }, "clearglass");
-    */
   }
 
   private static void registerAllItems()
@@ -238,6 +226,7 @@ public class Registrator
     
     register(ModBlocks.BLOCK_BREAKER);
     register(ModBlocks.BLOCK_PLACER);
+    register(ModBlocks.BLOCK_DETECTOR);
 
     register(ModBlocks.TRASHCAN);
     register(ModBlocks.FLUID_TRASHCAN);
@@ -258,6 +247,7 @@ public class Registrator
     registerContainer(VacuumChestContainer::new, "vacuum_chest");
     registerContainer(BlockBreakerContainer::new, "block_breaker");
     registerContainer(BlockPlacerContainer::new, "block_placer");
+    registerContainer(BlockDetectorContainer::new, "block_detector");
   }
 
   ////////////////////////////////////////////////////////

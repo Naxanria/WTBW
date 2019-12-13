@@ -3,6 +3,9 @@ package com.wtbw;
 import com.wtbw.block.ctm.CTMBakedModel;
 import com.wtbw.block.ctm.CTMBlock;
 import com.wtbw.block.ctm.CTMTextureData;
+import com.wtbw.gui.container.ModContainers;
+import com.wtbw.gui.screen.*;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.BlockRenderLayer;
@@ -15,6 +18,7 @@ import java.util.Map;
 /*
   @author: Naxanria
 */
+@SuppressWarnings("ConstantConditions")
 public class ClientRegistration
 {
   private static Map<CTMBlock, CTMTextureData> textureData = new HashMap<>();
@@ -70,5 +74,15 @@ public class ClientRegistration
       
       event.getModelRegistry().put(new ModelResourceLocation(ctmBlock.getRegistryName(), "inventory"), new CTMBakedModel(DefaultVertexFormats.ITEM, textureData.get(ctmBlock)));
     }
+  }
+  
+  public static void registerScreens()
+  {
+    ScreenManager.registerFactory(ModContainers.TIERED_FURNACE, TieredFurnaceScreen::new);
+    ScreenManager.registerFactory(ModContainers.TRASHCAN, TrashCanScreen::new);
+    ScreenManager.registerFactory(ModContainers.VACUUM_CHEST, VacuumChestScreen::new);
+    ScreenManager.registerFactory(ModContainers.BLOCK_BREAKER, BlockBreakerScreen::new);
+    ScreenManager.registerFactory(ModContainers.BLOCK_PLACER, BlockPlacerScreen::new);
+    ScreenManager.registerFactory(ModContainers.BLOCK_DETECTOR, BlockDetectorScreen::new);
   }
 }

@@ -34,6 +34,7 @@ public class Networking
     INSTANCE.registerMessage(id(), CycleToolPacket.class, CycleToolPacket::toBytes, CycleToolPacket::new, CycleToolPacket::handle);
     INSTANCE.registerMessage(id(), ColoredRedstoneParticlePacket.class, ColoredRedstoneParticlePacket::toBytes, ColoredRedstoneParticlePacket::new, ColoredRedstoneParticlePacket::handle);
     INSTANCE.registerMessage(id(), ButtonClickedPacket.class, ButtonClickedPacket::toBytes, ButtonClickedPacket::new, ButtonClickedPacket::handle);
+    INSTANCE.registerMessage(id(), UpdateDetectorPacket.class, UpdateDetectorPacket::toBytes, UpdateDetectorPacket::new, UpdateDetectorPacket::handle);
   }
   
   public static int sendAround(World world, BlockPos pos, double radius, Object packet)

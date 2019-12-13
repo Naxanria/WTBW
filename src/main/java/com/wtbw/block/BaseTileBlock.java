@@ -62,6 +62,7 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
           if (!world.isRemote)
           {
             NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (INamedContainerProvider) tileEntity, tileEntity.getPos());
+            onGuiOpen(state, world, pos, ((ServerPlayerEntity) playerEntity), hand, hit);
           }
 
           return true;
@@ -71,6 +72,9 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
 
     return super.onBlockActivated(state, world, pos, playerEntity, hand, hit);
   }
+  
+  protected void onGuiOpen(BlockState state, World world, BlockPos pos, ServerPlayerEntity player, Hand hand, BlockRayTraceResult hit)
+  { }
   
   @Override
   public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
