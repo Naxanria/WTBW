@@ -16,9 +16,7 @@ import com.wtbw.gui.container.*;
 import com.wtbw.item.EnderPouchItem;
 import com.wtbw.item.MagnetItem;
 import com.wtbw.item.tools.*;
-import com.wtbw.tile.EntityPusherTileEntity;
-import com.wtbw.tile.MagnetInhibitorTileEntity;
-import com.wtbw.tile.VacuumChestTileEntity;
+import com.wtbw.tile.*;
 import com.wtbw.tile.furnace.FurnaceTier;
 import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import com.wtbw.util.TextComponentBuilder;
@@ -110,8 +108,11 @@ public class Registrator
     register(new RedstoneTimerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_timer");
     register(new RedstoneEmitterBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "redstone_emitter");
     
-    register(new BlockBreakerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_breaker");
-    register(new BlockPlacerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_placer");
+//    register(new BlockBreakerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_breaker");
+//    register(new BlockPlacerBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "block_placer");
+    
+    register(new SixWayTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new BlockBreakerTileEntity()), "block_breaker");
+    register(new SixWayTileBlock<>(getBlockProperties(Material.IRON).hardnessAndResistance(4), (world, state) -> new BlockPlacerTileEntity()), "block_placer");
 
     register(new TrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "trashcan");
     register(new FluidTrashCanBlock(getBlockProperties(Material.IRON).hardnessAndResistance(4)), "fluid_trashcan");

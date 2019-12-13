@@ -1,6 +1,6 @@
 package com.wtbw.tile;
 
-import com.wtbw.block.BlockBreakerBlock;
+import com.wtbw.block.SixWayTileBlock;
 import com.wtbw.gui.container.BlockBreakerContainer;
 import com.wtbw.gui.util.ClickType;
 import com.wtbw.tile.util.IContentHolder;
@@ -74,7 +74,7 @@ public class BlockBreakerTileEntity extends TileEntity implements ITickableTileE
   
   private boolean breakBlock()
   {
-    Direction facing = world.getBlockState(pos).get(BlockBreakerBlock.FACING);
+    Direction facing = world.getBlockState(pos).get(SixWayTileBlock.FACING);
     BlockPos breakPos = pos.offset(facing);
     BlockState breakState = world.getBlockState(breakPos);
   

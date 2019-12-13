@@ -1,14 +1,12 @@
 package com.wtbw.block;
 
-import com.wtbw.tile.BlockBreakerTileEntity;
-import com.wtbw.tile.BlockPlacerTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 
@@ -17,15 +15,13 @@ import javax.annotation.Nullable;
 /*
   @author: Naxanria
 */
-public class BlockPlacerBlock extends BaseTileBlock<BlockPlacerTileEntity>
+public class SixWayTileBlock<TE extends TileEntity> extends BaseTileBlock<TE>
 {
   public static final DirectionProperty FACING = BlockStateProperties.FACING;
   
-  public BlockPlacerBlock(Block.Properties properties)
+  public SixWayTileBlock(Properties properties, TileEntityProvider<TE> tileEntityProvider)
   {
-    super(properties, (world, state) -> new BlockPlacerTileEntity());
-    
-    setDefaultState(stateContainer.getBaseState().with(FACING, Direction.NORTH));
+    super(properties, tileEntityProvider);
   }
   
   @Nullable

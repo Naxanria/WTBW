@@ -1,6 +1,7 @@
 package com.wtbw.tile;
 
-import com.wtbw.block.BlockPlacerBlock;
+
+import com.wtbw.block.SixWayTileBlock;
 import com.wtbw.gui.container.BlockPlacerContainer;
 import com.wtbw.tile.util.IContentHolder;
 import com.wtbw.tile.util.IRedstoneControlled;
@@ -75,7 +76,7 @@ public class BlockPlacerTileEntity extends TileEntity implements ITickableTileEn
   {
     boolean overrideFluids = true;
     
-    Direction facing = world.getBlockState(pos).get(BlockPlacerBlock.FACING);
+    Direction facing = world.getBlockState(pos).get(SixWayTileBlock.FACING);
     BlockPos placePos = pos.offset(facing);
     BlockState placeState = world.getBlockState(placePos);
 
