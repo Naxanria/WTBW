@@ -123,5 +123,8 @@
   "death.attack.spikes.bamboo": "Bamboo spikes pierced %s",
   "death.attack.spikes.iron": "Iron spikes pierced %s",
   "death.attack.spikes.gold": "Gold spikes pierced %s",
-  "death.attack.spikes.diamond": "Diamond spikes pierced %s"
+  "death.attack.spikes.diamond": "Diamond spikes pierced %s",
+
+  "wtbw.gui.current": "Current",
+  "wtbw.gui.exact": "Exact"
 }
