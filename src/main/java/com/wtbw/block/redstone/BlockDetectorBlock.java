@@ -3,6 +3,7 @@ package com.wtbw.block.redstone;
 import com.wtbw.block.SixWayTileBlock;
 import com.wtbw.tile.BlockDetectorTileEntity;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -33,7 +34,6 @@ public class BlockDetectorBlock extends SixWayTileBlock<BlockDetectorTileEntity>
     {
       return 0;
     }
-    
     BlockDetectorTileEntity tileEntity = getTileEntity(world, pos);
     if (tileEntity != null)
     {

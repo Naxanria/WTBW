@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GOG",
+    "GQG",
+    "GRG"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:observer"
+    },
+    "G": {
+      "item": "wtbw:groundium"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "Q": {
+      "tag": "forge:gems/quartz"
+    }
+  },
+  "result": {
+    "item": "wtbw:block_detector"
+  }
+}
