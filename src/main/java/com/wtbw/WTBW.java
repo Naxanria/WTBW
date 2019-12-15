@@ -61,7 +61,8 @@ public class WTBW
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
     {
       forgeEventBus.addListener(ClientEventHandler::onTooltip);
-      forgeEventBus.addListener(RenderManager::render);
+//      forgeEventBus.addListener(RenderManager::render);
+      forgeEventBus.addListener(RenderManager::renderOutline);
       
       KeyEventListener.registerKeys();
       forgeEventBus.addListener(KeyEventListener::update);
