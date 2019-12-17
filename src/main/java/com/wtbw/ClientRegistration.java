@@ -1,10 +1,13 @@
 package com.wtbw;
 
+import com.wtbw.block.ModBlocks;
 import com.wtbw.block.ctm.CTMBlock;
 import com.wtbw.block.ctm.CTMTextureData;
 import com.wtbw.gui.container.ModContainers;
 import com.wtbw.gui.screen.*;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
@@ -80,5 +83,12 @@ public class ClientRegistration
     ScreenManager.registerFactory(ModContainers.BLOCK_BREAKER, BlockBreakerScreen::new);
     ScreenManager.registerFactory(ModContainers.BLOCK_PLACER, BlockPlacerScreen::new);
     ScreenManager.registerFactory(ModContainers.BLOCK_DETECTOR, BlockDetectorScreen::new);
+  }
+  
+  public static void setupRenderLayers()
+  {
+    final RenderType translucent = RenderType.func_228645_f_();
+    
+    RenderTypeLookup.setRenderLayer(ModBlocks.GREENHOUSE_GLASS, translucent);
   }
 }

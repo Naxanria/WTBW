@@ -44,4 +44,7 @@ public class ModBlocks
   public static final PushBlock PULLER = null;
   
   public static final Block GROUNDIUM = Blocks.AIR;
+  
+  public static final Block GREENHOUSE_GLASS = Blocks.AIR;
+  
 }

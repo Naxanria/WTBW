@@ -12,6 +12,8 @@ public class ClientSetup
   public static void init()
   {
     ClientRegistration.registerScreens();
+    
+    ClientRegistration.setupRenderLayers();
   }
 
   public static World getWorld()
