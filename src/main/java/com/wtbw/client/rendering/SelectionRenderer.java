@@ -16,7 +16,7 @@ import java.util.List;
 /*
   @author: Naxanria
 */
-public class GreatAxeRenderer extends ItemStackWorldRenderer
+public class SelectionRenderer extends ItemStackWorldRenderer
 {
   @Override
   public boolean render(ItemStack stack, PlayerEntity player, RayTraceResult hit, WorldRenderer context, ActiveRenderInfo info)
@@ -25,18 +25,18 @@ public class GreatAxeRenderer extends ItemStackWorldRenderer
     {
       return false;
     }
-  
+    
     World world = player.world;
-  
+    
     BlockPos pos = ((BlockRayTraceResult)hit).getPos();
     List<BlockPos> blocks = Utilities.getBlocks(pos, ((BlockRayTraceResult) hit).getFace());
-  
+    
     BlockState blockstate = world.getBlockState(pos);
     if (blockstate.getBlockHardness(world, pos) == 0 || !stack.getItem().canHarvestBlock(blockstate))
     {
       return false;
     }
-  
+    
     for (BlockPos blockpos : blocks)
     {
       blockstate = world.getBlockState(blockpos);
@@ -44,10 +44,10 @@ public class GreatAxeRenderer extends ItemStackWorldRenderer
       {
         continue;
       }
-    
-      renderOutline(info, world, blockstate, blockpos);
-    }
   
+      renderOutline(context, info, world, blockstate, blockpos);
+    }
+    
     return true;
   }
 }
