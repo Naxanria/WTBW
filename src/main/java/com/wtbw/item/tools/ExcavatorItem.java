@@ -71,7 +71,7 @@ public class ExcavatorItem extends ShovelItem
       return false;
     }
     
-    return state.isIn(BlockTags.SAND) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.GRAVEL) || state.getBlock() == Blocks.SOUL_SAND;
+    return state.isIn(BlockTags.SAND) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.GRAVEL) || state.getBlock() == Blocks.SOUL_SAND || state.getBlock() == Blocks.GRASS_BLOCK;
   }
   
   private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem)

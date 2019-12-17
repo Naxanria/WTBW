@@ -32,27 +32,28 @@ public class RenderManager
     Minecraft instance = Minecraft.getInstance();
     ClientPlayerEntity player = instance.player;
     ItemStack heldStack = player.getHeldItem(Hand.MAIN_HAND);
-  
-    if (heldStack.getItem() instanceof HammerItem)
-    {
-      if (Renderers.HAMMER_RENDERER.render(heldStack, player, event.getTarget(), event.getContext(), event.getInfo()))
-      {
-        event.setCanceled(true);
-      }
-    }
-    else if (heldStack.getItem() instanceof ExcavatorItem)
-    {
-      if (Renderers.EXCAVATOR_RENDERER.render(heldStack, player, event.getTarget(), event.getContext(), event.getInfo()))
-      {
-        event.setCanceled(true);
-      }
-    }
-    else if (heldStack.getItem() instanceof GreatAxeItem)
-    {
-      if (Renderers.GREAT_AXE_RENDERER.render(heldStack, player, event.getTarget(), event.getContext(), event.getInfo()))
-      {
-        event.setCanceled(true);
-      }
-    }
+    // todo: fix outline rendering
+//
+//    if (heldStack.getItem() instanceof HammerItem)
+//    {
+//      if (Renderers.HAMMER_RENDERER.render(heldStack, player, event.getTarget(), event.getContext(), event.getInfo()))
+//      {
+//        event.setCanceled(true);
+//      }
+//    }
+//    else if (heldStack.getItem() instanceof ExcavatorItem)
+//    {
+//      if (Renderers.EXCAVATOR_RENDERER.render(heldStack, player, event.getTarget(), event.getContext(), event.getInfo()))
+//      {
+//        event.setCanceled(true);
+//      }
+//    }
+//    else if (heldStack.getItem() instanceof GreatAxeItem)
+//    {
+//      if (Renderers.GREAT_AXE_RENDERER.render(heldStack, player, event.getTarget(), event.getContext(), event.getInfo()))
+//      {
+//        event.setCanceled(true);
+//      }
+//    }
   }
 }

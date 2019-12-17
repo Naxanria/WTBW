@@ -12,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,6 +34,13 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
 //  {
 //    return BlockRenderLayer.TRANSLUCENT;
 //  }
+  
+  @OnlyIn(Dist.CLIENT)
+  @Override
+  public float getAmbientOcclusionLightValue(BlockState p_220080_1_, IBlockReader p_220080_2_, BlockPos p_220080_3_) {
+    return 1.0F;
+  }
+  
   
   @Override
   public DyeColor getColor()
@@ -62,7 +71,6 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
       {
         if (world.canBlockSeeSky(pos.up()))
         {
-          // FIXME: Particles
           for (int i = 1; i < maxRange; i++)
           {
             BlockPos check = pos.down(i);

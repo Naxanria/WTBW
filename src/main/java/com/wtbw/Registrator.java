@@ -23,6 +23,7 @@ import com.wtbw.tile.redstone.RedstoneTimerTileEntity;
 import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
@@ -143,7 +144,7 @@ public class Registrator
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(5), SpikesType.GOLD), "gold_spikes");
     register(new SpikesBlock(getBlockProperties(Material.IRON).hardnessAndResistance(6), SpikesType.DIAMOND), "diamond_spikes");
     
-    register(new GreenHouseGlass(getBlockProperties(Material.GLASS).hardnessAndResistance(1)), "greenhouse_glass");
+    register(new GreenHouseGlass(getBlockProperties(Material.GLASS, DyeColor.GREEN).hardnessAndResistance(1)), "greenhouse_glass");
   }
 
   private static void registerAllItems()
@@ -262,7 +263,16 @@ public class Registrator
   {
     return Block.Properties.create(material);
   }
-
+  
+  private static Block.Properties getBlockProperties(Material material, DyeColor color)
+  {
+    return Block.Properties.create(material, color);
+  }
+  
+  private static Block.Properties getBlockProperties(Material material, MaterialColor color)
+  {
+    return Block.Properties.create(material, color);
+  }
 
   public static void registerBlocks(RegistryEvent.Register<Block> event)
   {
