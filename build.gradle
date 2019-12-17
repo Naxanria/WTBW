@@ -17,7 +17,7 @@ apply plugin: 'com.wynprice.cursemaven'
 
 version = "${project_version}"
 group = 'com.wtbw'
-archivesBaseName = 'wtbw'
+archivesBaseName = "wtbw-${minecraft_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -58,7 +58,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${forge_version}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compile fg.deobf(curse.resolve('jei', project.jei_file))
     compile fg.deobf(curse.resolve("item-filters", project.item_filters_file))
 }
