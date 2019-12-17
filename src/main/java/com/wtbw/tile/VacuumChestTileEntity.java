@@ -1,7 +1,7 @@
 package com.wtbw.tile;
 
 import com.wtbw.Flags;
-import com.wtbw.compat.item_filters.ItemFiltersWrapper;
+//import com.wtbw.compat.item_filters.ItemFiltersWrapper;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.gui.container.VacuumChestContainer;
 import com.wtbw.tile.util.IContentHolder;
@@ -91,10 +91,9 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
       {
         if (tick % CommonConfig.get().vacuumTickRate.get() == 0)
         {
-          List<Entity> entities = world.getEntitiesWithinAABB(EntityType.ITEM, bound, (e) -> canInsert(((ItemEntity) e).getItem()));
-          for (Entity e : entities)
+          List<ItemEntity> entities = world.getEntitiesWithinAABB(EntityType.ITEM, bound, (e) -> canInsert(((ItemEntity) e).getItem()));
+          for (ItemEntity entity : entities)
           {
-            ItemEntity entity = (ItemEntity) e;
             if (!filter(entity.getItem()))
             {
               continue;
@@ -224,10 +223,11 @@ public class VacuumChestTileEntity extends TileEntity implements ITickableTileEn
   {
     ItemStack filter = this.filter.getStackInSlot(0);
     
-    if (Flags.isItemFiltersLoaded())
-    {
-      return ItemFiltersWrapper.filter(filter, stack);
-    }
+    // Fixme: when Item Filters are updated
+//    if (Flags.isItemFiltersLoaded())
+//    {
+//      return ItemFiltersWrapper.filter(filter, stack);
+//    }
     
     return filter.isEmpty() || filter.getItem() == stack.getItem() && Objects.equals(stack.getTag(), filter.getTag());
   }

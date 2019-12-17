@@ -3,6 +3,7 @@ package com.wtbw.gui.screen;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.wtbw.WTBW;
 import com.wtbw.gui.container.BlockPlacerContainer;
+import com.wtbw.gui.util.GuiUtil;
 import com.wtbw.gui.util.RedstoneButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -30,9 +31,6 @@ public class BlockPlacerScreen extends BaseContainerScreen<BlockPlacerContainer>
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
   {
-    GlStateManager.color4f(1, 1, 1, 1);
-    minecraft.getTextureManager().bindTexture(GUI);
-    
-    blit(guiLeft - 21, guiTop, 0, 0, xSize + 21, ySize);
+    GuiUtil.renderTexture(guiLeft - 21, guiTop, xSize + 21, ySize, 0, 0, 256, 256, GUI);
   }
 }

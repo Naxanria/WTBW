@@ -2,6 +2,7 @@ package com.wtbw.gui.screen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.wtbw.gui.container.TieredFurnaceContainer;
+import com.wtbw.gui.util.GuiUtil;
 import com.wtbw.tile.furnace.BaseFurnaceTileEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -28,21 +29,24 @@ public class TieredFurnaceScreen extends BaseContainerScreen<TieredFurnaceContai
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
   {
-    GlStateManager.color4f(1, 1, 1, 1);
-    minecraft.getTextureManager().bindTexture(GUI);
+//    GlStateManager.color4f(1, 1, 1, 1);
+//    minecraft.getTextureManager().bindTexture(GUI);
     int xp = guiLeft;
     int yp = guiTop;
     
-    blit(xp, yp, 0, 0, xSize, ySize);
+//    blit(xp, yp, 0, 0, xSize, ySize);
+    GuiUtil.renderTexture(xp, yp, xSize, ySize, 0, 0, 256, 256, GUI);
     if (furnace.isBurning())
     {
       float progress = furnace.getBurnTime() / (float) furnace.getBurnTimeTotal();
       int l = (int) (progress * 14);
-      blit(xp + 56, yp + 36 + 12 - l, 176, 12 - l, 14, l + 1);
+      GuiUtil.renderTexture(xp + 56, yp + 36 + 12 - l, 14, l + 1, 176, 12 - l, 256, 256, GUI);
+//      blit(xp + 56, yp + 36 + 12 - l, 176, 12 - l, 14, l + 1);
     }
     
     float progress = furnace.getCookTime() / (float) furnace.getCookTimeTotal();
     int l = (int) (progress * 24);
-    this.blit(xp + 79, yp + 34, 176, 14, l + 1, 16);
+    GuiUtil.renderTexture(xp + 79, yp + 34, l + 1, 16, 176, 14, 256, 256, GUI);
+//    this.blit(xp + 79, yp + 34, 176, 14, l + 1, 16);
   }
 }

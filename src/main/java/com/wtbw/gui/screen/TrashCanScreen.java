@@ -3,6 +3,7 @@ package com.wtbw.gui.screen;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.wtbw.WTBW;
 import com.wtbw.gui.container.TrashCanContainer;
+import com.wtbw.gui.util.GuiUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -22,11 +23,6 @@ public class TrashCanScreen extends BaseContainerScreen<TrashCanContainer>
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
   {
-    GlStateManager.color4f(1, 1, 1, 1);
-    minecraft.getTextureManager().bindTexture(GUI);
-    int xp = guiLeft;
-    int yp = guiTop;
-    
-    blit(xp, yp, 0, 0, xSize, ySize);
+    GuiUtil.renderTexture(guiLeft, guiTop, xSize, ySize, 0, 0, 256, 256, GUI);
   }
 }

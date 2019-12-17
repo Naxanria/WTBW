@@ -110,7 +110,8 @@ public class Utilities
 
   public static Vec3d getVec3d(Entity entity)
   {
-    return new Vec3d(entity.posX, entity.posY, entity.posZ);
+    return entity.getPositionVec();
+//    return new Vec3d(entity.posX, entity.posY, entity.posZ);
   }
 
   public static <T> List<T> listOf(T... toList)

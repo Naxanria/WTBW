@@ -5,7 +5,6 @@ import com.wtbw.gui.container.BlockDetectorContainer;
 import com.wtbw.gui.util.ClickType;
 import com.wtbw.gui.util.GuiUtil;
 import com.wtbw.network.BufferHelper;
-import com.wtbw.tile.BlockBreakerTileEntity;
 import com.wtbw.tile.BlockDetectorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,10 +13,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.state.IProperty;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.translation.LanguageMap;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
-import java.util.Collection;
 import java.util.Map;
 
 /*

@@ -45,7 +45,7 @@ public class ExcavatorItem extends ShovelItem
       if (entity instanceof PlayerEntity)
       {
         PlayerEntity player = (PlayerEntity) entity;
-        if (!player.isSneaking())
+        if (!player.isCrouching())
         {
           breakNeighbours(world, pos, (ServerPlayerEntity) player, true);
           return true;
@@ -71,7 +71,7 @@ public class ExcavatorItem extends ShovelItem
       return false;
     }
     
-    return state.isIn(BlockTags.SAND) || state.isIn(BlockTags.DIRT_LIKE) || state.isIn(Tags.Blocks.GRAVEL) || state.getBlock() == Blocks.SOUL_SAND;
+    return state.isIn(BlockTags.SAND) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.GRAVEL) || state.getBlock() == Blocks.SOUL_SAND;
   }
   
   private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem)

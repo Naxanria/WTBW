@@ -4,6 +4,7 @@ import com.wtbw.WTBW;
 import com.wtbw.util.Utilities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -44,8 +45,8 @@ public class Networking
       throw new IllegalStateException("Can only be used on server side!");
     }
     
-    List<Entity> players = world.getEntitiesWithinAABB(EntityType.PLAYER, Utilities.getBoundingBox(pos, radius), (e) -> true);
-    for (Entity e : players)
+    List<PlayerEntity> players = world.getEntitiesWithinAABB(EntityType.PLAYER, Utilities.getBoundingBox(pos, radius), (e) -> true);
+    for (PlayerEntity e : players)
     {
       ServerPlayerEntity player = (ServerPlayerEntity) e;
       INSTANCE.sendTo(packet, player.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);

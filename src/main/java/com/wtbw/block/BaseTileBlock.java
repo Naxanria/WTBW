@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -48,13 +49,13 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
   {
     return (TE) world.getTileEntity(pos);
   }
-
+  
   @Override
-  public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult hit)
+  public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult hit)
   {
     if (hasGui)
     {
-      if (!playerEntity.isSneaking())
+      if (!playerEntity.isCrouching())
       {
         TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity != null && tileEntity instanceof INamedContainerProvider)
@@ -65,12 +66,12 @@ public class BaseTileBlock<TE extends TileEntity> extends Block
             onGuiOpen(state, world, pos, ((ServerPlayerEntity) playerEntity), hand, hit);
           }
 
-          return true;
+          return ActionResultType.SUCCESS;
         }
       }
     }
 
-    return super.onBlockActivated(state, world, pos, playerEntity, hand, hit);
+    return super.func_225533_a_(state, world, pos, playerEntity, hand, hit);
   }
   
   protected void onGuiOpen(BlockState state, World world, BlockPos pos, ServerPlayerEntity player, Hand hand, BlockRayTraceResult hit)

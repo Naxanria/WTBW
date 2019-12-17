@@ -42,7 +42,7 @@ public class HammerItem extends PickaxeItem
       if (entity instanceof PlayerEntity)
       {
         PlayerEntity player = (PlayerEntity) entity;
-        if (!player.isSneaking())
+        if (!player.isCrouching())
         {
           breakNeighbours(world, pos, (ServerPlayerEntity) player, true);
           return true;

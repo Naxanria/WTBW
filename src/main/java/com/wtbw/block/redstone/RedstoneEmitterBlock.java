@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -53,16 +54,16 @@ public class RedstoneEmitterBlock extends Block
   }
   
   @Override
-  public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+  public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult)
   {
-    if (player.isAllowEdit() && handIn != Hand.OFF_HAND)
+    if (player.isAllowEdit() && hand != Hand.OFF_HAND)
     {
-      if (!worldIn.isRemote)
+      if (!world.isRemote)
       {
-        if (player.getHeldItem(handIn).isEmpty())
+        if (player.getHeldItem(hand).isEmpty())
         {
           BlockState newState;
-          if (player.isSneaking())
+          if (player.isCrouching())
           {
             int next = state.get(POWER) - 1;
             if (next < 0)
@@ -75,18 +76,19 @@ public class RedstoneEmitterBlock extends Block
           {
             newState = state.cycle(POWER);
           }
-          
-          worldIn.setBlockState(pos, newState, 4);
-          worldIn.notifyNeighbors(pos, this);
-          return true;
+        
+          world.setBlockState(pos, newState, 4);
+          world.notifyNeighbors(pos, this);
+          return ActionResultType.SUCCESS;
         }
       }
       else
       {
-        return true;
+        return ActionResultType.SUCCESS;
       }
     }
-    return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    
+    return super.func_225533_a_(state, world, pos, player, hand, rayTraceResult);
   }
   
   @Override
@@ -95,8 +97,9 @@ public class RedstoneEmitterBlock extends Block
     return true;
   }
   
+  
   @Override
-  public void randomTick(BlockState state, World world, BlockPos pos, Random random)
+  public void animateTick(BlockState state, World world, BlockPos pos, Random random)
   {
     int power = state.get(POWER);
     if (power == 0)

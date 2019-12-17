@@ -95,7 +95,7 @@ public class SwapTool extends TieredItem implements ICycleTool
 
       ItemStack stack = context.getItem();
 
-      if (player.isSneaking())
+      if (player.isCrouching())
       {
         if (isBlacklisted(block))
         {

@@ -60,16 +60,19 @@ public class RedstoneButton<TE extends TileEntity & IRedstoneControlled> extends
   @Override
   public void renderButton(int mouseX, int mouseY, float partial)
   {
-    Minecraft minecraft = Minecraft.getInstance();
-    minecraft.getTextureManager().bindTexture(WIDGETS_LOCATION);
-    GlStateManager.color4f(1.0F, 1.0F, 1.0F, this.alpha);
+//    Minecraft minecraft = Minecraft.getInstance();
+//    minecraft.getTextureManager().bindTexture(WIDGETS_LOCATION);
+//    GlStateManager.color4f(1.0F, 1.0F, 1.0F, this.alpha);
     int yOff = this.getYImage(this.isHovered());
-    GlStateManager.enableBlend();
-    GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-    GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-    this.blit(this.x, this.y, 0, 46 + yOff * 20, this.width / 2, this.height);
-    this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + yOff * 20, this.width / 2, this.height);
-
+//    GlStateManager.enableBlend();
+//    GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+//    GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+//    this.blit(this.x, this.y, 0, 46 + yOff * 20, this.width / 2, this.height);
+//    this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + yOff * 20, this.width / 2, this.height);
+//
+    GuiUtil.renderTexture(x, y, width / 2, height, 0, 46 + yOff * 20, 256, 256, WIDGETS_LOCATION);
+    GuiUtil.renderTexture(x + width / 2, y, width / 2, width / 2, 200 - width / 2, 46 + yOff * 20, 256, 256, WIDGETS_LOCATION);
+    
     Sprite sprite;
     switch (control.getRedstoneMode())
     {
@@ -90,7 +93,7 @@ public class RedstoneButton<TE extends TileEntity & IRedstoneControlled> extends
     
     sprite.render(x + 1, y + 2);
 
-    this.renderBg(minecraft, mouseX, mouseY);
+    this.renderBg(Minecraft.getInstance(), mouseX, mouseY);
   }
   
   private RedstoneMode getNextMode()

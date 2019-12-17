@@ -1,9 +1,7 @@
 package com.wtbw.block.ctm;
 
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -38,16 +36,17 @@ public class CTMGlassBlock extends CTMBlock
     return true;
   }
   
+  
   @Override
-  public BlockRenderLayer getRenderLayer()
+  public float getAmbientOcclusionLightValue(BlockState p_220080_1_, IBlockReader p_220080_2_, BlockPos p_220080_3_)
   {
-    return BlockRenderLayer.TRANSLUCENT;
+    return 1.0f;
   }
   
   @Override
-  public BlockRenderType getRenderType(BlockState p_149645_1_)
+  public boolean isNormalCube(BlockState p_220081_1_, IBlockReader p_220081_2_, BlockPos p_220081_3_)
   {
-    return super.getRenderType(p_149645_1_);
+    return false;
   }
   
   @Override

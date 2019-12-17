@@ -1,6 +1,7 @@
 package com.wtbw.gui.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.wtbw.network.ButtonClickedPacket;
 import com.wtbw.network.Networking;
 import net.minecraft.client.Minecraft;
@@ -36,10 +37,10 @@ public class GuiUtil extends AbstractGui
     float g = ((color >> 8) & 0xff) / 256f;
     float b = (color & 0xff) / 256f;
     Minecraft.getInstance().getTextureManager().bindTexture(textureLocation);
-    GlStateManager.color4f(r, g, b, a);
-    GlStateManager.enableBlend();
-    GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-    GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+    RenderSystem.color4f(r,g , b, a);
+    RenderSystem.enableBlend();
+    RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+    RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     blit(x, y, u, v, width, height, textureWidth, textureHeight);
   }
 }

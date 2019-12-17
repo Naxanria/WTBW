@@ -72,7 +72,7 @@ public class EntityPusherTileEntity extends TileEntity implements ITickableTileE
         {
           if (entity instanceof PlayerEntity)
           {
-            if (entity.isSneaking() || ((PlayerEntity) entity).isCreative())
+            if (entity.isCrouching() || ((PlayerEntity) entity).isCreative())
             {
               continue;
             }

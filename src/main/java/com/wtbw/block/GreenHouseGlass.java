@@ -6,16 +6,11 @@ import com.wtbw.util.RandomUtil;
 import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.*;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.command.impl.ParticleCommand;
-import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
@@ -32,11 +27,11 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
     super(properties.tickRandomly());
   }
   
-  @Override
-  public BlockRenderLayer getRenderLayer()
-  {
-    return BlockRenderLayer.TRANSLUCENT;
-  }
+//  @Override
+//  public BlockRenderLayer getRenderLayer()
+//  {
+//    return BlockRenderLayer.TRANSLUCENT;
+//  }
   
   @Override
   public DyeColor getColor()
@@ -45,7 +40,13 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
   }
   
   @Override
-  public void randomTick(BlockState state, World world, BlockPos pos, Random rand)
+  public boolean ticksRandomly(BlockState p_149653_1_)
+  {
+    return true;
+  }
+  
+  @Override
+  public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random rand)
   {
     int maxRange = 25;
     int chance = 40;
@@ -80,7 +81,7 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
             if (block instanceof SaplingBlock)
             {
               PlayEvent.boneMeal(world, check, rand.nextInt(7) + 5);
-              ((SaplingBlock) block).grow(world, check, foundState, rand);
+              ((SaplingBlock) block).func_226942_a_(world, check, foundState, rand);
 
               break;
             }
@@ -89,6 +90,8 @@ public class GreenHouseGlass extends AbstractGlassBlock implements IBeaconBeamCo
       }
     }
   }
+  
+  
   
   @Override
   public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)

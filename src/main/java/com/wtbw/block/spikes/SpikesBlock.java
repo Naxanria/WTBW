@@ -3,14 +3,11 @@ package com.wtbw.block.spikes;
 import com.wtbw.WTBW;
 import com.wtbw.util.TextComponentBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -49,12 +46,12 @@ public class SpikesBlock extends Block
       }
     }
   }
-  
-  @Override
-  public BlockRenderLayer getRenderLayer()
-  {
-    return BlockRenderLayer.CUTOUT;
-  }
+//
+//  @Override
+//  public BlockRenderLayer getRenderLayer()
+//  {
+//    return BlockRenderLayer.CUTOUT;
+//  }
   
   @Override
   public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)

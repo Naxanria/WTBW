@@ -23,7 +23,9 @@ public abstract class ItemStackWorldRenderer
   
   public static Vec3d getPlayerPos()
   {
-    return new Vec3d(TileEntityRendererDispatcher.staticPlayerX, TileEntityRendererDispatcher.staticPlayerY, TileEntityRendererDispatcher.staticPlayerZ);
+//    return new Vec3d(TileEntityRendererDispatcher.staticPlayerX, TileEntityRendererDispatcher.staticPlayerY, TileEntityRendererDispatcher.staticPlayerZ);
+    // fixme: proper position etc
+    return new Vec3d(0, 0, 0);
   }
 
   public static Vec3d getPosTranslated(BlockPos pos)
@@ -37,25 +39,26 @@ public abstract class ItemStackWorldRenderer
   {
     if (!blockstate.isAir(world, blockpos) && world.getWorldBorder().contains(blockpos))
     {
-      GlStateManager.enableBlend();
-      GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-      GlStateManager.lineWidth(Math.max(2.5F, (float) minecraft.mainWindow.getFramebufferWidth() / 1920.0F * 2.5F));
-      GlStateManager.disableTexture();
-      GlStateManager.depthMask(false);
-      GlStateManager.matrixMode(5889);
-      GlStateManager.pushMatrix();
-      GlStateManager.scalef(1.0F, 1.0F, 0.999F);
-      double d0 = info.getProjectedView().x;
-      double d1 = info.getProjectedView().y;
-      double d2 = info.getProjectedView().z;
-      WorldRenderer.drawShape(
-        blockstate.getShape(world, blockpos, ISelectionContext.forEntity(info.getRenderViewEntity())),
-        (double) blockpos.getX() - d0, (double) blockpos.getY() - d1, (double) blockpos.getZ() - d2, 0.0F, 0.0F, 0.0F, 0.4F);
-      GlStateManager.popMatrix();
-      GlStateManager.matrixMode(5888);
-      GlStateManager.depthMask(true);
-      GlStateManager.enableTexture();
-      GlStateManager.disableBlend();
+      // fixme: reimplement
+//      GlStateManager.enableBlend();
+//      GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+//      GlStateManager.lineWidth(Math.max(2.5F, (float) minecraft.mainWindow.getFramebufferWidth() / 1920.0F * 2.5F));
+//      GlStateManager.disableTexture();
+//      GlStateManager.depthMask(false);
+//      GlStateManager.matrixMode(5889);
+//      GlStateManager.pushMatrix();
+//      GlStateManager.scalef(1.0F, 1.0F, 0.999F);
+//      double d0 = info.getProjectedView().x;
+//      double d1 = info.getProjectedView().y;
+//      double d2 = info.getProjectedView().z;
+//      WorldRenderer.drawShape(
+//        blockstate.getShape(world, blockpos, ISelectionContext.forEntity(info.getRenderViewEntity())),
+//        (double) blockpos.getX() - d0, (double) blockpos.getY() - d1, (double) blockpos.getZ() - d2, 0.0F, 0.0F, 0.0F, 0.4F);
+//      GlStateManager.popMatrix();
+//      GlStateManager.matrixMode(5888);
+//      GlStateManager.depthMask(true);
+//      GlStateManager.enableTexture();
+//      GlStateManager.disableBlend();
     }
   }
 }
