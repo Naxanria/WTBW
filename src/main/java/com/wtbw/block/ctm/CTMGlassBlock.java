@@ -1,5 +1,6 @@
 package com.wtbw.block.ctm;
 
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.BlockRenderLayer;
@@ -41,6 +42,12 @@ public class CTMGlassBlock extends CTMBlock
   public BlockRenderLayer getRenderLayer()
   {
     return BlockRenderLayer.TRANSLUCENT;
+  }
+  
+  @Override
+  public BlockRenderType getRenderType(BlockState p_149645_1_)
+  {
+    return super.getRenderType(p_149645_1_);
   }
   
   @Override

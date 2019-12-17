@@ -2,18 +2,18 @@ buildscript {
     repositories {
         jcenter()
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url "https://plugins.gradle.org/m2/" }
+//        maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-        classpath 'com.wynprice.cursemaven:CurseMaven:1.2.+'
+//        classpath 'com.wynprice.cursemaven:CurseMaven:1.2.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply plugin: 'com.wynprice.cursemaven'
+//apply plugin: 'com.wynprice.cursemaven'
 
 version = "${project_version}"
 group = 'com.wtbw'
@@ -59,8 +59,8 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    compile fg.deobf(curse.resolve('jei', project.jei_file))
-    compile fg.deobf(curse.resolve("item-filters", project.item_filters_file))
+//    compile fg.deobf(curse.resolve('jei', project.jei_file))
+//    compile fg.deobf(curse.resolve("item-filters", project.item_filters_file))
 }
 
 jar {
