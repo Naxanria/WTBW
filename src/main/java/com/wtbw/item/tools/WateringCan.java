@@ -180,11 +180,7 @@ public class WateringCan extends Item
         double x = pos.getX() + rand.nextDouble();
         double y = pos.getY() + rand.nextDouble() + .7;
         double z = pos.getZ() + rand.nextDouble();
-//        double dx = world.rand.nextDouble() * .2;
-//        double dy = world.rand.nextDouble() * -.3 - .4;
-//        double dz = world.rand.nextDouble() * .2;
-//
-//        world.addParticle(new RedstoneParticleData(0, 0, 0.9f, 0.8f), x, y, z, dx, dy, dz);
+
         world.addParticle(ParticleTypes.RAIN, x, y, z, 0, 0, 0);
       }
   
