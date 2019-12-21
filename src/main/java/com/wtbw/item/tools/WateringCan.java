@@ -285,7 +285,7 @@ public class WateringCan extends Item
   {
     int water = getWater(stack);
     tooltip.add(new TranslationTextComponent(WTBW.MODID + ".tooltip.water", water, wateringCanData.maxWater));
-    tooltip.add(new TranslationTextComponent(WTBW.MODID + "tooltip.radius", wateringCanData.radius));
+    tooltip.add(new TranslationTextComponent(WTBW.MODID + ".tooltip.radius", wateringCanData.radius));
     
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }

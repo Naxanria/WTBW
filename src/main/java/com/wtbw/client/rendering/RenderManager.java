@@ -8,7 +8,7 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import net.minecraftforge.client.event.DrawHighlightEvent;
 
 /*
   @author: Naxanria
@@ -16,7 +16,7 @@ import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 public class RenderManager
 {
   
-  public static void renderOutline(final DrawBlockHighlightEvent event)
+  public static void renderOutline(final DrawHighlightEvent event)
   {
     Minecraft instance = Minecraft.getInstance();
     ClientPlayerEntity player = instance.player;

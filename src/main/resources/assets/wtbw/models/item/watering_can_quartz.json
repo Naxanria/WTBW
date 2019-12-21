@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "wtbw:item/tools/wateringcans/basic"
+    "layer0": "wtbw:item/tools/wateringcans/quartz"
   }
 }
