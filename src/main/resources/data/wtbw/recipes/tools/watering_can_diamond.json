@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ddd",
+    "dwd",
+    "dDd"
+  ],
+  "key": {
+    "d": {
+      "tag": "forge:gems/diamond"
+    },
+    "D": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "w": {
+      "item": "wtbw:watering_can_quartz"
+    }
+  },
+  "result": {
+    "item": "wtbw:watering_can_diamond"
+  }
+}

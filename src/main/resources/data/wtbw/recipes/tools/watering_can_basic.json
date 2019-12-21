@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    "SbS",
+    " B "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stone"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "b": {
+      "item": "minecraft:bone_meal"
+    }
+  },
+  "result": {
+    "item": "wtbw:watering_can"
+  }
+}
