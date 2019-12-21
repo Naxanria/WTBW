@@ -1,6 +1,7 @@
 package com.wtbw.config;
 
 import com.wtbw.WTBW;
+import com.wtbw.item.tools.WateringCan;
 import com.wtbw.tile.furnace.FurnaceTier;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -37,9 +38,22 @@ public class CommonConfig
   public FurnaceConfig diamondFurnace;
   public FurnaceConfig endFurnace;
   
+  // watering cans //
+  
+  public ForgeConfigSpec.BooleanValue wateringCanSpreadGrass;
+  public ForgeConfigSpec.IntValue wateringCanRefillRate;
+  public ForgeConfigSpec.BooleanValue wateringCanMoisterize;
+  
+  public WateringCanConfig basicWateringCan;
+  public WateringCanConfig quartzWateringCan;
+  public WateringCanConfig diamondWateringCan;
+  public WateringCanConfig enderWateringCan;
+  
   // redstone //
   public ForgeConfigSpec.IntValue redstoneClockRepeat;
   public ForgeConfigSpec.IntValue redstoneClockDuration;
+  
+  
   
   public CommonConfig(ForgeConfigSpec.Builder builder)
   {
@@ -73,19 +87,19 @@ public class CommonConfig
   
   private void blocks()
   {
-    builder.push("blocks");
+    push("blocks");
     
     furnaces();
     redstone();
     vacuumChest();
     puller();
     
-    builder.pop();
+    pop();
   }
   
   private void puller()
   {
-    builder.push("pusher_puller").comment("For both pusher and puller");
+    push("pusher_puller").comment("For both pusher and puller");
     
     pusherStrength = builder
       .comment("Strength of pull/push", "default: 0.8")
@@ -102,12 +116,12 @@ public class CommonConfig
       .translation(key("pusher.tickRate"))
       .defineInRange("tick_rate", 10, 1, 100);
     
-    builder.pop();
+    pop();
   }
   
   private void vacuumChest()
   {
-    builder.push("vacuum");
+    push("vacuum");
     
     vacuumTickRate = builder
       .comment("The time in ticks between trying to suck up items", "default: 10")
@@ -119,15 +133,15 @@ public class CommonConfig
       .translation(key("blocks.vacuum.range"))
       .defineInRange("range", 6, 1, 16);
     
-    builder.pop();
+    pop();
   }
   
   
   private void redstone()
   {
-    builder.push("redstone");
+    push("redstone");
     
-    builder.push("timer");
+    push("timer");
     
     redstoneClockRepeat = builder
       .comment("The time in ticks for the delay between pulses")
@@ -139,26 +153,26 @@ public class CommonConfig
       .translation(key("redstone.redstone_timer_length"))
       .defineInRange("duration", 6, 1, 100);
     
-    builder.pop();
+    pop();
     
-    builder.pop();
+    pop();
   }
   
   private void furnaces()
   {
-    builder.push("furnace");
+    push("furnace");
     
     ironFurnace = new FurnaceConfig(FurnaceTier.IRON, builder);
     goldFurnace = new FurnaceConfig(FurnaceTier.GOLD, builder);
     diamondFurnace = new FurnaceConfig(FurnaceTier.DIAMOND, builder);
     endFurnace = new FurnaceConfig(FurnaceTier.END, builder);
     
-    builder.pop();
+    pop();
   }
   
   private void tools()
   {
-    builder.push("tools");
+    push("tools");
     
     hammers();
     
@@ -166,12 +180,41 @@ public class CommonConfig
     
     magnet();
     
-    builder.pop();
+    wateringCans();
+    
+    pop();
+  }
+  
+  private void wateringCans()
+  {
+    push("wateringCans");
+    
+    wateringCanSpreadGrass = builder
+      .comment("Can the watering cans spread grass faster")
+      .translation(key("tools.wateringcan.spread_grass"))
+      .define("canSpreadGrass", true);
+    
+    wateringCanRefillRate = builder
+      .comment("The refill rate of water/tick")
+      .translation(key("tools.wateringcan.refill_rate"))
+      .defineInRange("refillRate", 30, 1, 100000);
+    
+    wateringCanMoisterize = builder
+      .comment("Moisterize farm land")
+      .translation(key("tools.wateringcan.moisterize"))
+      .define("moisterize", true);
+    
+    basicWateringCan = new WateringCanConfig(WateringCan.Tier.BASIC, "basic", builder);
+    quartzWateringCan = new WateringCanConfig(WateringCan.Tier.QUARTZ, "quartz", builder);
+    diamondWateringCan = new WateringCanConfig(WateringCan.Tier.DIAMOND, "diamond", builder);
+    enderWateringCan = new WateringCanConfig(WateringCan.Tier.ENDER, "ender", builder);
+    
+    pop();
   }
   
   private void hammers()
   {
-    builder.push("hammer");
+    push("hammer");
     toolsDurabilityMultiplier = builder
       .comment
         (
@@ -182,12 +225,12 @@ public class CommonConfig
       .translation(key("tools.hammer.multiplier"))
       .defineInRange("multiplier", 7, 1, 15);
     
-    builder.pop();
+    pop();
   }
   
   private void swapping()
   {
-    builder.push("swapping");
+    push("swapping");
     
     swapperBlackList = builder
       .comment("The blacklisted blocks")
@@ -199,12 +242,12 @@ public class CommonConfig
       .translation(key("tools.swapping.hardness"))
       .defineInRange("max_hardness", 49, 0, Double.MAX_VALUE);
     
-    builder.pop();
+    pop();
   }
   
   private void magnet()
   {
-    builder.push("magnet");
+    push("magnet");
     
     magnetTickRate = builder
       .comment("How often the magnet needs to check to magnetize, in ticks", "default: 10")
@@ -221,22 +264,32 @@ public class CommonConfig
       .translation(key("tools.magnet.pick_up"))
       .define("pick_up", true);
     
-    builder.pop();
+    pop();
   }
   
   private void debug()
   {
-    builder.push("debug").comment("Debug options");
+    push("debug").comment("Debug options");
     
     debugOutput = builder
       .comment("Show debug output")
       .translation(key("debug.output"))
       .define("output", false);
     
-    builder.pop();
+    pop();
   }
   
-  public static class FurnaceConfig
+  private ForgeConfigSpec.Builder push(String name)
+  {
+    return builder.push(name);
+  }
+  
+  private ForgeConfigSpec.Builder pop()
+  {
+    return builder.pop();
+  }
+  
+  public static class FurnaceConfig extends SubConfig
   {
     public final FurnaceTier tier;
     public final String name;
@@ -244,26 +297,89 @@ public class CommonConfig
     
     public FurnaceConfig(FurnaceTier tier, ForgeConfigSpec.Builder builder)
     {
+      super(builder);
       this.tier = tier;
       this.name = tier.name;
-      init(builder);
+      init();
     }
     
-    void init(ForgeConfigSpec.Builder builder)
+    @Override
+    protected void init()
     {
-      builder.push(name);
+      push(name);
       
       speed = builder
         .comment(name + " furnace smelting speed, in how many ticks it takes to smelt")
         .translation(key("furnace." + name + "_furnace_speed"))
         .defineInRange("speed", tier.getCookTime(), 1, 500);
       
-      builder.pop();
+      pop();
     }
     
+    @Override
     public void reload()
     {
       tier.setCookTime(speed.get());
+    }
+  }
+  
+  public static class WateringCanConfig extends SubConfig
+  {
+    public final WateringCan.Tier tier;
+    public final String name;
+    
+    public ForgeConfigSpec.IntValue radius;
+    public ForgeConfigSpec.IntValue maxWater;
+    public ForgeConfigSpec.IntValue drainRate;
+    public ForgeConfigSpec.IntValue chance;
+  
+    public WateringCanConfig(WateringCan.Tier tier, String name, ForgeConfigSpec.Builder builder)
+    {
+      super(builder);
+      this.tier = tier;
+      this.name = name;
+      init();
+    }
+  
+    @Override
+    protected void init()
+    {
+      push(name);
+      
+      WateringCan.WateringCanData data = WateringCan.getData(tier);
+      String baseKey = "tools.wateringcan." + name + ".";
+    
+      radius = builder
+        .comment("The radius of effect for the watering can", "Number MUST be uneven")
+        .translation(key(baseKey + "radius"))
+        .defineInRange("radius", data.radius, 1, 15);
+      
+      maxWater = builder
+        .comment("The maximum amount of water the watering can can hold")
+        .translation(key(baseKey + "max_water"))
+        .defineInRange("maxWater", data.maxWater, 100, 100000);
+      
+      drainRate = builder
+        .comment("The amount of water consumed per tick")
+        .translation(key(baseKey + "drain_rate"))
+        .defineInRange("drainRate", data.waterUse, 1, 10000);
+      
+      chance = builder
+        .comment("The chance to further a growth stage")
+        .translation(key(baseKey + "chance"))
+        .defineInRange("chance", data.chance, 1, 100);
+      
+      pop();
+    }
+  
+    @Override
+    protected void reload()
+    {
+      WateringCan.WateringCanData data = WateringCan.getData(tier);
+      data.radius = radius.get();
+      data.maxWater = maxWater.get();
+      data.waterUse = drainRate.get();
+      data.chance = chance.get();
     }
   }
 }

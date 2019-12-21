@@ -12,7 +12,7 @@ public class FurnaceTier
 {
   public static final FurnaceTier IRON = new FurnaceTier("Iron", () -> ModTiles.IRON_FURNACE, 160);
   public static final FurnaceTier GOLD = new FurnaceTier("Gold", () -> ModTiles.GOLD_FURNACE, 80);
-  public static final FurnaceTier DIAMOND = new FurnaceTier("Diamond", () -> ModTiles.DIAMOND_FURNACE, 40);
+  public static final FurnaceTier DIAMOND = new FurnaceTier("DIAMOND", () -> ModTiles.DIAMOND_FURNACE, 40);
   public static final FurnaceTier END = new FurnaceTier("End", () -> ModTiles.END_FURNACE, 10);
 
   public final String name;

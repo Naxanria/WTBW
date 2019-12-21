@@ -63,4 +63,16 @@ public class RandomUtil
   {
     return new Vec3d(random.nextDouble() * xBound, random.nextDouble() * yBound, random.nextDouble() * zBound);
   }
+  
+  public static int range(Random random, int min, int max)
+  {
+    int diff = max - min;
+    return random.nextInt(diff) + min;
+  }
+  
+  public static float range(Random random, float min, float max)
+  {
+    float diff = max - min;
+    return random.nextFloat() * diff + min;
+  }
 }

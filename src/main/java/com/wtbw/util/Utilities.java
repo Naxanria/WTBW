@@ -87,12 +87,17 @@ public class Utilities
 
   public static BlockRayTraceResult getLookingAt(PlayerEntity player, double range)
   {
+    return getLookingAt(player, range, RayTraceContext.FluidMode.NONE);
+  }
+  
+  public static BlockRayTraceResult getLookingAt(PlayerEntity player, double range, RayTraceContext.FluidMode fluidMode)
+  {
     World world = player.world;
 
     Vec3d look = player.getLookVec();
     Vec3d startPos = getVec3d(player).add(0, player.getEyeHeight(), 0);
     Vec3d endPos = startPos.add(look.mul(range, range, range));
-    RayTraceContext context = new RayTraceContext(startPos, endPos, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player);
+    RayTraceContext context = new RayTraceContext(startPos, endPos, RayTraceContext.BlockMode.OUTLINE, fluidMode, player);
     return world.rayTraceBlocks(context);
   }
   
@@ -101,6 +106,11 @@ public class Utilities
     Vec3d endPos = position.add(look.mul(range, range, range));
     RayTraceContext context = new RayTraceContext(position, endPos, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, entity);
     return entity.world.rayTraceBlocks(context);
+  }
+  
+  public static boolean isMiss(BlockRayTraceResult lookingAt)
+  {
+    return lookingAt.getType() == BlockRayTraceResult.Type.MISS;
   }
 
   public static Vec3d getVec3d(BlockPos pos)
