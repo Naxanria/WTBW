@@ -28,6 +28,12 @@
 
   "item.wtbw.ender_pouch": "Ender Pouch",
 
+  "item.wtbw.watering_can": "Basic Watering Can",
+  "item.wtbw.watering_can_quartz": "Quartz Watering Can",
+  "item.wtbw.watering_can_diamond": "Diamond Watering Can",
+  "item.wtbw.watering_can_ender": "Ender Watering Can",
+  "item.wtbw.ender_core": "Ender Core",
+
   "block.wtbw.charcoal_block": "Block of Charcoal",
 
   "block.wtbw.redstone_timer": "Redstone Timer",
@@ -115,6 +121,8 @@
   "wtbw.tooltip.spikes_non_lethal": "This spike leaves entities at 1 health",
   "wtbw.tooltip.pusher_range": "This block pushes entities in a %s block radius",
   "wtbw.tooltip.puller_range": "This block pulls entities in a %s block radius",
+  "wtbw.tooltip.water": "Water: %s/%s",
+  "wtbw.tooltip.radius": "Radius: %s",
 
   "wtbw.text.swap_target_changed": "Changed block to ",
   "wtbw.text.cycled": "Changed radius to %s",

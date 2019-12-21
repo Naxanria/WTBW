@@ -21,6 +21,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -282,10 +283,9 @@ public class WateringCan extends Item
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
   {
-    // todo: make localized
     int water = getWater(stack);
-    tooltip.add(new StringTextComponent("Water: " + water + "/" + wateringCanData.maxWater));
-    tooltip.add(new StringTextComponent("Radius: " + wateringCanData.radius));
+    tooltip.add(new TranslationTextComponent(WTBW.MODID + ".tooltip.water", water, wateringCanData.maxWater));
+    tooltip.add(new TranslationTextComponent(WTBW.MODID + "tooltip.radius", wateringCanData.radius));
     
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }

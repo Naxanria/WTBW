@@ -217,6 +217,8 @@ public class Registrator
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.QUARTZ), "watering_can_quartz");
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.DIAMOND), "watering_can_diamond");
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.ENDER), "watering_can_ender");
+    
+    register(new Item(getItemProperties().maxStackSize(8)), "ender_core");
   }
 
   private static void registerAllTiles()

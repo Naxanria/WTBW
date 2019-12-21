@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  E",
+    "EwE",
+    " C "
+  ],
+  "key": {
+    "E": {
+      "tag": "forge:end_stones"
+    },
+    "C": {
+      "item": "wtbw:ender_core"
+    },
+    "w": {
+      "item": "wtbw:watering_can_diamond"
+    }
+  },
+  "result": {
+    "item": "wtbw:watering_can_ender"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " n ",
+    "ehe",
+    " n "
+  ],
+  "key": {
+    "n": {
+      "item": "minecraft:nether_star"
+    },
+    "e": {
+      "item": "minecraft:ender_pearl"
+    },
+    "h": {
+      "item": "minecraft:heart_of_the_sea"
+    }
+  },
+  "result": {
+    "item": "wtbw:ender_core"
+  }
+}
