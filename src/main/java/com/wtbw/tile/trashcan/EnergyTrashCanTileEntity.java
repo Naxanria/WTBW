@@ -2,8 +2,14 @@ package com.wtbw.tile.trashcan;
 
 import com.wtbw.tile.ModTiles;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /*
   @author: Naxanria
@@ -58,5 +64,17 @@ public class EnergyTrashCanTileEntity extends TileEntity
         return true;
       }
     };
+  }
+  
+  @Nonnull
+  @Override
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
+  {
+    if (cap == CapabilityEnergy.ENERGY)
+    {
+      return storage.cast();
+    }
+    
+    return super.getCapability(cap, side);
   }
 }
