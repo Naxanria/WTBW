@@ -4,6 +4,7 @@ import com.wtbw.Flags;
 import com.wtbw.WTBW;
 import com.wtbw.config.CommonConfig;
 import com.wtbw.util.NBTHelper;
+import com.wtbw.util.PlayEvent;
 import com.wtbw.util.RandomUtil;
 import com.wtbw.util.Utilities;
 import net.minecraft.block.*;
@@ -256,10 +257,10 @@ public class WateringCan extends Item
       {
         if (!crop.isMaxAge(state) && crop.canGrow(world, pos, state, world.isRemote))
         {
-          crop.grow(world, pos, state);
-          if (world.isRemote)
+          if (!world.isRemote)
           {
-            BoneMealItem.spawnBonemealParticles(world, pos, RandomUtil.range(rand, 3, 6));
+            crop.grow(world, pos, state);
+            PlayEvent.boneMeal(world, pos, RandomUtil.range(rand, 3, 6));
           }
         }
       }
@@ -270,10 +271,7 @@ public class WateringCan extends Item
           if (!world.isRemote)
           {
             sapling.func_226942_a_((ServerWorld) world, pos, state, rand);
-          }
-          else
-          {
-            BoneMealItem.spawnBonemealParticles(world, pos, RandomUtil.range(rand, 3, 6));
+            PlayEvent.boneMeal(world, pos, RandomUtil.range(rand, 3, 6));
           }
         }
       }
